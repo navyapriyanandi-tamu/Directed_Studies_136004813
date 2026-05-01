@@ -1,0 +1,1777 @@
+{
+  "repo_name": "httpx",
+  "judge_model": "protected.Claude Sonnet 4.5",
+  "generator_model": "Claude Haiku 4.5",
+  "repo_summary_evaluation": {
+    "accuracy": {
+      "rating": 5,
+      "errors_found": [],
+      "notes": "The summary accurately describes HTTPX's purpose, architecture, and technical implementation. All mentioned components (httpcore foundation, Client/AsyncClient classes, transport system, authentication, content encoding/decoding, data models) align correctly with the module summaries. Design patterns and architectural descriptions are factually correct."
+    },
+    "completeness": {
+      "rating": 3,
+      "missing_elements": [
+        "CLI functionality (_main.py) - significant feature not mentioned",
+        "Exception hierarchy and error handling (_exceptions.py)",
+        "URL parsing and manipulation utilities (_urls.py, _urlparse.py)",
+        "Configuration classes (Timeout, Limits, Proxy from _config.py)",
+        "Status code utilities (_status_codes.py)",
+        "Detailed decompression capabilities (brotli, zstandard support)"
+      ],
+      "notes": "While the summary covers core HTTP client functionality well, it omits several important subsystems. The CLI tool is a notable omission given it's a complete user-facing feature. URL handling and exception management are significant architectural components that deserve mention. The summary focuses heavily on the request/response cycle but under-represents supporting infrastructure."
+    },
+    "clarity": {
+      "rating": 4,
+      "notes": "The human-friendly section is excellent\u2014clear, accessible, and well-scoped. The technical section is informative but dense; it packs many concepts into long sentences that could be broken up for better readability. The transition between describing components and design patterns could be smoother. Overall, someone new to the codebase would understand the big picture but might struggle to mentally map all the pieces without re-reading."
+    },
+    "usefulness": {
+      "rating": 4,
+      "notes": "Provides a strong foundation for understanding HTTPX's purpose and core architecture. A developer could quickly grasp the sync/async model, transport abstraction, and layered design. However, missing elements (CLI, exception handling, URL utilities) mean developers would need to supplement this summary when working with those areas. The summary excels at explaining the request/response pipeline but provides less guidance on configuration, error handling, and utility subsystems."
+    },
+    "overall_score": 4,
+    "strengths": [
+      "Accurate technical descriptions with no factual errors",
+      "Clear human-friendly explanation suitable for various audiences",
+      "Strong coverage of core HTTP client functionality and request/response lifecycle",
+      "Correctly identifies architectural patterns (context managers, lazy evaluation, parameter merging)",
+      "Properly highlights the sync/async duality and pluggable transport system",
+      "Good emphasis on httpcore as the foundation"
+    ],
+    "weaknesses": [
+      "Completely omits CLI functionality despite it being a significant user-facing feature",
+      "No mention of exception hierarchy or error handling strategy",
+      "URL parsing/manipulation utilities not covered despite being substantial modules",
+      "Configuration classes (Timeout, Limits, Proxy) not explicitly mentioned",
+      "Technical section is dense and could benefit from better structure/formatting",
+      "Missing details on compression algorithms supported (brotli, zstandard)",
+      "Status code utilities not mentioned"
+    ]
+  },
+  "module_summaries_evaluation": {
+    "modules_evaluated": [
+      "httpx/__init__.py",
+      "httpx/__version__.py",
+      "httpx/_api.py",
+      "httpx/_auth.py",
+      "httpx/_client.py",
+      "httpx/_config.py",
+      "httpx/_content.py",
+      "httpx/_decoders.py",
+      "httpx/_exceptions.py",
+      "httpx/_main.py",
+      "httpx/_models.py",
+      "httpx/_multipart.py",
+      "httpx/_status_codes.py",
+      "httpx/_transports/__init__.py",
+      "httpx/_transports/asgi.py",
+      "httpx/_transports/base.py",
+      "httpx/_transports/default.py",
+      "httpx/_transports/mock.py",
+      "httpx/_transports/wsgi.py",
+      "httpx/_types.py",
+      "httpx/_urlparse.py",
+      "httpx/_urls.py",
+      "httpx/_utils.py"
+    ],
+    "individual_evaluations": {
+      "httpx/__init__.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as the main entry point and public API for httpx. The description of the main() function as a fallback error handler for missing CLI dependencies is correct. The fa\u00e7ade pattern description and re-exporting behavior are accurate."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary mentions the main() function (the only function) and correctly notes there are no classes. However, the technical section lists some but not all imported submodules\u2014it mentions _auth, _client, _config, _content, _exceptions, and _models, but omits _status_codes, _transports, _types, _urls, and _main from the detailed description. These omissions slightly reduce completeness."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical sections are well-written and easy to understand. The explanation clearly distinguishes between the module's role as a public API fa\u00e7ade and its secondary function as a CLI entry point handler. Terminology is appropriate and accessible."
+        },
+        "overall_score": 4
+      },
+      "httpx/__version__.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the purpose and typical contents of a __version__.py module. The description of containing a __version__ string constant and serving as single source of truth for versioning is correct and aligns with standard Python packaging practices."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "Given the module structure shows 0 functions, 0 classes, and no imports, the summary appropriately covers what would be present (a version string constant). It also helpfully explains how this module is typically used within the package ecosystem, which is valuable context despite not being structural elements."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-organized and clearly written. It explains both the 'what' (version constant) and 'why' (single source of truth pattern) in accessible language. The technical section provides a concrete example that makes the abstract description tangible."
+        },
+        "overall_score": 5
+      },
+      "httpx/_api.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies this as a convenience API layer that wraps the Client class, creates context-managed instances, and delegates to client.request()/client.stream(). All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 9 functions are mentioned (get, post, put, patch, delete, head, options, stream, request). The summary correctly notes there are no classes defined in this module. Key concepts like automatic resource cleanup, configuration parameters, and the delegation pattern are all included. The connection to the underlying _client module is appropriately referenced."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical descriptions are well-written and accessible to their target audiences. The human version effectively communicates the 'why' (convenience for one-off requests) with concrete use cases. The technical version clearly explains the implementation pattern without being overly verbose. The distinction between this functional API and the underlying Client class is clear."
+        },
+        "overall_score": 5
+      },
+      "httpx/_auth.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. All technical details mentioned (RFC 2617/7616, HA1/HA2 hashing, nonce-counter replay prevention, generator-based pattern, sync/async orchestration) align precisely with the function summaries. The description of challenge-response flows, credential caching, and cryptographic operations is correct."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "All 6 classes are explicitly named, and the core auth flow architecture is well-covered. The summary appropriately focuses on DigestAuth as the most complex implementation. However, BasicAuth and NetRCAuth are only mentioned by name without any description of their functionality (e.g., BasicAuth does base64 encoding, NetRCAuth reads from .netrc files). The summary captures the overall pattern but could benefit from brief descriptions of the simpler auth types."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical descriptions are well-articulated. The human version explains concepts accessibly (e.g., 'securely verifies user identity without transmitting passwords in plain text'), while the technical version uses precise terminology appropriately. The logical flow from general authentication purpose to specific implementation details (generator pattern, I/O orchestration) makes it easy to understand the module's architecture at both high and low levels."
+        },
+        "overall_score": 5
+      },
+      "httpx/_client.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies both sync/async client interfaces, the request lifecycle handling, key classes (7 total), and core design patterns like parameter merging, proxy routing, and authentication handling. The technical details about context managers, transport initialization, and the inheritance hierarchy are all correct based on the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers the major functional areas well: HTTP methods, redirect handling, authentication, parameter merging, transport layers, and lifecycle management. It mentions all 7 classes by name and categorizes the 81 functions effectively. However, it could explicitly mention some important features like cookie extraction/management, timeout configuration details, SSL/TLS verification, and the distinction between streaming vs buffered responses. The proxy configuration and environment variable support could also be more prominent."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The human summary is well-structured and accessible, clearly explaining the module's purpose and capabilities. The technical summary appropriately uses domain-specific terminology (sentinel, lazy instantiation, context manager protocol) that would be understood by the target audience. The progression from high-level functionality to implementation details is logical. However, the technical summary is quite dense with multiple concepts packed into long sentences, which could be slightly more digestible with better sentence structure."
+        },
+        "overall_score": 4
+      },
+      "httpx/_config.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as the configuration layer for httpx HTTP clients. All technical details are correct: the four classes and their purposes are accurately represented, create_ssl_context's behavior is correctly characterized, and the integration points with other httpx components are properly identified."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All major components are covered: the four classes (UnsetType, Timeout, Limits, Proxy), the main create_ssl_context function, key methods (__eq__, __repr__, as_dict, raw_auth), and integration patterns. The summary successfully captures both the high-level purpose and low-level implementation details."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-structured with a clear human-readable section followed by technical details. The language is accessible yet precise, and the progression from general concepts (timeout/proxy configuration) to specific implementation patterns (property-based lazy evaluation, immutable configuration objects) is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_content.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as content encoding/formatting for HTTP transmission. All technical details are correct: the encoding functions return tuple[headers, ByteStream], the priority-based routing in encode_request/encode_response matches the function summaries, stream consumption tracking is properly identified, and the four stream classes are correctly characterized."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components: the main encoding functions (encode_content, encode_json, encode_text, encode_multipart_data, encode_urlencoded_data, plus encode_request/encode_response), all four stream classes, and key patterns like stream consumption tracking. Minor deduction because encode_html is grouped implicitly rather than explicitly mentioned, and some implementation details like the CHUNK_SIZE reading pattern could be noted. Overall very comprehensive."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity with well-structured human and technical descriptions. The human version provides an accessible high-level view ('content preparation layer'), while the technical version gives precise implementation details without being overwhelming. The progression from what it does to how it does it is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_decoders.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. All mentioned classes exist in the structure, the decompression algorithms are correctly identified, and the streaming/incremental processing approach is properly characterized. The technical details about class hierarchy and integration with httpx are correct."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 11 classes are mentioned with appropriate context. The summary covers both the core decompression functionality (ContentDecoder hierarchy) and utility classes (ByteChunker, TextChunker, TextDecoder, LineDecoder). Key methods (decode/flush), external dependencies (zlib, brotli, zstandard), and the integration context (httpx response handling) are all included."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent separation between human-friendly and technical explanations. The human section clearly explains the 'what' and 'why' (transparent decompression, memory efficiency, handling various formats), while the technical section provides implementation details without being overwhelming. The progression is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_exceptions.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and structure. It correctly identifies the hierarchical exception organization with HTTPError as base, the request_context() utility for enriching errors with request metadata, and the various error categories (timeouts, network, protocol, etc.) that align with the class list."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary captures the main patterns and key exception types well, including the hierarchy, request_context() manager, and major error categories. However, it doesn't specifically mention some important exception classes like HTTPStatusError, InvalidURL, CookieConflict, or the stream-related exceptions (StreamError, StreamConsumed, StreamClosed, ResponseNotRead, RequestNotRead). These are significant enough to warrant at least brief mention."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and easy to understand. The human summary explains the purpose in accessible terms, while the technical summary provides appropriate detail about implementation patterns (hierarchical structure, context manager, property-based validation) without being overly verbose."
+        },
+        "overall_score": 4
+      },
+      "httpx/_main.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes this as a CLI module for HTTPX with correct identification of all major functionality: Click-based entry point, Rich library formatting, request/response handling, syntax highlighting via Pygments, trace callbacks, and download progress tracking. All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Most key functions are explicitly mentioned (main, formatters, validators, trace system, content-type detection). Minor omissions: print_help()/handle_help() are implied but not named, print_response() is covered conceptually but not explicitly mentioned, and format_certificate() is omitted (though it's a helper function). The core functionality and architecture are thoroughly covered."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and accessible. The human version clearly explains the user-facing purpose, while the technical version effectively describes the architecture with appropriate detail. The flow from input to output is clearly articulated, and technical terminology is used appropriately without being overwhelming."
+        },
+        "overall_score": 5
+      },
+      "httpx/_models.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and components. All six classes are correctly identified, the function count (95) matches the structure, and the technical details about lazy evaluation, adapter patterns, and stdlib compatibility are well-supported by the function summaries. The dependencies mentioned (email.message, urllib.request, json, codecs) align with the imports list."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers all major functionality areas and classes. Minor omission: it doesn't explicitly mention the dual sync/async nature of the response streaming API (iter_bytes/aiter_bytes, read/aread, etc.), which is a significant feature evident in the function summaries. Also could mention specific compression formats supported (gzip, deflate, brotli, zstd) for completeness."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical versions are well-written and appropriately targeted. The human version clearly explains the value proposition and abstractions provided. The technical version effectively describes the architecture patterns (lazy evaluation, adapters, dual interfaces) and key dependencies without being overly verbose."
+        },
+        "overall_score": 5
+      },
+      "httpx/_multipart.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose of encoding and streaming multipart form data for HTTP requests. It correctly identifies the three core classes (DataField, FileField, MultipartStream) and their roles, accurately mentions RFC 2046 compliance, and properly describes the streaming capabilities for handling large files without memory overflow."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All key components are mentioned: the three main classes, critical methods (__iter__, __aiter__, iter_chunks, get_content_length, get_headers), and helper functions (_format_form_param, _guess_content_type). The summary covers both the high-level purpose and important implementation details like boundary generation, MIME type detection, and header construction."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-structured with a clear human-friendly explanation followed by technical details. It clearly articulates the problem being solved (converting Python data structures to multipart HTTP payloads) and explains how the module achieves this through streaming and proper MIME formatting. The progression from purpose to implementation is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_status_codes.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and functionality. It correctly identifies the HTTP status code utilities, the codes class that extends integers with phrases, and the categorization methods."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers all major functionality but omits the __str__() method from the technical description. The technical summary mentions 'nine methods' but only explicitly lists eight (__new__, get_reason_phrase, and six category checkers), leaving out __str__. This is a minor omission but worth noting."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and clear. The human version effectively communicates the module's value to non-technical users, while the technical version provides appropriate implementation details about the enum-based design, O(1) complexity, and integration patterns."
+        },
+        "overall_score": 5
+      },
+      "httpx/_transports/__init__.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary makes reasonable assumptions about an __init__.py file's purpose but speculates beyond the available evidence. It assumes the module 're-exports' classes through __all__ or direct imports, but the structure shows 0 classes and 0 functions - only imports are confirmed. While this is likely correct for a transport package init file, it's not verified by the provided structure. The description of transport types (ASGI, WSGI, mock, default) accurately reflects the imports shown."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "Given that the structure shows 0 functions and 0 classes, there are no specific members to mention. The summary appropriately doesn't list specific class/function names. However, it doesn't acknowledge the limitation that we can only see imports, not what's actually exposed. A more complete summary would note what we know (imports) versus what we're inferring (re-exports)."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The summary is well-written, logically structured, and easy to understand. It clearly explains the assumed purpose (aggregation point for transport implementations) and provides good architectural context. The distinction between the general and technical descriptions is helpful. Minor deduction for not being explicit about speculative elements."
+        },
+        "overall_score": 3
+      },
+      "httpx/_transports/asgi.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies this as an ASGI transport layer for testing web applications, accurately describes the protocol conversion mechanism (HTTP to ASGI), and correctly explains the dual async framework support (asyncio/Trio). All technical details align with the function summaries."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All major components are covered: both classes (ASGITransport, ASGIResponseStream), key utility functions (is_running_trio, create_event), the main orchestration method (handle_async_request), and the receive/send callables. The summary captures both the high-level purpose and the implementation mechanics, including error handling configuration."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-structured with clear human and technical sections. The human section provides good context about the problem being solved (testing ASGI apps in isolation), while the technical section offers precise implementation details without unnecessary complexity. The progression from purpose to implementation details flows logically."
+        },
+        "overall_score": 5
+      },
+      "httpx/_transports/base.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as defining abstract base classes for HTTP transports. It correctly identifies both sync/async variants, the context manager protocols, and the core abstract methods (handle_request/handle_async_request). The description of the design pattern and purpose aligns well with the function summaries."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components: both base classes, context manager methods (__exit__/__aexit__), and abstract request handling methods. The close/aclose methods and __enter__/__aenter__ are implied but not explicitly named. Could briefly mention that there are 8 functions total across both classes, but the key ones are well-represented."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical versions are well-written and clear. The human version effectively explains the purpose (pluggable transport implementations) and benefit (consistent interface). The technical version appropriately names design patterns (Template Method, Abstract Base Class) and explains the contract without unnecessary jargon. Good logical flow from purpose to implementation details."
+        },
+        "overall_score": 5
+      },
+      "httpx/_transports/default.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's role as the HTTP transport layer bridging httpx and httpcore. Correctly identifies the four classes, their purposes, proxy support types, exception translation mechanism, and the flow of request/response conversion. The technical details about pool instantiation and exception mapping are precise."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components: the 4 classes, primary request handling methods, exception mapping, context managers, and proxy configuration. Minor deduction because iteration protocols (__iter__, __aiter__) and cleanup methods (close, aclose) could be more explicitly mentioned in the summary, though they're implied in 'wrapping httpcore response streams'. The _load_httpcore_exceptions helper is also not mentioned, though its purpose is covered in the exception mapping discussion."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "Well-structured with clear human-friendly explanation followed by technical details. The human section effectively communicates purpose without jargon. Technical section is comprehensive but dense - packing connection pools, proxy types, exception handling, and both sync/async patterns into one paragraph. Could benefit from slight restructuring (perhaps separating sync/async discussion) but remains understandable."
+        },
+        "overall_score": 4
+      },
+      "httpx/_transports/mock.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. The mock transport concept, handler pattern, sync/async method distinction, and type safety validation all align with the function summaries and module structure."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers the MockTransport class and both handle_request/handle_async_request methods well. However, __init__() is listed in the structure but not mentioned in the summary (though no function summary was provided for it, so this may be intentional). The core functionality is comprehensively described."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical descriptions. The human version clearly explains the testing use case and benefits, while the technical version provides precise implementation details. The progression from purpose to mechanism is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_transports/wsgi.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as a WSGI transport adapter for httpx. The technical details are correct: WSGITransport converts requests to WSGI environ dicts, uses start_response callbacks, and WSGIByteStream wraps response iterables. The description of it fitting into httpx's transport layer for testing without network calls is accurate."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All key components are covered: both classes (WSGITransport, WSGIByteStream), the main handle_request() method, the start_response callback mechanism, and the helper function _skip_leading_empty_chunks(). The init, iter, and close methods are appropriately represented implicitly in phrases like 'wraps the WSGI app's iterable response body with cleanup support.'"
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The human summary clearly explains the 'why' (testing without network overhead) and 'what' (WSGI-to-HTTP translation). The technical summary provides appropriate implementation details without overwhelming. The flow from request \u2192 environ \u2192 WSGI app \u2192 response is easy to follow."
+        },
+        "overall_score": 5
+      },
+      "httpx/_types.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the abstract base class pattern and the purpose of the module. However, it doesn't account for all listed functions\u2014specifically 'aclose()' which is mentioned in the structure but not covered in the summary or function descriptions provided."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "The summary covers both classes and mentions 3 of 4 functions (__iter__, close, __aiter__), but completely omits 'aclose()', which based on the pattern established should be the async cleanup method parallel to close(). This is a significant omission since it breaks the symmetry between sync and async interfaces that the summary claims to describe."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical explanations are well-written and easy to understand. The summary clearly explains the abstract base class pattern, the purpose of enforcing implementation in subclasses, and how this enables polymorphic handling of data sources. The progression from human-friendly to technical description is excellent."
+        },
+        "overall_score": 4
+      },
+      "httpx/_urlparse.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose, functionality, and implementation details. All mentioned components (urlparse function, ParseResult, helper functions, dependencies) are correctly characterized. The technical description properly identifies regex-based parsing, RFC 3986 compliance, and the normalization/validation workflows."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers the primary API (urlparse), data structure (ParseResult), and most critical helper functions (encode_host, normalize_port, normalize_path, quote/percent_encoded, authority, netloc, copy_with, __str__). However, validate_path() is notably absent from the summary despite being important for RFC 3986 validation. The PERCENT function is also not explicitly mentioned, though it appears to be a lower-level helper. Overall captures ~75% of functions with good coverage of the most important ones."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical versions. The human summary provides an accessible high-level overview ('URL parsing engine'), while the technical version offers concrete implementation details without excessive verbosity. The logical flow from main function to helpers to dependencies makes the module's architecture easy to understand."
+        },
+        "overall_score": 4
+      },
+      "httpx/_urls.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary is highly accurate. It correctly describes the module's purpose (URL handling for HTTPX), accurately identifies the two main classes (URL and QueryParams), correctly characterizes the immutable design pattern, and accurately describes the encoding/decoding operations (URL encoding, IDNA/punycode, ASCII conversion). The technical details about implementation dependencies and methods are all correct."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary captures the main functionality well and mentions key methods like copy_with(), join(), and merge(). However, it doesn't explicitly mention the specialized URL manipulation methods visible in the structure: copy_set_param, copy_add_param, copy_remove_param, and copy_merge_params, which appear to be important convenience methods for parameter manipulation. While their functionality is implied in the general description, explicitly mentioning them would improve completeness."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both the Human and Technical summaries are very clear and well-structured. The Human version is accessible and explains the 'why' effectively, while the Technical version provides precise implementation details. The explanation of the immutable design pattern and its implications is particularly clear. The progression from high-level purpose to implementation details is logical and easy to follow."
+        },
+        "overall_score": 4
+      },
+      "httpx/_utils.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the functionality that it covers - proxy configuration, URL pattern matching, file size detection, IP validation, and type conversion are all correctly explained. However, it presents an incomplete picture by omitting several functions listed in the structure (to_bytes, to_str, to_bytes_or_str, unquote), which suggests the module also handles string/bytes encoding and URL decoding - functionality not mentioned in the summary."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "The URLPattern class and its methods are well-covered, and several utility functions are described (primitive_value_to_str, get_environment_proxies, peek_filelike_length, IP validators). However, 4 out of 15 functions are completely omitted: to_bytes, to_str, to_bytes_or_str, and unquote. These appear to be string encoding/decoding utilities that are likely important for HTTP handling but aren't mentioned at all. The special methods (__hash__, __lt__, __eq__) are also not mentioned, though these are less critical as they support URLPattern functionality."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are exceptionally clear and well-written. The human version provides accessible explanations of purpose, while the technical version includes appropriate implementation details. The structure flows logically from general purpose to specific capabilities, and the relationship between components is well-explained."
+        },
+        "overall_score": 3
+      }
+    },
+    "average_score": 4.52
+  },
+  "function_summaries": {
+    "httpx/__init__.py::main": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are factually correct. The summary accurately describes the error message, the sys.exit(1) call, the exit code meaning, and the purpose of the function."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The function never returns normally (sys.exit prevents normal return)",
+          "The `# type: ignore` comment on the function signature"
+        ],
+        "notes": "Covers all major functionality including the error message, exit behavior, and exit code. Minor omissions: doesn't explicitly state that the function never returns normally (though sys.exit(1) implies termination), and doesn't mention the type: ignore comment (which may or may not be relevant depending on context)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with well-structured human-friendly and technical versions. The human version provides context about when this is called, while the technical version gives specific implementation details. Both are easily understandable to their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth covering stdout output, sys.exit(1) behavior, and exit code meaning. Could be slightly enhanced by explicitly noting that sys.exit raises SystemExit and prevents normal function return, but the current level is appropriate for most use cases."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Consider adding: 'Note that sys.exit(1) raises SystemExit, so the function never returns normally.' This would make the control flow completely explicit, though it may be unnecessarily detailed for most audiences."
+    },
+    "httpx/_api.py::request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly describes the function's purpose, the temporary client creation, the context management pattern, and the delegation to client.request(). No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Technical summary mentions 'body parameters (content, data, files, json)' but doesn't explicitly note that params, headers, auth, and follow_redirects are also passed to client.request()",
+          "Could mention that parameters are strategically split: connection-level configs go to Client() while request-level params go to client.request()"
+        ],
+        "notes": "Covers the main functionality, return value, and resource cleanup well. The omission of some forwarded parameters in the technical section is minor but worth noting."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a logical flow. The human-friendly summary explains the 'why' (convenience for one-off calls) and 'what', while the technical summary explains the 'how' (context manager, delegation). Terminology is appropriate for each audience."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth mentioning context management, delegation pattern, and automatic resource cleanup. Could be slightly more detailed about the parameter routing (which params configure Client vs which are passed to the request method), but overall provides solid technical insight."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "In the technical summary, explicitly mention that ALL request parameters (method, url, content, data, files, json, params, headers, auth, follow_redirects) are forwarded to client.request(), not just the body parameters. Consider adding: 'The function strategically splits parameters: connection-level configurations (cookies, proxy, verify, timeout, trust_env) initialize the Client, while request-specific parameters are forwarded to the request method.'"
+    },
+    "httpx/_api.py::options": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "States '11 parameters' when there are actually 10 parameters in the function signature"
+        ],
+        "notes": "The summary is highly accurate overall. Correctly describes the purpose of OPTIONS requests, the delegation pattern, excluded parameters, and return type. Only minor counting error present."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage including: main purpose, HTTP method semantics, all parameter categories, return type, delegation pattern, and the notable exclusion of body-related parameters. Both high-level and technical perspectives are addressed."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with well-structured dual-level explanation. The human-readable section explains the 'why' (discovering server capabilities) while the technical section explains the 'how' (wrapper pattern). Accessible to both general users and developers."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for this type of wrapper function. Correctly identifies the delegation pattern, notes all parameter types, specifies the return type, and explains the intentional design choice to exclude body parameters. No unnecessary verbosity."
+      },
+      "overall_score": 5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Correct the parameter count from '11 parameters' to '10 parameters'. Otherwise, this is an excellent summary that balances accessibility with technical precision."
+    },
+    "httpx/_auth.py::sync_auth_flow": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's behavior. The description of the generator-based coroutine pattern, the yielding mechanism, and the flow control is correct."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Return type not explicitly mentioned (Generator[Request, Response, None])",
+          "Could clarify that this function itself IS a generator, not just using one",
+          "The fact that the function doesn't return a value (returns None via StopIteration) could be clearer"
+        ],
+        "notes": "Covers the main flow well, including conditional body reading and the loop mechanism. Minor omissions around the function's nature as a generator and its return semantics."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human and technical summaries are well-written and appropriate for their audiences. The human version provides intuitive understanding, while the technical version explains the implementation pattern clearly."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail about the generator protocol (next(), send(), StopIteration). Could be enhanced by explaining that this function is itself a generator that acts as a bridge/adapter between the caller and the inner auth_flow generator, and that the 'None' in the type signature indicates no return value."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Clarify that this function IS a generator (not just uses one) and explain the dual-generator pattern more explicitly. 2) Mention that the function returns None (completes without yielding a final value). 3) Could add a note that this acts as an adapter/bridge allowing the caller to drive the authentication flow by sending responses to yielded requests."
+    },
+    "httpx/_auth.py::_parse_challenge": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code without any hallucinations. It correctly identifies the parsing process, field extraction, encoding behavior, return type, and error handling."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The assert statement that validates the scheme is 'digest'",
+          "The default value 'MD5' for the algorithm field",
+          "That 'request' parameter is passed through to ProtocolError"
+        ],
+        "notes": "Covers the main functionality well, including return values and error handling. Minor elements omitted don't significantly impact understanding but would add completeness."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach with human-readable and technical summaries. The human summary provides accessible context about authentication, while the technical summary gives implementation details. Well-structured and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Provides appropriate technical detail including specific function calls (parse_http_list, unquote), data transformations (encoding to bytes), dictionary construction, and distinction between required and optional fields. The level of detail matches what developers need."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention: (1) the assert statement that enforces the 'digest' scheme, (2) the default 'MD5' value for the algorithm parameter, and (3) that the request parameter is passed to ProtocolError for context. However, these are minor omissions that don't significantly impact the summary's utility."
+    },
+    "httpx/_client.py::_send_handling_redirects": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the redirect-following logic, hook execution, history tracking, conditional behavior based on follow_redirects flag, exception handling, and return conditions."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality: redirect loop, max_redirects check, request/response hooks, history management, conditional redirect following, exception handling with cleanup, and multiple return paths. Both high-level purpose and technical details are present."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-readable version clearly explains the purpose and behavior in accessible terms. The technical version provides implementation details in a logical flow without being overwhelming. Easy to understand for both audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth with specific method names (_send_single_request, _build_redirect_request, aclose, aread), clear explanation of control flow, conditional logic, and the distinction between following redirects (loops) vs. storing next_request (returns). Correctly identifies the async nature and exception handling pattern."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary. If any minor enhancement were desired, you could explicitly mention that TooManyRedirects is raised when len(history) exceeds max_redirects, but this is already clearly implied and the current summary is comprehensive without being verbose."
+    },
+    "httpx/_client.py::put": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly identifies the function as an async wrapper that delegates to self.request() with 'PUT' as the HTTP method, accurately describes the purpose of PUT requests (update/replace data), and correctly notes all parameters are forwarded and a Response object is returned."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all essential aspects: the async nature, the delegation pattern, the HTTP method used, all major parameters, return type, and the practical purpose. The two-tiered explanation (human-friendly and technical) provides appropriate coverage for different audiences."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a well-structured two-level approach. The human-friendly explanation is accessible to non-technical users, while the technical explanation provides precise implementation details for developers. The language is concise and unambiguous."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth: identifies the async wrapper pattern, explains the delegation mechanism, specifies the HTTP method string being passed, enumerates all forwarded parameters, and mentions the async/await pattern. This level of detail is ideal for understanding the implementation without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary that requires no improvements. If being extremely pedantic, one could mention that some parameters use USE_CLIENT_DEFAULT as default values, but this level of detail is not necessary for a function summary and would reduce clarity."
+    },
+    "httpx/_client.py::headers": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "States 'encodes string values to ASCII bytes' which is misleading - only ACCEPT_ENCODING and USER_AGENT variables are encoded; the header keys and some values (b'*/*', b'keep-alive') are already byte literals",
+          "Claims 'This is a setter property' but the code snippet doesn't show a @property.setter decorator - this cannot be confirmed from the provided code"
+        ],
+        "notes": "The core functionality is correctly described, but details about encoding and property type contain inaccuracies or assumptions not evident in the code"
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't clarify that update() allows user-provided headers to override defaults",
+          "Could mention this is a method with return type None (void)"
+        ],
+        "notes": "Covers most essential elements including the main flow, default headers, merging, and storage. Minor details about override behavior could be more explicit"
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Both human and technical summaries are well-structured and understandable. The human summary effectively explains the purpose, while the technical one provides implementation details. Clear language throughout"
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail mentioning Headers object instantiation, update() method, ASCII encoding, and storage mechanism. Could be more precise about which values are being encoded vs. already being bytes"
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Clarify encoding statement: 'encodes ACCEPT_ENCODING and USER_AGENT variables to ASCII bytes, while other headers are defined as byte literals' 2) Remove or qualify the 'setter property' claim since it's not evident from this code snippet 3) Explicitly mention that user-provided headers can override the defaults via the update() method 4) Note that the method returns None"
+    },
+    "httpx/_client.py::_init_transport": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior, including the conditional logic, parameter usage, and return type. The factory pattern identification is appropriate. No hallucinations or inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: the conditional logic, parameter purposes, return behavior, and the pass-through nature of configuration. Both human and technical versions appropriately address their audiences. The return type (AsyncBaseTransport) could be explicitly stated in the human version, but the technical version covers this adequately."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity in both versions. The human version is accessible and explains the 'why' (purpose), while the technical version provides implementation details without unnecessary complexity. The two-tier approach works well for different audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Correctly identifies the factory pattern, notes the short-circuit optimization, enumerates all parameters with their roles, and highlights that parameters are passed without transformation. The level of detail is well-calibrated for a technical audience without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary that requires no changes. If being extremely pedantic, the human version could explicitly mention the return type (AsyncBaseTransport), but this is a very minor point and the current version is already highly effective."
+    },
+    "httpx/_client.py::close": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior. The term 'proxy transports' is reasonable given the docstring mentions 'proxies', though the code itself uses the generic term 'mounts'. All described operations match the actual implementation."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: state checking, guard condition, main transport closure, mounted transport iteration, None-checking, and resource cleanup. Return type (None) is implicitly covered by describing it as a cleanup operation."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-readable version explains the 'why' and high-level behavior. The technical version provides implementation details without being overly verbose. Both versions are well-written and accessible to their target audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary appropriately references specific implementation details (_state, _transport, _mounts.values()), explains the purpose of conditional checks, and describes the iteration pattern. The level of detail is appropriate for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is a high-quality summary with no significant issues. If being extremely pedantic, you could note that 'mounts' is a more generic term than 'proxies', but the docstring supports the proxy interpretation, making this acceptable."
+    },
+    "httpx/_client.py::_build_auth": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are factually correct. The summary accurately describes each conditional branch, the type conversions (tuple\u2192BasicAuth, callable\u2192FunctionAuth), pass-through behavior for Auth objects, and the TypeError for invalid inputs."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all five conditional branches, return value types (None and Auth objects), error handling with TypeError, and the design pattern of flexible input normalization. The only minor omission is that it's a private method (underscore prefix), but this is not critical for understanding functionality."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with two-tier approach. The human-readable version provides accessible high-level understanding ('normalizes different authentication input formats'), while the technical version offers precise implementation details. Both are well-structured and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: specifies class names (BasicAuth, FunctionAuth, Auth), mentions conditional type checking pattern, details tuple unpacking (username/password extraction), and identifies the design pattern (flexible input interface with normalization). Level of detail matches what a developer would need."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent. If any enhancement were desired, could add: (1) mention that it's a private method (underscore prefix suggests internal use), or (2) note the specific error message format with !r for repr(). However, these are very minor and don't diminish the quality of the current summary."
+    },
+    "httpx/_client.py::request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly describes the async HTTP request flow, parameter handling, deprecation warning, and the two-step build/send pattern."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major aspects: main functionality, parameters, return value (Response), side effects (deprecation warning), delegation pattern, and configuration merging. Could optionally note that only 'auth' and 'follow_redirects' are passed to send() while other params go to build_request(), but this is a minor implementation detail."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-friendly version is accessible to general developers, while the technical version provides appropriate detail for code maintainers. Language is precise without being verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Strong technical detail: identifies the delegation pattern, names specific methods called, mentions the UseClientDefault sentinel pattern, notes async execution, and explains the parameter flow. Appropriate depth without over-explaining."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary. If any enhancement were desired, could optionally mention that the function essentially provides a convenience wrapper that combines build_request() and send() into a single call, but this is already implicit in the current description."
+    },
+    "httpx/_client.py::_same_origin": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. The origin comparison logic is correctly explained, including the three components (scheme, host, port) and the use of the helper function for port normalization. The mention of security context is appropriate for same-origin checks."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential elements: main functionality, all three comparison components, return value (boolean), and the helper function's role. The function is pure with no side effects, so nothing significant is omitted. Input parameters are implicitly clear from context."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate layering. The human-readable section uses accessible language (e.g., 'web addresses', 'protocol', 'server') while the technical section provides implementation details suitable for developers. The real-world security context helps readers understand the function's purpose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for a straightforward comparison function. Mentions key implementation details like the helper function for port normalization and short-circuit AND evaluation. Doesn't over-explain obvious aspects but covers non-trivial elements like default port handling."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent as written. If being extremely pedantic, could explicitly state 'takes two URL objects as parameters' in the technical section, but this is clear from context and the current version avoids redundancy."
+    },
+    "httpx/_config.py::create_ssl_context": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "Minor: The technical summary implies cert handling always occurs at the end ('Finally, if cert is provided...'), but when verify is a string, the function returns early without processing the cert parameter"
+        ],
+        "notes": "The summary is mostly accurate. It correctly describes the main branching logic, parameter types, and deprecation warnings. The early return in the string path is a subtle flow detail that's not captured."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't mention certifi library as the default certificate source",
+          "Doesn't note that cert can be either a string or tuple (implied by *cert unpacking)",
+          "Missing the detail that string verify path checks if it's a directory vs file"
+        ],
+        "notes": "Covers all major functionality, parameters, return type, and deprecation warnings. The missing elements are minor details that don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are well-structured and clear. The human summary provides good context about purpose and use cases. The technical summary logically walks through the branching logic. Appropriate vocabulary for target audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including specific parameter types, environment variable names, SSL context methods, and control flow. Could be slightly more detailed about the early return behavior and the tuple unpacking for cert, but appropriate for most use cases."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Clarify that when verify is a string, the function returns immediately without processing the cert parameter. 2. Mention that certifi library provides the default certificate bundle. 3. Note that cert can be either a string (single file) or a tuple/sequence for multiple cert chain components. Suggested revision: '...if `str`, treats it as a file/directory path, emits deprecation warning, and returns immediately. Otherwise, if `cert` is provided (note: not reached when verify is str), calls `ctx.load_cert_chain()` with the cert path (string) or unpacked tuple before returning.'"
+    },
+    "httpx/_content.py::encode_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior, including the deprecation warning for non-Mapping data, the priority order of encoding logic, and the default return value. All statements are factually correct."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The boundary parameter and its use in multipart encoding",
+          "Return type distinction (SyncByteStream | AsyncByteStream rather than just ByteStream)"
+        ],
+        "notes": "Covers the main functionality, return structure, and the deprecation warning side effect well. Minor omissions include the boundary parameter's role and the precise return type annotation, though these are relatively minor details."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a two-tier approach: a high-level explanation for general understanding followed by technical details. The language is precise and accessible. The priority order is clearly articulated."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth by naming specific encoder functions, explaining the conditional flow, mentioning the deprecation warning mechanism, and describing the data structures returned. The level of detail is well-suited for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement could mention that the boundary parameter is specifically passed to encode_multipart_data() when files are present, and that the return type is either SyncByteStream or AsyncByteStream (not specifically ByteStream). However, these omissions are minimal and don't detract significantly from the summary's utility."
+    },
+    "httpx/_content.py::encode_text": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: UTF-8 encoding, header construction (Content-Length and Content-Type), return value structure (tuple with dict and ByteStream), and the overall purpose. No hallucinations or inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: input parameter, encoding process, both headers created, calculated content length, return value structure, and the practical purpose. The function has no side effects, which appropriately isn't mentioned."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent dual-level explanation. The human-friendly version uses an effective analogy (package with label and contents) that makes the concept accessible. The technical summary is precise and well-structured, using appropriate terminology without unnecessary jargon."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail: specifies UTF-8 encoding, names both HTTP headers explicitly, describes the tuple structure, mentions the ByteStream wrapper, and provides context about HTTP compatibility. Balances detail with conciseness well."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that accurately and clearly describes the code at both conceptual and technical levels. It would serve well in documentation."
+    },
+    "httpx/_decoders.py::decode": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all key aspects of the code without hallucinations. Both the trailing carriage return handling and buffer management are correctly explained."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The empty text edge case handling (returns empty list)",
+          "The specific NEWLINE_CHARS set beyond just standard newlines"
+        ],
+        "notes": "Covers all main functionality, return values, and state mutations (buffer and trailing_cr). Missing elements are relatively minor edge cases that don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human and technical summaries are well-structured and understandable. The human version provides good context about streaming use cases, while the technical version clearly explains the implementation details with appropriate terminology."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: mentions specific methods (splitlines(), pop()), explains the buffer concatenation logic, and describes the state management for trailing_cr. Good balance between detail and readability."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention: (1) the comprehensive set of newline characters beyond \\n and \\r (includes Unicode line separators), and (2) the empty text edge case that returns an empty list. However, these are minor enhancements and the summary is already of high quality."
+    },
+    "httpx/_exceptions.py::request_context": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims the function is 'decorated with @contextlib.contextmanager' but no such decorator is visible in the provided code"
+        ],
+        "notes": "The summary contains a significant hallucination about a decorator that isn't present. While the function signature indicates it returns Iterator[None] (suggesting it should be used with such a decorator), stating it IS decorated when the code doesn't show this is factually incorrect. All other aspects are accurate."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention that the function yields None specifically (indicated by Iterator[None] return type)"
+        ],
+        "notes": "Covers the main functionality well: the context manager behavior, exception catching, conditional attachment, and re-raising. The omission of what specifically is yielded is minor."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical explanations are clear and well-written. The two-tier approach effectively serves different audience levels. The explanation of purpose (helping with debugging) adds valuable context."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including exception handling mechanism, conditional logic, attribute assignment, and stack trace preservation. The mention of the (non-existent) decorator actually shows attempt at deeper explanation, though it's incorrect in this case. Could mention the Iterator[None] return type annotation."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove the claim about '@contextlib.contextmanager' decorator as it's not present in the code. Instead, could note that 'the function is a generator (yields control) that returns Iterator[None], making it suitable for use as a context manager.' Optionally mention that such generators typically need the @contextlib.contextmanager decorator to work with 'with' statements, but don't claim it's already decorated."
+    },
+    "httpx/_main.py::handle_help": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior. The condition logic is correctly explained, and the Click framework context is properly identified."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The `param` parameter is accepted but unused (could mention this minor detail)"
+        ],
+        "notes": "Covers all major aspects: early return conditions, main functionality, side effects, and return value. Only minor detail is that the `param` parameter exists but isn't used in the function body, though this is a very minor omission."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are well-written and appropriate for their audiences. The human version provides good context about typical usage, while the technical version clearly explains the control flow and side effects."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth: mentions the Click framework specifically, explains the boolean logic precisely, identifies it as a callback pattern, and explicitly notes side effects vs return value. Appropriate level of detail without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancement: Could briefly mention that the `param` parameter is part of the Click callback signature but unused in this implementation. However, this is a very minor point and the summary is excellent as-is."
+    },
+    "httpx/_main.py::print_help": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly identifies this as a help menu display function, accurately counts 17 table rows, correctly names all the components (Rich Console, Table.grid), and accurately describes the styling and formatting used."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Return type is None (though this is evident from function signature)",
+          "Table padding configuration (padding=1, pad_edge=True)",
+          "Different justification options used (center vs left)"
+        ],
+        "notes": "Covers the main functionality comprehensively and mentions the console output side effect. The missing elements are relatively minor details that don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity in both human and technical summaries. The human version provides a high-level overview that's accessible to non-technical users, while the technical version gives specific implementation details that would be useful to developers. Well-structured and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for a technical summary. Mentions specific Rich library components (Console, Table.grid), accurately counts and categorizes the rows, identifies styling mechanisms (bold, cyan), and provides representative examples of the documented options without exhaustively listing all 17."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement could mention the table configuration (padding=1, pad_edge=True) and that different text justifications are used (center for header, left for usage), but these are very minor details that don't detract from an otherwise excellent summary."
+    },
+    "httpx/_main.py::main": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the method determination logic, Client creation, streaming behavior, download/print branching, error handling, and exit codes."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The `verify` parameter for SSL certificate verification",
+          "Use of context managers for resource cleanup",
+          "The `follow_redirects` parameter handling"
+        ],
+        "notes": "Covers all major functionality including method determination, request streaming, response handling, error catching, and exit codes. Minor parameters like `verify` and `follow_redirects` could be mentioned for completeness, but their omission doesn't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human-friendly and technical summaries are well-written and appropriately targeted. The human summary provides clear conceptual understanding while the technical summary gives implementation details without being overwhelming. Good separation of concerns."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: mentions specific data type conversions (list/dict), the streaming approach, functools.partial usage, rich console formatting, and specific exit codes. Balances detail with readability well."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional: Could briefly mention `verify` parameter for SSL verification and `follow_redirects` handling in the technical summary. Could note the use of context managers for proper resource cleanup. However, these are minor enhancements to an already strong summary."
+    },
+    "httpx/_models.py::iter_raw": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all key behaviors: state validation, iteration mechanism, chunking process, byte tracking, flushing, and cleanup. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not mention the `request_context` context manager that wraps the iteration",
+          "Could mention that `_num_bytes_downloaded` is initialized to 0",
+          "Could explicitly state return type is `Iterator[bytes]`"
+        ],
+        "notes": "Covers all major functionality including validations, iteration logic, side effects, and exceptions. The omission of `request_context` is minor but notable since it's part of the execution flow."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical sections are well-structured and clear. The human-friendly version provides good conceptual understanding, while the technical version offers implementation details. Language is precise and accessible to the respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical section provides excellent detail: specific method calls (`chunker.decode()`, `chunker.flush()`, `self.close()`), exception types, state tracking mechanisms, and control flow. Appropriate level of detail for understanding implementation without being overly verbose."
+      },
+      "overall_score": 4.75,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add mention of the `request_context` context manager in the technical section, as it's part of the execution flow: 'Wraps iteration in `request_context(request=self._request)` context manager, then iterates through `self.stream`...'"
+    },
+    "httpx/_models.py::reason_phrase": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the try-except flow, retrieval from self.extensions dictionary, the bytes type, ASCII decoding with error handling, the fallback to codes.get_reason_phrase(), and the string return type. No factual errors or hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major elements: the primary retrieval path, exception handling, fallback mechanism, data types (bytes \u2192 string), decoding parameters, and return value. The mention of errors='ignore' parameter demonstrates thoroughness. Nothing significant is missing."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are well-written and clear. The human summary provides good context about HTTP reason phrases with examples. The technical summary follows a logical flow and uses precise language appropriate for developers."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical depth. Includes specific implementation details like the bytes type, ASCII encoding, the errors parameter value, dictionary key name, exception type (KeyError), and method call chain. Appropriate level of detail for a technical audience without being unnecessarily verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary that requires no changes. If being extremely pedantic, one could mention that errors='ignore' silently drops invalid ASCII bytes, but this level of detail is unnecessary for most use cases."
+    },
+    "httpx/_models.py::values": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The description of ValuesView as 'dynamic' is misleading since values_dict is a local variable that won't change after the function returns"
+        ],
+        "notes": "The summary is mostly accurate. The main issue is describing the ValuesView as 'dynamic' when it's actually tied to a local dictionary that becomes immutable after function return. While ValuesView technically doesn't copy data, the practical behavior here is more like a static collection."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: iteration through _list, decoding, aggregation logic, duplicate key handling, and return type. Both human and technical summaries complement each other well."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity. The human summary provides intuitive understanding while the technical summary gives implementation details. Well-structured and easy to follow for both audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail covering encoding, data structures, and return type. The ValuesView explanation could be more precise about the lifecycle implications. Also, 'comma-separation' could more precisely be 'comma-space separation' (', ')."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Revise the ValuesView description to be more accurate: 'Returns a ValuesView object containing the aggregated values. Note that while ValuesView is technically a view object, it references a local dictionary created within this function.' Also consider noting the comma-space (', ') separator more precisely."
+    },
+    "httpx/_models.py::delete": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. The optimization path (direct clear when both domain and path are specified), the filtering logic with list comprehension, and the subsequent deletion process are all correctly explained."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: main functionality, optional parameters, the optimization strategy, filtering logic, return value (None), and side effects (deletion from jar). Both the general use case and technical implementation details are included."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate separation between human-readable and technical explanations. The human section provides context with a concrete example ('session_id'), while the technical section explains the implementation without being overly verbose. The flow from optimization case to general case is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for the code complexity. Identifies the optimization strategy, explains the filtering conditions (name match with optional domain/path), mentions list comprehension usage, and describes the iteration/deletion pattern. Correctly notes the side-effect nature of the operation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a well-crafted summary that balances accessibility with technical precision. It would serve both users trying to understand how to use the function and developers examining the implementation."
+    },
+    "httpx/_models.py::url": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly identifies this as a property that returns self.request.url with no transformation, side effects, or external dependencies. The return type (URL) matches the type hint."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all relevant aspects: purpose, return value, implementation pattern (delegation), data flow, side effects (none), and dependencies (none). Appropriately thorough for such a simple accessor method."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with both human-friendly and technical explanations. The human section uses accessible language ('convenient way', 'digging through nested details'), while the technical section provides precise terminology (delegation, attribute access). Very readable."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate depth for the code complexity. Identifies the property pattern, explains the delegation mechanism, notes the absence of transformation/side effects, and correctly identifies the return type. No unnecessary elaboration on trivial code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. The summary is well-balanced, accurate, and appropriately detailed for a simple accessor method. The dual-level explanation (human + technical) is a good practice that serves different audiences effectively."
+    },
+    "httpx/_models.py::_parse_header_links": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major aspects of the code: HTTP Link header parsing, regex-based splitting pattern, delimiter handling, exception handling for malformed data, and the data structure returned. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The specific characters being stripped (space, single quote, double quote)",
+          "The early return for empty input strings",
+          "The specific regex pattern ', *<' used for splitting"
+        ],
+        "notes": "Covers the main functionality, return values, and error handling well. Minor details about the specific regex pattern and empty string handling could be mentioned, but these are not critical omissions."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The summary is well-structured with both a human-readable overview and technical details. The explanation flows logically from input processing to output generation. The use case (pagination and resource relationships) provides helpful context."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section appropriately details the implementation: regex splitting, delimiter-based parsing, exception handling strategy, data structure accumulation, and key naming conventions. The level of detail is appropriate for understanding the implementation without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional: Could mention the specific regex pattern ', *<' and the characters being stripped (space, single/double quotes) for completeness, but the current summary is already excellent and these details may be too granular for most use cases."
+    },
+    "httpx/_models.py::raw": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior. While it assumes HTTP headers from context (function name 'raw', byte types, header-like structure), this is a reasonable and well-supported inference. The technical description correctly identifies the list comprehension, tuple unpacking, and element discarding."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: return type, transformation logic, what's preserved (raw_key, value), what's discarded (middle element), and the purpose. Appropriately notes no modification or decoding occurs. The function has no side effects, which is correctly implied by the description."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a human-readable overview followed by technical details. The human-readable section explains the 'why' and 'what', while the technical section explains the 'how'. Language is precise and accessible to the appropriate audience levels."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate level of detail for the code's complexity. Correctly identifies the list comprehension pattern, explains the underscore convention for ignored values, and makes a reasonable inference about the middle element's purpose. Provides sufficient detail without over-explaining simple operations."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None required. The summary is accurate, complete, clear, and appropriately detailed. If being extremely pedantic, could add that this appears to be a method of a class managing headers (based on `self._list`), but this is already implicit and adequately conveyed."
+    },
+    "httpx/_models.py::aiter_raw": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's behavior. The human summary correctly explains the high-level purpose, while the technical summary precisely captures implementation details including state management, context wrapping, and exception handling."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Excellent coverage. The human summary captures the use case and flow. The technical summary comprehensively covers: precondition checks, state flags (is_stream_consumed, _num_bytes_downloaded), the ByteChunker mechanism, request_context wrapper, flush operation, aclose() call, and all three exception types with their conditions."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written for their target audiences. The human summary uses accessible language (\"manageable chunks,\" \"process data incrementally\") suitable for general developers. The technical summary is appropriately detailed with precise terminology for maintainers/advanced users without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary demonstrates excellent depth: mentions the chunker's role in enforcing chunk_size boundaries, tracks the specific state variables modified, identifies the request_context wrapper, explains the two-phase yielding (decode + flush), and enumerates specific exception types. This is the right level of detail for code documentation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summaries are excellent. If being very pedantic, the technical summary could clarify that ByteChunker.decode() does chunking/buffering rather than traditional 'decoding' (which might imply character encoding), but this is a very minor point and the current wording is acceptable."
+    },
+    "httpx/_multipart.py::get_length": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the header rendering, type checking for string/bytes vs file-like objects, the use of helper functions (to_bytes, peek_filelike_length), and the conditional return logic. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major aspects: the two branches of execution (string/bytes vs file-like), both return types (int and None), the reason for returning None, and the method's overall purpose. The return type annotation (int | None) is implicitly covered."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and appropriate for their audiences. The human-readable version provides good context (HTTP response size calculation) while remaining accessible. The technical version clearly explains the implementation flow without being verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate detail: mentions specific helper functions, explains the branching logic, notes the conversion mechanism (to_bytes), and explains the rationale for peek_filelike_length (avoiding full buffering). The level of detail matches what a developer would need to understand the implementation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary with no significant issues. If being extremely pedantic, could add that this is an instance method (uses self), but this is a very minor point and doesn't detract from the quality."
+    },
+    "httpx/_multipart.py::get_content_length": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. The byte calculations for boundary markers are correct: `--{boundary}\\r\\n` (2+len+2), field content, trailing `\\r\\n` (2), and final `--{boundary}--\\r\\n` (2+len+4). The None-return condition is properly explained."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: purpose, iteration logic, early-return condition, byte-by-byte calculation breakdown, and return values. Both the conceptual overview and implementation details are thoroughly addressed."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-readable section provides clear context about multipart form data without implementation details. The technical section systematically walks through the algorithm with precise byte calculations, making it easy to verify against the code."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical summary. Breaks down the exact byte composition of each boundary marker, explains the accumulation logic, and identifies the specific multipart/form-data protocol elements. The explicit byte arithmetic (e.g., '2 + boundary_length + 2 bytes') enables verification without needing to trace the code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If any enhancement were desired, it could briefly mention that this implements the multipart/form-data format from RFC 2046, but this is optional context rather than a deficiency."
+    },
+    "httpx/_status_codes.py::is_server_error": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. It correctly identifies the 5xx range (500-599), the boolean return type, and the classmethod nature (indicated by cls parameter). No hallucinations or inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: main functionality, input parameter (integer value), return values (boolean with conditions), lack of side effects, and implementation approach. Both high-level purpose and technical details are addressed."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with two distinct sections serving different audiences. The human-readable section explains the purpose and context (HTTP server errors, web applications). The technical section provides implementation details without unnecessary jargon. Well-structured and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for this simple function. Correctly identifies it as a classmethod, explains the range comparison logic, notes the boolean return type, and mentions the absence of dependencies and side effects. The 'pure logic with immediate return' characterization is accurate and valuable."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None necessary. This is a high-quality summary that balances accessibility with technical precision. For extreme thoroughness, one could note that the function doesn't validate input type, but this is unnecessary for such a straightforward range check."
+    },
+    "httpx/_status_codes.py::is_redirect": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. While the code doesn't explicitly show the @classmethod decorator, the 'cls' parameter strongly indicates this is a classmethod, making the description reasonable. All technical details about the range check (300-399 inclusive) and return values are correct."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage including: purpose (redirect detection), input type (integer HTTP status code), return values (boolean), specific range (300-399), examples (301, 302, 307), use case context (web applications), and implementation details (no external calls, no side effects, simple comparison)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent dual-level explanation. The human-friendly section effectively contextualizes HTTP redirects for general developers. The technical section is precise and uses appropriate terminology. Both sections are concise and easy to understand for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail for a simple function. Correctly identifies the method type, describes the comparison operation, notes the lack of side effects and external dependencies, and accurately describes the boolean conversion. Doesn't over-explain trivial aspects while covering all relevant technical characteristics."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None required. This is a high-quality summary that balances accessibility with technical precision. If being extremely pedantic, could note that the @classmethod decorator isn't visible in the snippet, but this would be unnecessarily cautious given the 'cls' parameter convention."
+    },
+    "httpx/_transports/asgi.py::send": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The technical summary mentions 'async/await patterns for non-blocking I/O' but the function doesn't actually use 'await' - it's declared async but performs no awaiting operations in the shown code"
+        ],
+        "notes": "The summary is largely accurate in describing the message handling, state management, and control flow. The only minor inaccuracy is overstating the async/await usage when only async declaration is present without actual await operations."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The assertion check 'assert not response_complete.is_set()' that prevents processing body messages after completion",
+          "The function returns None (though this is implicit and relatively obvious)"
+        ],
+        "notes": "Covers the main functionality well including both message types, the HEAD request edge case, state flags, and the more_body mechanism. Minor elements about the response_complete assertion check could be more explicit."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent organization with separate human-readable and technical sections. The progression from high-level explanation to technical details is logical and easy to follow. Language is precise and accessible to the appropriate audience levels."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including specific variable names, message types, flag usage, and control flow. Appropriately mentions the nonlocal state machine pattern and assertion-based lifecycle enforcement. Could be slightly more precise about the async nature (it's async-compatible but doesn't perform async operations internally)."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Revise the async/await statement to be more precise - perhaps 'declared as async for compatibility with async frameworks' rather than implying it performs non-blocking I/O operations. Consider explicitly mentioning the assertion that prevents body processing after response completion. Otherwise, this is a high-quality summary with good structure and coverage."
+    },
+    "httpx/_transports/base.py::handle_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code as an abstract method that raises NotImplementedError and must be overridden by subclasses. All stated facts are correct."
+      },
+      "completeness": {
+        "rating": 3,
+        "missing_elements": [
+          "Resource management warning about stream consumption (response.stream.read())",
+          "Note that developers shouldn't typically call this directly (Client class provides higher-level API)",
+          "try/finally block recommendation for proper resource cleanup",
+          "The transport pattern context (HTTPTransport usage)"
+        ],
+        "notes": "While the summary correctly explains the abstract method pattern, it omits critical information from the docstring about resource management and proper usage patterns. These details are important for developers who might implement or use this method."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human and technical summaries are well-written and clearly explain the abstract method pattern at appropriate levels for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "The technical summary appropriately explains the abstract method pattern, type hints, and implementation requirements. However, it could mention the critical resource management considerations that are prominently featured in the docstring."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add a sentence about resource management: 'Important: The response stream must either be consumed immediately with response.stream.read() or properly closed in a try/finally block to release network resources.' Also note that this is typically called internally by higher-level Client APIs rather than directly by developers."
+    },
+    "httpx/_transports/default.py::handle_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are factually correct. The summary accurately describes the request transformation, delegation to the connection pool, exception handling, and response transformation. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The assertions that validate request.stream is SyncByteStream and resp.stream is Iterable",
+          "The inline import of httpcore module"
+        ],
+        "notes": "Covers all major functionality including input processing, delegation, error handling, and output construction. The missing assertions are validation checks that could be mentioned for completeness, though their omission doesn't significantly impact understanding of core functionality."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with two well-targeted summaries. The human-friendly version uses accessible language and clear flow. The technical version is precise, uses proper terminology, and logically sequences the operations. Both are easy to understand for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Identifies all key components (method, URL parts, headers, stream, extensions), mentions specific classes (httpcore.Request, ResponseStream, Response), and describes the exception handling mechanism. The level of detail matches what a developer would need to understand the function's operation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional: Could briefly mention the type assertions that validate the stream types before and after the httpcore call, as these represent important preconditions and postconditions. However, this is a minor enhancement rather than a necessary correction."
+    },
+    "httpx/_transports/mock.py::handle_async_request": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The summary implies a clean sync/async handler distinction, but the code actually checks isinstance(response, Response), not whether the handler is sync or async. A sync handler could theoretically return an awaitable non-Response object, or an async handler could return a Response directly (though unlikely)."
+        ],
+        "notes": "The summary is mostly accurate but slightly oversimplifies the logic. The code checks the return type (Response vs non-Response) rather than directly checking if the handler is sync or async. This distinction matters for edge cases, though the summary captures the likely intended usage pattern."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "No mention that the code assumes non-Response returns are awaitable (no error handling for TypeError if it's not)",
+          "Doesn't note that await request.aread() is called but the result isn't used/stored"
+        ],
+        "notes": "Covers the main flow well. The missing elements are relatively minor but could be relevant for understanding potential issues or side effects."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are clear and well-structured. The progression from high-level concept to implementation details is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail with specific method names and the isinstance check. Could be enhanced by noting the assumption that non-Response objects are awaitable, and that there's no explicit validation or error handling for cases where this assumption fails."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Clarify that the code checks whether the return value is a Response object (not directly whether the handler is sync/async), though in practice sync handlers return Response and async handlers return awaitables. 2) Note that non-Response returns are assumed to be awaitable without validation. 3) Mention that request.aread() is called for its side effect (loading request body into memory) but the return value isn't used."
+    },
+    "httpx/_transports/wsgi.py::handle_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the WSGI bridge pattern, environ construction, start_response callback mechanism, and response conversion. No hallucinations or technical inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Exception handling logic (raise_app_exceptions flag and exc_info handling)",
+          "Initial request.read() call that loads content into memory",
+          "Details about WSGI environ keys like wsgi.multithread, wsgi.multiprocess, wsgi.run_once"
+        ],
+        "notes": "Covers the main flow comprehensively, but omits the exception handling mechanism which is a significant side effect. The missing elements don't severely impact understanding but would add completeness."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach: the human-readable summary provides clear context about the WSGI bridge pattern, while the technical summary offers implementation details. Both are well-structured and appropriate for their audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Technical summary provides good detail about the implementation (environ dict construction, start_response callback, status parsing, byte encoding). Could be enhanced by mentioning the exception handling logic and the nonlocal variable capture pattern in start_response."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add mention of exception handling: 'optionally raises WSGI application exceptions if raise_app_exceptions is enabled'. Consider noting that 'request.read() pre-loads content into memory before processing'. Otherwise, this is a strong summary that accurately captures the core functionality."
+    },
+    "httpx/_types.py::close": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code. It correctly identifies this as an empty template method meant to be overridden by subclasses, accurately describes the return type and parameters, and appropriately characterizes its purpose for resource cleanup."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary thoroughly covers all relevant aspects: the method's purpose, its intended use pattern (template method for subclasses), return value (None), side effects (none by default), timing (after request/response cycle), and concrete examples of what subclasses might implement (closing sockets, releasing connection pools)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a well-structured two-part approach. The human-readable explanation provides an accessible overview with the helpful 'hook' metaphor, while the technical section provides precise implementation details. The progression from general concept to specific examples is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed technical analysis. Correctly identifies the template method pattern (without using jargon), mentions type hints, clarifies the empty implementation, and provides relevant examples of resource types (sockets, connection pools). The depth is well-calibrated for the complexity of the code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an exemplary summary that balances accessibility with technical precision. It would serve well for both developers trying to understand usage and those implementing subclasses."
+    },
+    "httpx/_urlparse.py::normalize_port": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the function: the normalization logic, default port handling, validation, and exception raising. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: input handling (None/empty), validation with exception raising, default port comparison logic, return values, and RFC compliance. The dictionary of schemes and their ports is explicitly mentioned."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The two-tier approach (human-friendly + technical) is well-executed. The human version explains the 'why' (cleaning up unnecessary ports), while the technical version provides implementation details. Both are concise and accessible to their intended audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: exception type, data flow, the specific dictionary lookup mechanism, and standards reference (RFC 3986). Sufficient detail for developers without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent. Very minor optional enhancements could include: (1) mentioning the type signature explicitly (accepts str|int|None, returns int|None), or (2) noting that InvalidURL is presumably a custom exception class. However, these are not necessary for a quality summary."
+    },
+    "httpx/_urlparse.py::normalize_path": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. The example is correct, the explanation of '.' and '..' handling is accurate, and the technical details match the implementation. The reference to RFC 3986 correctly reflects the code comment."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all major aspects: the purpose, optimization strategies (early returns), the core algorithm (component iteration, skip/pop/append logic), the root protection condition (output != ['']), and the final join operation. Both functional behavior and implementation details are well-represented."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The summary is well-structured with separate human-friendly and technical sections. The human section provides clear context and use cases, while the technical section efficiently describes the implementation flow. The language is precise and accessible to the intended audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section provides appropriate depth: mentions the stack-like behavior of the output list, explains the condition checks for '..' handling, describes the optimization paths, and references the relevant RFC standard. It balances detail with conciseness effectively."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary with no significant issues. Very minor enhancement: could explicitly mention that the function takes a string parameter and returns a string, though this is reasonably implied from context."
+    },
+    "httpx/_urls.py::userinfo": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims function 'serves as a property decorator' but no @property decorator is visible in the code",
+          "Human summary slightly misleads by implying the function does percent-encoding transformation (e.g., '@' to '%40'), when it actually just converts already-encoded string to bytes"
+        ],
+        "notes": "The core functionality is described correctly, but there are accuracy issues. The function receives already percent-encoded userinfo from _uri_reference and simply converts it from string to bytes using ASCII encoding. The summary implies the function performs the percent-encoding transformation itself."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could clarify that userinfo arrives already percent-encoded",
+          "Could mention potential exceptions (e.g., UnicodeEncodeError if non-ASCII characters present)"
+        ],
+        "notes": "Covers main functionality, return type, and side effects well. Minor omissions don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Well-structured with both human-readable and technical explanations. The example in the human summary could be clearer about what transformation actually occurs (string \u2192 bytes, not unencoded \u2192 encoded)."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail about implementation, mentions specific encoding method and return type. The property decorator claim needs verification. Would benefit from noting this is a simple accessor/converter method."
+      },
+      "overall_score": 3.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Remove or verify the 'property decorator' claim since it's not evident in the code. 2) Clarify in the human summary that the function converts already-percent-encoded userinfo from string to bytes, rather than implying it performs the percent-encoding. 3) Example could show: 'receives \"jo%40email.com:a%20secret\" (string) and returns b\"jo%40email.com:a%20secret\" (bytes)' to make the transformation clearer."
+    },
+    "httpx/_urls.py::port": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly describes port normalization behavior, return type, delegation pattern, and WHATWG spec compliance."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Docstring mentions 5 schemes (http, https, ws, wss, ftp) but summary only explicitly names 2 (http, https)",
+          "Could explicitly mention this is a @property decorator, though it's strongly implied"
+        ],
+        "notes": "Covers all essential aspects: main functionality, return values, normalization rules, and implementation approach. Minor omission of complete scheme list."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity for both audiences. Human-level summary is accessible and explains the 'why' behind the design. Technical summary provides appropriate implementation details without overcomplicating."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Correctly identifies this as a simple accessor/delegation pattern, mentions the underlying object, references WHATWG spec, and explains where the actual logic resides."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement: Could list all 5 schemes mentioned in docstring (http, https, ws, wss, ftp) instead of just providing examples. Could also explicitly state '@property decorator' for maximum clarity, though this is a very minor point."
+    },
+    "httpx/_urls.py::query": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims it 'Serves as a property decorator that enables direct attribute-style access without method call syntax' - but no @property decorator is visible in the provided code. This is an assumption/hallucination."
+        ],
+        "notes": "Most of the summary is accurate, but the property decorator claim cannot be verified from the code shown and appears to be an incorrect assumption. The method signature shows `def query(self) -> bytes:` which would require parentheses to call unless decorated with @property."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention that it excludes the leading '?' character as explicitly stated in the docstring",
+          "Could note the return type annotation (-> bytes)"
+        ],
+        "notes": "Covers the main functionality, return value, and purpose well. The connection to QueryParams mentioned in the docstring could be referenced but isn't critical."
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Both human-friendly and technical sections are well-written and understandable. The example usage is helpful. Minor deduction for the confusing property decorator statement that contradicts the method signature shown."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail about internal implementation (_uri_reference.query, encode method, ASCII encoding). Appropriately explains the preservation of URL-encoded characters. The property decorator mention, if it were correct, would be relevant detail, but since it appears incorrect, it detracts slightly."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove or clarify the property decorator statement since it's not visible in the provided code. If this method IS intended to be used as a property in practice, this should be noted as contextual information rather than stated as fact from the code. Consider explicitly mentioning that the leading '?' is excluded as stated in the docstring. Otherwise, the summary effectively explains both the purpose and implementation."
+    },
+    "httpx/_urls.py::password": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the partition operation, URL decoding, and the function's behavior. The technical details about index [2] containing the password portion and unquote() decoding are correct."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Edge case: behavior when userinfo contains no colon (would return empty string)",
+          "Potential error condition if userinfo is None"
+        ],
+        "notes": "Covers main functionality, return value, and side effects well. Minor deduction for not addressing edge cases, though these may be intentionally omitted for brevity."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity in both human-friendly and technical sections. The example of %20 for spaces is helpful. The explanation flows logically from high-level purpose to implementation details."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Explains the partition() method's behavior, array indexing, URL decoding, and property accessor nature. Correctly notes the lack of side effects. Good balance between detail and conciseness."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention edge case behavior: 'Returns empty string if userinfo contains no colon separator.' However, this is a minor enhancement and the summary is excellent as written."
+    },
+    "httpx/_urls.py::netloc": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: retrieves netloc from _uri_reference, encodes to ASCII bytes, mentions normalization and IDNA encoding, and correctly identifies the use case for HTTP headers."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: main functionality, return type (bytes), purpose (HTTP headers), normalization details, and implementation approach. Could mention it's a property rather than a method, but this is a very minor omission."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical versions are well-written and appropriately targeted. The human version focuses on purpose and behavior, while the technical version explains implementation details. Clear progression from what to how."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate implementation details: mentions the internal _uri_reference object, explains the encoding process, and clarifies that normalization happens at the underlying object level. Good balance of detail without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could add a very minor note that this is a property decorator method (not a regular method call), but this is negligible and the summary is already excellent as written."
+    },
+    "httpx/_urls.py::host": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims 'strips away IPv6 brackets' but the code doesn't show bracket removal - this likely happens in the underlying _uri_reference.host property",
+          "States 'The result is always lowercase' but no lowercasing occurs in this code - again, this normalization must happen elsewhere"
+        ],
+        "notes": "The summary attributes normalizations (IPv6 bracket removal, lowercasing) to this function when they actually occur in the underlying URI reference object. The summary conflates what the function returns with what the function actively does."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't mention the function is a property/getter (indicated by @property decorator implied by 'def host(self) -> str')",
+          "Could clarify that only hosts starting with 'xn--' are decoded, not all hosts"
+        ],
+        "notes": "Covers the main IDNA decoding functionality well, mentions return value and input types. The conditional nature of IDNA decoding could be slightly clearer."
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Well-structured with separate human and technical explanations. Good use of examples. However, the misattribution of normalization steps could confuse readers trying to understand what THIS specific code does versus what the overall property returns."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Technical section appropriately explains IDNA encoding, punycode, and the decode mechanism. Good level of detail for the decoding logic. Could be more precise about what operations occur in this function versus inherited from _uri_reference.host."
+      },
+      "overall_score": 3,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Clarify that lowercasing and IPv6 bracket removal are handled by the underlying _uri_reference.host property, not by this function's logic. Revise to: 'This property retrieves the already-normalized host from the internal URI reference (which handles lowercasing and bracket removal), then additionally decodes IDNA-encoded hosts (those starting with \"xn--\") from punycode to Unicode using idna.decode().'"
+    },
+    "httpx/_urls.py::fragment": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "States 'Returns the decoded string result as a property accessor' - but the code shows a method definition without visible @property decorator"
+        ],
+        "notes": "All other technical details are accurate. The 'property accessor' claim may be correct if @property decorator exists elsewhere, but cannot be verified from the provided code."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensively covers: the fragment extraction, the internal object source, default value handling, URL decoding, return type, and the absence of '#'. No side effects to document."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with effective two-tier explanation. Human-friendly summary uses accessible language with good context (HTML anchors, web addresses). Technical section is well-structured with specific implementation details and helpful example (%20 to space)."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail: identifies the chained attribute access pattern (self._uri_reference.fragment), explains the 'or' operator for None handling, names the unquote() function with its purpose, and provides concrete example of URL encoding transformation."
+      },
+      "overall_score": 4.75,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove or clarify the 'property accessor' reference in the technical summary since the code shows a regular method definition. Consider: 'Returns the decoded string result' or 'Returns the decoded string as a public method' unless @property decorator is confirmed to exist."
+    },
+    "httpx/_utils.py::peek_filelike_length": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the two-strategy approach with fallback to None, accurately names the functions and constants used, and properly describes the exception handling mechanism."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage including: main purpose, both strategies attempted, return values (implicit int or explicit None), side effect of position restoration in seek strategy, exception types caught, and graceful degradation pattern."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and appropriate for their audiences. The human-friendly version uses accessible language and provides context about use cases. The technical version is precise with specific function names and logic flow without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate detail: specific function calls (fileno(), os.fstat(), tell(), seek()), the exact constant used (os.SEEK_END), the key insight about position restoration, and the exception handling strategy. The level of detail matches what a developer would need to understand the implementation without reading the code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an exemplary summary that balances accessibility with technical precision. Both the human-friendly and technical portions accurately and completely describe the code's functionality."
+    },
+    "httpx/_utils.py::get_environment_proxies": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's functionality. It correctly identifies the use of getproxies(), the creation of the mounts dictionary, the handling of the wildcard '*' case, and the processing of different hostname formats (IPv4, IPv6, domains, localhost). No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't explicitly mention that http/https/all schemes are processed first to add proxy URLs",
+          "Could clarify that proxy hostnames get 'http://' prefix added if they lack a protocol"
+        ],
+        "notes": "The summary covers the main functionality well, including return values and special cases. However, it could be slightly more explicit about the two-phase processing: first adding proxy URLs for http/https/all schemes, then adding no-proxy exceptions."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-readable and technical summaries are well-written and clear. The human-readable version provides good context about the purpose, while the technical version gives implementation details without being overly verbose. The distinction between proxy rules (with URLs) and no-proxy entries (with None values) is clearly explained."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "The technical summary provides good depth with specifics about getproxies(), the mounts dictionary structure, URL scheme formatting, and helper function usage. It could be slightly enhanced by mentioning the specific schemes processed (http, https, all) and showing example mappings more explicitly (e.g., 'http://' -> 'http://proxy.com' vs 'all://*.example.com' -> None)."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. In the technical summary, explicitly mention the two phases: (a) processing http/https/all schemes to add proxy URLs, and (b) processing no_proxy entries. 2. Add a brief note that proxy hostnames without protocol prefixes get 'http://' prepended. 3. Consider adding a concrete example of the return dictionary structure, e.g., {'http://': 'http://proxy:8080', 'all://*.internal.com': None}"
+    }
+  },
+  "architecture_evaluation": {
+    "completeness": {
+      "rating": 5,
+      "files_in_repo": 23,
+      "notes": "All 23 files are properly accounted for in the logical groups. The Transport Layer subsystem is correctly identified with its 6 files."
+    },
+    "logical_grouping": {
+      "rating": 5,
+      "notes": "The groups are semantically coherent and follow clear architectural boundaries: entry points, API layer, transport abstractions, data processing, configuration, authentication, models, error handling, and utilities. The separation of concerns is well-defined."
+    },
+    "diagram_quality": {
+      "rating": 2,
+      "notes": "The diagram has significant issues: (1) Too many edges (36+) creating visual clutter, (2) Circular dependencies that obscure hierarchy (Application Entry <-> API Layer, Models <-> Data Processing), (3) Utilities node has bidirectional connections to many components which seems incorrect, (4) Error Handling -> Models dependency is questionable, (5) The diagram doesn't clearly show a top-down flow or layered architecture."
+    },
+    "overall_score": 3,
+    "suggestions": [
+      "Reduce circular dependencies - consider showing only the primary dependency direction",
+      "Re-evaluate Utilities connections - utilities should typically be leaf nodes that others depend on, not have dependencies on domain components",
+      "Consider a layered architecture view: Application -> API -> Transport -> Core (Models, Data, Config)",
+      "Remove or clarify questionable edges like Error Handling -> Models",
+      "The API Layer should not depend back on Application Entry - this creates a cycle",
+      "Consider splitting into multiple views: one for high-level layers, another for internal component relationships"
+    ]
+  },
+  "overall_metrics": {
+    "repo_summary_score": 4,
+    "module_summary_avg": 4.52,
+    "function_summary_avg": 4.68,
+    "architecture_score": 3,
+    "overall_quality": 4.17
+  },
+  "function_sampling": {
+    "target_size": 50,
+    "sampled_count": 50,
+    "total_functions": 278,
+    "sampled_items": [
+      "httpx/__init__.py::main",
+      "httpx/_api.py::request",
+      "httpx/_api.py::options",
+      "httpx/_auth.py::sync_auth_flow",
+      "httpx/_auth.py::_parse_challenge",
+      "httpx/_client.py::_send_handling_redirects",
+      "httpx/_client.py::put",
+      "httpx/_client.py::headers",
+      "httpx/_client.py::_init_transport",
+      "httpx/_client.py::close",
+      "httpx/_client.py::_build_auth",
+      "httpx/_client.py::request",
+      "httpx/_client.py::_same_origin",
+      "httpx/_config.py::create_ssl_context",
+      "httpx/_content.py::encode_request",
+      "httpx/_content.py::encode_text",
+      "httpx/_decoders.py::decode",
+      "httpx/_exceptions.py::request_context",
+      "httpx/_main.py::handle_help",
+      "httpx/_main.py::print_help",
+      "httpx/_main.py::main",
+      "httpx/_models.py::iter_raw",
+      "httpx/_models.py::reason_phrase",
+      "httpx/_models.py::values",
+      "httpx/_models.py::delete",
+      "httpx/_models.py::url",
+      "httpx/_models.py::_parse_header_links",
+      "httpx/_models.py::raw",
+      "httpx/_models.py::aiter_raw",
+      "httpx/_multipart.py::get_length",
+      "httpx/_multipart.py::get_content_length",
+      "httpx/_status_codes.py::is_server_error",
+      "httpx/_status_codes.py::is_redirect",
+      "httpx/_transports/asgi.py::send",
+      "httpx/_transports/base.py::handle_request",
+      "httpx/_transports/default.py::handle_request",
+      "httpx/_transports/mock.py::handle_async_request",
+      "httpx/_transports/wsgi.py::handle_request",
+      "httpx/_types.py::close",
+      "httpx/_urlparse.py::normalize_port",
+      "httpx/_urlparse.py::normalize_path",
+      "httpx/_urls.py::userinfo",
+      "httpx/_urls.py::port",
+      "httpx/_urls.py::query",
+      "httpx/_urls.py::password",
+      "httpx/_urls.py::netloc",
+      "httpx/_urls.py::host",
+      "httpx/_urls.py::fragment",
+      "httpx/_utils.py::peek_filelike_length",
+      "httpx/_utils.py::get_environment_proxies"
+    ],
+    "skip_dunders": true,
+    "min_function_lines": 5,
+    "prefer_longer": true,
+    "random_seed": 42
+  }
+}

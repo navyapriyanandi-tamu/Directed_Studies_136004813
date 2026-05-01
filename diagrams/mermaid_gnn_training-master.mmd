@@ -1,0 +1,17 @@
+graph TD
+    subgraph gnn_training-master
+        g_ML_7882b805["ML Models - model.py, qm9_model.py"]
+        style g_ML_7882b805 fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Training_e92e4371["Training and Evaluation - main.py, qm9_train.py"]
+        style g_Training_e92e4371 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Inference_bfc7647f["Inference - inference.py"]
+        style g_Inference_bfc7647f fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_ceba282b["Utilities - utils.py"]
+        style g_Utilities_ceba282b fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Inference_bfc7647f --> g_ML_7882b805
+    g_Training_e92e4371 --> g_ML_7882b805
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

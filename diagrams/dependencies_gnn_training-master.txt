@@ -1,0 +1,7 @@
+ MODULE DEPENDENCY GRAPH
+============================================================
+ inference.py
+  └─> model.py
+
+ main.py
+  └─> model.py

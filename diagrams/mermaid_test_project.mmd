@@ -1,0 +1,25 @@
+graph TD
+    subgraph test_project
+        g_Application_315bb4c3["Application Entry - main.py"]
+        style g_Application_315bb4c3 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Business_9ebada18["Business Logic - task_handler.py"]
+        style g_Business_9ebada18 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Data_e1d5cab3["Data Storage - storage.py"]
+        style g_Data_e1d5cab3 fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Package_4088c4bc["Package Initialization - __init__.py, __init__.py"]
+        style g_Package_4088c4bc fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_ceba282b["Utilities - logger.py, validators.py"]
+        style g_Utilities_ceba282b fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Application_315bb4c3 --> g_Utilities_ceba282b
+    g_Application_315bb4c3 --> g_Business_9ebada18
+    g_Application_315bb4c3 --> g_Data_e1d5cab3
+    g_Package_4088c4bc --> g_Data_e1d5cab3
+    g_Package_4088c4bc --> g_Business_9ebada18
+    g_Package_4088c4bc --> g_Utilities_ceba282b
+    g_Business_9ebada18 --> g_Utilities_ceba282b
+    g_Business_9ebada18 --> g_Data_e1d5cab3
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

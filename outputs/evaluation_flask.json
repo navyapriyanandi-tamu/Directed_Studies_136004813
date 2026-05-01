@@ -1,0 +1,1980 @@
+{
+  "repo_name": "flask",
+  "judge_model": "protected.Claude Sonnet 4.5",
+  "generator_model": "Claude Haiku 4.5",
+  "repo_summary_evaluation": {
+    "accuracy": {
+      "rating": 5,
+      "errors_found": [],
+      "notes": "The summary accurately describes Flask's architecture, core components, and design patterns. All technical details align with the module summaries\u2014WSGI compliance, context system using contextvars, Blueprint registration patterns, Jinja2 integration, HMAC-signed sessions, and Click CLI integration are all correctly represented."
+    },
+    "completeness": {
+      "rating": 4,
+      "missing_elements": [
+        "Signals/event system (blinker integration) for decoupled component communication",
+        "Class-based views (View/MethodView) as an alternative to function-based routing",
+        "Configuration system details (multiple load sources, environment variable support)",
+        "Debug helpers and enhanced error messaging for development"
+      ],
+      "notes": "The summary covers all major architectural components and primary workflows comprehensively. Missing elements are secondary features that don't affect the core understanding but would add completeness for advanced users. The sansio layer separation is mentioned implicitly but could be more explicit."
+    },
+    "clarity": {
+      "rating": 5,
+      "notes": "Excellent two-tier structure: the human summary is accessible to non-technical stakeholders, while the technical summary provides detailed architecture without being overwhelming. Key concepts like 'application factory pattern', 'context proxies', and 'deferred callbacks' are named clearly. The progression from components to patterns to integration points is logical and easy to follow."
+    },
+    "usefulness": {
+      "rating": 5,
+      "notes": "Highly effective for onboarding. A new developer would understand: (1) Flask's purpose and use cases, (2) the major architectural components they'll interact with, (3) key design patterns to look for in the codebase, and (4) how components interact (e.g., Blueprints registering with App, context proxies routing to active contexts). The mention of specific integration points (werkzeug, Jinja2, Click) helps orient developers to dependencies."
+    },
+    "overall_score": 5,
+    "strengths": [
+      "Accurate and technically precise descriptions of all core components",
+      "Clear layered presentation (human-friendly \u2192 technical depth)",
+      "Identifies key architectural patterns (factory, composition, proxies, middleware-style hooks)",
+      "Explains integration strategy with dependencies (werkzeug, Jinja2, Click)",
+      "Balances breadth (covering routing, templates, sessions, CLI, testing) with depth (context implementation details, security features)",
+      "Examples directory coverage shows practical usage patterns (Celery integration, tutorial structure)"
+    ],
+    "weaknesses": [
+      "Omits signals/event system despite dedicated module (src/flask/signals.py)",
+      "Class-based views not mentioned despite full implementation (src/flask/views.py)",
+      "Configuration system deserves more prominence given its flexibility (multiple load sources, environment variables, type conversion)",
+      "Debug helpers and development-focused features understated",
+      "Could briefly mention the sansio layer as a design principle for separating I/O from logic"
+    ]
+  },
+  "module_summaries_evaluation": {
+    "modules_evaluated": [
+      "docs/conf.py",
+      "examples/celery/make_celery.py",
+      "examples/celery/src/task_app/__init__.py",
+      "examples/celery/src/task_app/tasks.py",
+      "examples/celery/src/task_app/views.py",
+      "examples/javascript/js_example/__init__.py",
+      "examples/javascript/js_example/views.py",
+      "examples/tutorial/flaskr/__init__.py",
+      "examples/tutorial/flaskr/auth.py",
+      "examples/tutorial/flaskr/blog.py",
+      "examples/tutorial/flaskr/db.py",
+      "src/flask/__init__.py",
+      "src/flask/__main__.py",
+      "src/flask/app.py",
+      "src/flask/blueprints.py",
+      "src/flask/cli.py",
+      "src/flask/config.py",
+      "src/flask/ctx.py",
+      "src/flask/debughelpers.py",
+      "src/flask/globals.py",
+      "src/flask/helpers.py",
+      "src/flask/json/__init__.py",
+      "src/flask/json/provider.py",
+      "src/flask/json/tag.py",
+      "src/flask/logging.py",
+      "src/flask/sansio/app.py",
+      "src/flask/sansio/blueprints.py",
+      "src/flask/sansio/scaffold.py",
+      "src/flask/sessions.py",
+      "src/flask/signals.py",
+      "src/flask/templating.py",
+      "src/flask/testing.py",
+      "src/flask/typing.py",
+      "src/flask/views.py",
+      "src/flask/wrappers.py"
+    ],
+    "individual_evaluations": {
+      "docs/conf.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as a Sphinx configuration file, correctly explains the github_link function's version-aware branching logic (dev\u2192main, release\u2192version-specific), and accurately details the technical implementation using packaging.version, docutils components, and Sphinx's role extension mechanism."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "Significant omission: the module has 2 functions but only github_link is described. The 'setup' function is completely missing from the summary, which is likely important as it typically registers custom roles/extensions with Sphinx. For a module with only 2 functions, omitting one is a 50% gap in coverage."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "Both human and technical sections are well-written and understandable. The explanation of the GitHub linking logic and Sphinx integration is clear. However, the absence of any mention of the setup function leaves a gap in understanding how this module fully operates within the Sphinx ecosystem."
+        },
+        "overall_score": 4
+      },
+      "examples/celery/make_celery.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary correctly identifies the import of `task_app` and makes reasonable inferences about Celery setup based on the module name and location. However, most claims are speculative ('likely', 'probably') without actual code visibility. The characterization as a 'bridge' and mention of avoiding 'circular imports' are plausible but unverified assumptions."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "With 0 functions and 0 classes, there's nothing to document in those categories. The import is mentioned. However, the summary cannot describe what the module actually does beyond importing. The disclaimer note acknowledges this limitation, which is appropriate, but doesn't change that key information is missing."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "Well-structured and easy to understand. Appropriately uses hedging language ('likely', 'minimal') to indicate speculation. The technical section provides specific details, and the disclaimer note transparently communicates the limitations. Clear separation between confident statements and educated guesses."
+        },
+        "overall_score": 3
+      },
+      "examples/celery/src/task_app/__init__.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the Flask-Celery integration pattern, correctly identifies Redis configuration, and properly explains how FlaskTask wraps execution in Flask's application context. All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers the main integration components (create_app, celery_init_app, FlaskTask, __call__) but omits mention of the index() function which serves as a route handler. While this is a minor omission since index() is not core to the integration pattern, it is one of the 4 functions listed in the structure."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical versions. The human explanation effectively communicates the purpose (offloading work to avoid blocking), while the technical version provides clear implementation details about context managers and dependency injection. Well-structured and accessible to different audience levels."
+        },
+        "overall_score": 4
+      },
+      "examples/celery/src/task_app/tasks.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary accurately describes the 'process' function but presents it as if it represents the entire module. The structure shows 3 functions (add, block, process), but the summary focuses solely on 'process' and describes the module's 'primary purpose' based only on that one function. This creates a misleading impression of what the module contains."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "Only 1 of 3 functions is covered. The 'add' and 'block' functions are completely ignored, even though they exist in the module structure. The summary should at least acknowledge their presence or explain the module provides multiple Celery task examples/utilities, not just the long-running progress-tracking task."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The description of the 'process' function is clear and well-articulated in both human and technical versions. However, clarity is undermined by the omission of 2/3 of the module's functions, which could confuse someone trying to understand the full scope of this module."
+        },
+        "overall_score": 2
+      },
+      "examples/celery/src/task_app/views.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module as a Flask blueprint that provides HTTP endpoints for Celery task queue interaction. All technical details are correct: three POST endpoints for job submission, one GET endpoint for status polling, use of .delay() for async dispatch, and AsyncResult for status introspection. The flow and purpose are precisely captured."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All four functions are referenced appropriately. The summary captures both the general pattern (async job submission and status monitoring) and specific endpoints (/add, /block, /process, /result/<task_id>). Key technical components (Celery's .delay() method, AsyncResult objects) are mentioned. The module's architectural role as an HTTP-to-Celery bridge is clearly stated."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-structured and easy to understand. The human version clearly explains the user-facing benefit (non-blocking operations, responsive application), while the technical version provides precise implementation details. The progression from high-level purpose to specific technical patterns is logical and clear."
+        },
+        "overall_score": 5
+      },
+      "examples/javascript/js_example/__init__.py": {
+        "accuracy": {
+          "rating": 2,
+          "notes": "The summary is overly speculative given the available data. With 0 functions and 0 classes, the module is likely minimal/empty, but the summary speculates extensively about Flask app instances, __all__ definitions, and various features that may not exist. The hedging language ('likely', 'probably', 'may') and the disclaimer at the end reveal uncertainty, but the summary still makes unfounded assumptions."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "The structure clearly shows 0 functions and 0 classes, meaning there's minimal content to describe. The summary doesn't acknowledge this simplicity and instead lists hypothetical features. A complete summary should note that the file appears to be a minimal/empty __init__.py with only imports, rather than speculating about unexposed functionality."
+        },
+        "clarity": {
+          "rating": 3,
+          "notes": "The text is well-written and easy to read, but the extensive speculation creates confusion about what the module actually does versus what it might theoretically do. The disclaimer asking for actual code content undermines confidence in the summary. Would be clearer if it directly stated the module appears minimal based on the structure data."
+        },
+        "overall_score": 2
+      },
+      "examples/javascript/js_example/views.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary overstates the module's capabilities by using plural terms ('arithmetic operations', 'endpoints') when only one operation (addition) and effectively one documented endpoint (add) exist. The module structure shows 2 functions (index, add) but the summary only accounts for 'add', ignoring 'index' entirely. The descriptions of what 'add' does are accurate, but the module-level characterization is misleading."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "Major omission: the 'index' function is completely absent from the summary despite being listed in the structure (representing 50% of the module's functions). Only the 'add' function is discussed. Without knowing what 'index' does, it's impossible to say if the module summary captures the full purpose of this module. The summary may be complete for 'add' but incomplete for the module as a whole."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written, clearly structured, and easy to understand. Good use of terminology, clear explanation of Flask patterns, and effective separation between human-friendly and technical descriptions. The clarity is not the issue here\u2014the content accuracy and completeness are."
+        },
+        "overall_score": 3
+      },
+      "examples/tutorial/flaskr/__init__.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the module's primary purpose and the create_app() function. All technical details mentioned (SQLAlchemy init, blueprints, config loading, application factory pattern) align with the function summary. Minor deduction because the 'hello' function listed in the structure is not mentioned, though it appears to be referenced indirectly as the '/hello diagnostic endpoint' in the technical summary."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Comprehensively covers create_app() and all its key components (database, blueprints, routing, configuration). However, the structure indicates 2 functions exist (create_app and hello), but the standalone 'hello' function is not explicitly mentioned in the summary, only obliquely referenced. This is a minor gap given that hello appears to be a secondary diagnostic function."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical versions. The human summary provides an accessible high-level explanation, while the technical version offers precise implementation details without being overly verbose. The application factory pattern is properly identified and explained. Well-structured and easy to understand."
+        },
+        "overall_score": 4
+      },
+      "examples/tutorial/flaskr/auth.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's authentication/authorization functionality. All technical details are correct: password hashing via werkzeug.security, use of Flask's g object and session management, before_app_request hook, database IntegrityError handling, and the decorator pattern for access control. The description aligns perfectly with the provided function summaries."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All six functions are appropriately referenced and their roles clearly explained. The summary covers all major functionality areas: registration, login, logout, access control decorators (both login_required and wrapped_view), and automatic user context loading. Key integrations with Flask utilities and database operations are mentioned. Nothing significant is missing."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and easy to understand. The human version provides a clear high-level overview accessible to non-technical readers, while the technical version offers appropriate implementation details without being overly verbose. The structure flows logically from what the module does to how it accomplishes those goals."
+        },
+        "overall_score": 5
+      },
+      "examples/tutorial/flaskr/blog.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module as a blog CRUD implementation in Flask. All technical details are correct: the 5 route handlers, SQL operations (JOIN queries, INSERT, UPDATE, DELETE), authentication integration via @login_required decorator, authorization checks via abort(403/404), and database/auth module dependencies. The description of user permissions and post lifecycle management aligns perfectly with the function summaries."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 5 functions are covered either explicitly or implicitly (index for display, get_post for retrieval/validation, create/update/delete for CRUD). Key technical components are mentioned: database integration via get_db(), authentication via @login_required, templating system, parameterized SQL queries, transaction management via db.commit(), and Flask utilities (redirect, abort, flash). The summary captures both the user-facing functionality and the underlying technical implementation."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical summaries. The human version provides an accessible overview of the module's purpose and functionality. The technical version is well-structured, using appropriate terminology without being overly verbose. The flow from high-level purpose to specific technical details is logical and easy to follow. The distinction between authentication (login_required) and authorization (checking post ownership) is clear."
+        },
+        "overall_score": 5
+      },
+      "examples/tutorial/flaskr/db.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary is completely accurate. It correctly describes the module's purpose (database lifecycle management), the implementation patterns (lazy-loaded connections via Flask's `g` object, teardown handlers), and technical details (SQLite with PARSE_DECLTYPES, Row factory, executescript for schema loading). All statements align with the function summaries."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 5 functions are covered either explicitly or implicitly. The summary mentions get_db() for lazy-loading, close_db() as teardown handler, init_db() for schema execution, init_app() for registration, and init_db_command() as the Click CLI command. Key technical aspects like request-scoped caching, cleanup mechanisms, and initialization patterns are all included."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written. The human version provides a clear, accessible explanation of what the module does and why. The technical version offers appropriate implementation details without being overwhelming. The progression from high-level concepts to specific technical patterns is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/flask/__init__.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the module's role as Flask's public API entry point and re-export mechanism. The technical description correctly identifies the module's purpose and mentions several key imported components (app, blueprints, config, ctx, globals, helpers). However, it omits mention of other significant imports visible in the structure: json, signals, templating, and wrappers."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "While the summary correctly identifies that this is a re-export module with no direct functions/classes, the technical section only mentions 6 import categories when the structure shows at least 10 distinct modules being imported (app, blueprints, config, ctx, globals, helpers, json, signals, templating, wrappers). Missing explicit mention of json utilities, signal handling, templating support, and request/response wrappers is a notable omission for Flask's public API."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is exceptionally clear and well-structured. It effectively explains the module's purpose using accessible language ('public API entry point', 'clean, unified interface') and provides concrete context with the 'from flask import ...' pattern example. The distinction between user-facing purpose and technical implementation is well-articulated."
+        },
+        "overall_score": 4
+      },
+      "src/flask/__main__.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the purpose and functionality of a __main__.py file. It correctly identifies that it imports the cli module and serves as an entry point for 'python -m flask' execution. The description of delegation to Flask's CLI system is accurate for this type of module."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "For a simple __main__.py module with only an import statement, the summary is complete. It covers the single import, explains the module's purpose, and contextualizes its role in Flask's command-line infrastructure. There are no functions or classes to document, which is correctly reflected."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is clear and well-articulated. It explains both the 'what' (entry point) and 'how' (delegates to cli module) effectively. The technical section provides appropriate detail about the -m flask invocation pattern without being overly verbose."
+        },
+        "overall_score": 5
+      },
+      "src/flask/app.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's role as Flask's core engine, correctly identifying it as the WSGI application entry point and accurately characterizing the request-response pipeline, context management, and lifecycle hooks. All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers the major functional areas comprehensively: initialization, routing, request processing, error handling, context management, and testing utilities. The two-group organization (initialization/routing vs. request-response lifecycle) is appropriate. Minor omission: could explicitly mention static file serving, session management, and CLI integration, which are significant features based on the function summaries (send_static_file, session_interface.save_session, CLI group creation)."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical descriptions are well-structured and easy to understand. The human version effectively conveys the module's purpose to non-technical readers, while the technical version provides clear architectural insight with appropriate use of terminology. The two-group breakdown and mention of design patterns (context managers, decorator-based routing) aids comprehension."
+        },
+        "overall_score": 5
+      },
+      "src/flask/blueprints.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the Blueprint module's purpose and implementation. All technical details align with the function summaries - the parent class relationship, the four key capabilities, integration with Flask's CLI system, and file handling mechanisms are all correctly represented."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All major components are covered: the Blueprint class, all four functions (__init__, get_send_file_max_age, send_static_file, open_resource), CLI integration via AppGroup, static file serving, resource management, and caching policy. The summary effectively synthesizes how these pieces work together for Flask application modularization."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-articulated. The human version clearly explains the 'why' (organizing and modularizing applications into reusable components) while the technical version provides concrete implementation details. The progression from high-level purpose to specific mechanisms is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/flask/cli.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the Flask CLI system's purpose, functionality, and architecture. It correctly identifies app discovery mechanisms, built-in commands, environment configuration, plugin system, and the lazy-loading pattern. The technical details about class relationships and integration with Click and importlib.metadata are accurate."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers the three main classes (ScriptInfo, AppGroup, FlaskGroup) and key functions (locate_app, find_best_app, load_app, with_appcontext). It mentions the built-in commands and plugin system. However, it omits some classes (NoAppException, CertParamType, SeparatedPathType) and several utility functions (prepare_import, find_app_by_string, load_dotenv as a function, get_version). The version command is also not explicitly mentioned. Despite these omissions, the summary captures the essential functionality and architecture."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both the human and technical descriptions are well-written and easy to understand. The human description provides an accessible overview for general developers, while the technical description offers appropriate detail about implementation patterns, key APIs, and architectural decisions. The explanation of lazy-loading and the relationship between components is particularly clear."
+        },
+        "overall_score": 4
+      },
+      "src/flask/config.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the module's purpose and functionality. However, there's a minor error: the technical summary states 'eight loading methods' but only lists 6 in parentheses (missing get_namespace and miscounting). The descriptor protocol and Config class functionality are correctly described."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers both main classes and the primary loading methods well. The descriptor system and various configuration sources are mentioned. Minor omission: get_namespace is discussed in the paragraph but not listed with the other loading methods. __repr__ is in the structure but not discussed, though this is acceptable for a module-level summary."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical summaries. The human version is accessible and explains the 'why' (solving the problem of flexible configuration). The technical version provides appropriate implementation details without being overwhelming. The distinction between ConfigAttribute and Config classes is clear."
+        },
+        "overall_score": 4
+      },
+      "src/flask/ctx.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the core functionality but appears to miss an important class. The structure lists 2 classes, and while _AppCtxGlobals and AppContext are mentioned, many functions (like after_this_request, copy_current_request_context, from_environ, match_request) suggest a RequestContext class exists but isn't explicitly mentioned in the module summary. The technical details about context variables, signals, and WSGI bridging are all accurate."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "Missing explicit mention of what appears to be a RequestContext class (given functions like from_environ, match_request, has_request, session). The after_this_request() functionality\u2014a key feature for per-request callbacks\u2014is mentioned in the human summary but not explicitly called out in the module summary. The utility functions and core mechanics are well-covered, but the omission of a likely third major component reduces completeness."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are exceptionally clear. The human version uses excellent analogies ('invisible infrastructure', 'plumbing') that make the abstract concept accessible. The technical summary is well-structured with specific implementation details. The progression from purpose to implementation details is logical and easy to follow."
+        },
+        "overall_score": 4
+      },
+      "src/flask/debughelpers.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies the debugging functionality for form submissions and template loading, accurately describes the dynamic patching mechanism, and properly explains how the module integrates with Flask's request context and logging systems."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components including the three named exception classes, the key functions for form debugging and template introspection, and the dynamic patching mechanism. Loses one point for not explicitly mentioning FormDataRoutingRedirect's purpose (URL redirect debugging) or UnexpectedUnicodeError (which appears in the structure but isn't detailed in the function summaries). The 'newcls' is appropriately omitted as it's the dynamically created class referenced in the explanation."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The human section effectively communicates the developer-facing value ('translates technical problems into helpful guidance'), while the technical section provides concrete implementation details without being overly verbose. The explanation flows logically from purpose to mechanism to integration."
+        },
+        "overall_score": 5
+      },
+      "src/flask/globals.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes the deprecation handling mechanism confirmed by the __getattr__ function. Claims about proxy classes wrapping context variables are plausible given the imports (contextvars, werkzeug.local) and class names, but cannot be fully verified without class summaries. The overall purpose of managing Flask's global context objects appears accurate based on available evidence."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "All 6 proxy classes are mentioned by name in the technical section, which is good. The __getattr__ deprecation mechanism is covered. However, the _get_current_object function (1 of 2 functions) is completely omitted from the summary. Without summaries for the classes themselves, it's unclear if their purposes are accurately represented."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical descriptions are clear and well-structured. The human version effectively explains the practical purpose (accessing request/session/app without parameters), while the technical version provides appropriate implementation details about proxy mechanisms and thread-safety."
+        },
+        "overall_score": 4
+      },
+      "src/flask/helpers.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately characterizes this module as Flask's core helper utilities that bridge Flask's context system with Werkzeug. The description of it as a 'sugar layer' is apt. Technical details about context variables (_cv_app), delegation patterns, and integration points (jinja_env, session, signals) are all correct."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "Good coverage of major functional areas (routing, flash messages, file serving, streaming), but omits several significant functions: abort() for error handling, make_response() for response object creation, get_template_attribute() for Jinja2 integration, and configuration helpers get_debug_flag()/get_load_dotenv(). These are non-trivial omissions that would help readers understand the full scope of the module."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and accessible. The progression from high-level purpose to specific implementation details is logical. Technical terminology is used appropriately without being overly dense. The 'sugar layer' metaphor effectively conveys the module's role."
+        },
+        "overall_score": 4
+      },
+      "src/flask/json/__init__.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and behavior. The two-path design pattern (app context vs fallback) is correctly identified for all functions. The technical details about current_app, JsonProvider delegation, and fallback to standard json module are all correct."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 5 functions are mentioned with their purposes clearly stated. The key architectural pattern (context-aware delegation) is highlighted. Important integrations with globals, provider, and wrappers modules are noted. The facade pattern and its purpose are explained."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both Human and Technical sections are well-articulated. The Human version effectively explains the 'why' (flexibility for Flask apps, backward compatibility) while the Technical version explains the 'how' (two-path design, current_app checks, JsonProvider interface). The progression from specific functions to overall module purpose is logical."
+        },
+        "overall_score": 5
+      },
+      "src/flask/json/provider.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose, implementation, and behavior. All technical details align with the function summaries: correct handling of special types (datetime, UUID, Decimal, dataclasses, __html__()), accurate description of the API structure (dumps/loads, dump/load, response), and proper explanation of the provider pattern architecture."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components (both classes, primary serialization methods, custom type handlers, response generation). Minor deduction because _prepare_response_obj() isn't mentioned, though it's a helper function so its omission is reasonable. The summary effectively captures the module's core functionality and design pattern. Note: the function list shows duplicates (dumps, loads, response appearing twice), likely indicating both class methods and module functions, which could be more explicitly addressed."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The human version provides an accessible problem/solution framing, while the technical version offers concrete implementation details. The progression from purpose \u2192 special type handling \u2192 response generation \u2192 provider pattern is logical and easy to follow. Good balance between high-level concepts and specific technical details."
+        },
+        "overall_score": 5
+      },
+      "src/flask/json/tag.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and functionality. It correctly identifies this as a tagging system for Flask JSON serialization, accurately describes the conversion mechanism for non-JSON-native types, and correctly explains the serialization/deserialization workflow. All technical details mentioned (class names, methods, workflow) align with the provided structure and function summaries."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers the core functionality and mentions most key components (TaggedJSONSerializer, JSONTag, major tag types, key methods). However, it omits some tag classes from the structure: TagDict, PassDict, TagTuple, and PassList. While these may be less critical, their omission slightly reduces completeness. The workflow and main APIs are well-covered."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and easy to understand. The human version clearly explains the problem (custom types aren't JSON-compatible) and solution (automatic conversion). The technical version provides appropriate implementation details without overwhelming complexity. The progression from high-level purpose to technical mechanism is logical and coherent."
+        },
+        "overall_score": 5
+      },
+      "src/flask/logging.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's functionality. The context-aware error routing via wsgi_errors_stream, logger hierarchy verification via has_level_handler, and automatic logger configuration via create_logger are all correctly explained. Technical details about LocalProxy, WSGI environment, logger traversal, and Flask integration are precise."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All three functions are mentioned with their key behaviors covered. The summary captures the relationships between functions (e.g., create_logger using has_level_handler), identifies the main integration points (Flask context, Python logging, WSGI), and explains both the problem being solved and the solution approach."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-structured with clear separation between human-readable and technical sections. The human section effectively explains the 'why' (avoiding silent failures, context-appropriate routing), while the technical section provides implementation specifics without unnecessary verbosity. The logical flow from context detection \u2192 handler verification \u2192 logger setup is easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/flask/sansio/app.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as Flask's core application object. All mentioned functionalities (blueprint registration, URL routing, template management, error handling, lifecycle hooks) are correctly represented and align with the actual function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Captures the major functionalities well, including blueprints, routing, templates, and lifecycle management. However, some important utilities are not explicitly mentioned: configuration management (make_config), initialization logic (__init__), debug mode handling, logging setup, redirect functionality, and the aborter system. The core themes are well-covered, but some supporting infrastructure is understated."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-articulated and accessible. The human version effectively explains concepts for general audiences, while the technical version appropriately uses specific terminology and design patterns. The structure is logical and easy to follow."
+        },
+        "overall_score": 4
+      },
+      "src/flask/sansio/blueprints.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes Flask's Blueprint system, correctly identifying its purpose for modular application organization. The technical details about BlueprintSetupState and Blueprint classes, the deferred callback pattern, and the registration mechanism are all accurate. The description of how blueprints handle URL prefixes, subdomains, nested blueprints, and duplicate initialization prevention aligns well with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Both main classes are mentioned, and key methods (add_url_rule, before_app_request, app_template_filter, register, record_once) are explicitly covered. The summary captures the major patterns: template extensions (filters/tests/globals), request lifecycle hooks, error handlers, and nested blueprint registration. While not all 40 functions are individually named, the summary effectively groups them by pattern/purpose, which is appropriate for a module-level overview. Minor deduction because some specific registration methods like register_blueprint could have been more prominently featured."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical descriptions. The human version effectively explains the 'why' (solving application complexity through modularity), while the technical version explains the 'how' (deferred callbacks, registration process). The progression from problem to solution is logical, and the balance between conceptual understanding and implementation details is well-calibrated for the intended audience."
+        },
+        "overall_score": 5
+      },
+      "src/flask/sansio/scaffold.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes this as a foundational base class (Scaffold) for Flask applications. Correctly identifies it as an abstract interface (add_url_rule raises NotImplementedError), accurately describes the decorator-based API, request lifecycle management, and resource path handling. All major components align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major components: Scaffold class, routing methods, HTTP verb shortcuts, error handling, request lifecycle hooks, @setupmethod decorator, template/static file management, and Jinja2 integration. Minor omission: doesn't explicitly mention url_value_preprocessor and url_defaults callbacks, and the utility functions (find_package, _find_package_path) are not highlighted, though these are less central to the core purpose. Otherwise comprehensive."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellently written with clear separation between human-readable purpose and technical implementation details. The human section effectively explains the 'what' and 'why' (declarative API for web developers, routing engine abstraction), while the technical section provides concrete implementation details (defaultdict registries, decorator patterns, NotImplementedError for abstract methods). Easy to understand for both high-level and detailed perspectives."
+        },
+        "overall_score": 5
+      },
+      "src/flask/sessions.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. All technical details are correct: secure cookie-based sessions, signing to prevent tampering, the five core classes and their roles, key APIs, dependencies (itsdangerous, werkzeug), and the session lifecycle. The description of open_session deserializing/validating cookies and save_session serializing/setting response cookies is precise."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major classes and the three most important functions (open_session, save_session, get_signing_serializer). However, it misses mentioning the _lazy_sha1 FIPS compliance feature (which is a notable security consideration) and the various get_cookie_* configuration accessors. The should_set_cookie logic for conditional persistence is mentioned conceptually but not by name. These omissions are minor given it's a module-level summary."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent structure and readability. The Human section clearly explains the problem (maintaining state in stateless HTTP) and solution (secure cookie encoding). The Technical section provides specific implementation details without being overwhelming. The progression from problem \u2192 solution \u2192 implementation details is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/flask/signals.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary makes reasonable inferences about Flask's signal system based on the module name and blinker import, but it's largely speculative. The structure shows 0 functions and 0 classes, yet the summary claims the module 'likely defines or re-exports Flask-specific signal instances.' Without evidence of any module-level constants or concrete elements beyond imports, these claims cannot be verified. The use of 'likely' acknowledges this uncertainty."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "With no functions, classes, or visible module-level constants in the structure, there are no concrete elements to document. The summary attempts to describe the module's purpose but cannot mention specific signal names (e.g., request_started, template_rendered) because none are shown. It's essentially describing what a Flask signals module *should* contain rather than what this structure reveals."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The explanation is well-written and clearly explains signal/event systems, pub/sub patterns, and decoupled communication. Technical terminology is appropriate and the purpose is articulated clearly, even if the actual content cannot be verified from the structure."
+        },
+        "overall_score": 3
+      },
+      "src/flask/templating.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies Flask's template rendering functionality, the two main classes (Environment and DispatchingJinjaLoader), the distinction between complete and streaming rendering, signal integration, and the hierarchical template loading from app and blueprints. All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All major components are covered: both classes, all six primary rendering functions, helper functions, context processors, loader delegation, signal system integration, and template discovery mechanisms. The summary successfully captures both the high-level purpose and technical implementation details without omitting significant functionality."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The human description provides an accessible overview for non-developers, while the technical section offers appropriate depth for engineers. The progression from general purpose to specific APIs and design patterns is logical and easy to follow. Technical terminology is used appropriately without being overly verbose."
+        },
+        "overall_score": 5
+      },
+      "src/flask/testing.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and functionality. All stated capabilities (HTTP request simulation, CLI command testing, session manipulation, context management) are supported by the function summaries. The technical description correctly identifies the three main classes, their inheritance relationships, and key integration points with Werkzeug, Click, and Flask's JSON serialization."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major functionality and interfaces. The three main classes and their key methods (open, session_transaction, invoke, __enter__/__exit__) are mentioned. Minor utility functions like _copy_environ, _request_from_builder_args, and json_dumps are not explicitly mentioned, but these are implementation details rather than primary interfaces. The summary effectively captures the module's purpose without getting lost in helper functions."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical versions are well-written and appropriate for their audiences. The human version clearly explains the testing use case in accessible terms. The technical version provides concrete implementation details (class inheritance, key methods, integration points) in a structured, readable format. The progression from high-level purpose to technical specifics is logical."
+        },
+        "overall_score": 5
+      },
+      "src/flask/typing.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes a typing module based on the imports present. The claims about WSGI types, Werkzeug data structures, and type aliases align well with the imported modules (_typeshed.wsgi, werkzeug.datastructures, typing). However, without seeing the actual module content, cannot fully verify specific claims about TypeVars or exact type aliases defined (e.g., 'response tuple formats', 'environ dictionaries')."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "For a module with no functions or classes, the summary appropriately focuses on type aliases and their purpose. However, it lacks specifics about what type aliases are actually defined (names, purposes). A more complete summary would list key type aliases like 'ResponseReturnValue', 'HeadersValue', etc. if they exist. The general purpose is well covered, but enumeration of actual definitions is missing."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity. The summary clearly explains the module's role as a type definition hub, uses appropriate terminology (type hints, type aliases, TypeVar), and provides good context about how it fits into the broader Flask framework. Easy to understand for both beginners and experienced developers."
+        },
+        "overall_score": 4
+      },
+      "src/flask/views.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies the two main classes (View and MethodView), accurately explains the as_view() conversion mechanism, __init_subclass__() method introspection, dispatch_request() routing logic with HEAD-to-GET fallback, and the use of ensure_sync() for async handling."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All key components are covered: both View and MethodView classes, the as_view() class method, __init_subclass__() hook, dispatch_request() routing, decorator support, and async-to-sync conversion. The summary effectively captures both the high-level purpose and technical implementation details."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-structured with clear separation between human-readable and technical descriptions. It progresses logically from explaining the overall purpose (enabling class-based views) to specific implementation details. Technical terminology is used appropriately and the explanation of how components work together is easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/flask/wrappers.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and functionality. It correctly identifies the wrapper pattern extending Werkzeug classes, the security limits with three-tier fallback logic, routing metadata access, and debug-enhanced error handling. All technical details align with the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers all major functionality including security limits (max_content_length, max_form_memory_size, max_form_parts, max_cookie_size), routing metadata (endpoint, blueprint/blueprints), and error handling (_load_form_data, on_json_loading_failed). Minor omission: doesn't explicitly mention that some properties have both getters and setters, though this is implied. The blueprints() method (returning hierarchy) is somewhat conflated with blueprint (singular) property in the summary."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical versions. The human version clearly explains the practical purpose (security, routing, debugging), while the technical version provides precise implementation details. The bridge metaphor between Flask and Werkzeug is particularly effective. Structure flows logically from purpose to implementation."
+        },
+        "overall_score": 5
+      }
+    },
+    "average_score": 4.34
+  },
+  "function_summaries": {
+    "docs/conf.py::github_link": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all key aspects of the code: the Sphinx role functionality, text parsing with <> delimiters, version-based URL construction, and the return structure. No factual errors or hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The fallback behavior when words is None (uses full URL as display text)",
+          "The base_url constant pointing to pallets/flask repository"
+        ],
+        "notes": "Covers the main functionality, control flow, and return values well. The missing elements are minor details that don't significantly impact understanding. The summary captures the essential purpose and mechanics of the function."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate two-tier structure. The human-friendly version is accessible to documentation writers, while the technical version provides implementation details for developers. Both are well-organized and easy to understand for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary demonstrates appropriate depth by mentioning: Sphinx role context, reStructuredText markup, the packaging.version.parse API, docutils nodes, set_classes() function, and the Sphinx-specific return format. It balances detail with conciseness effectively."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement could mention that when no display text is provided (words is None), the full URL is used as the link text. However, this is a very minor detail and the summary is already excellent without it."
+    },
+    "examples/celery/src/task_app/__init__.py::create_app": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements accurately reflect the code's functionality. No hallucinations detected. Correctly identifies Redis configuration, Celery integration, route registration, blueprint usage, and return value."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The `task_ignore_result=True` setting is not mentioned",
+          "Could note this follows the application factory pattern"
+        ],
+        "notes": "Covers all major components: Celery configuration, environment config loading, route definition, blueprint registration, and return value. Minor details like the specific `task_ignore_result` setting are omitted but don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and appropriate for their audiences. The human-friendly version uses accessible language ('background job processing'), while the technical version provides precise method names and call sequence. Easy to follow and understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary appropriately detailed with specific method names (`from_mapping()`, `from_prefixed_env()`, `register_blueprint()`), configuration structure, and execution flow. Provides enough detail for a developer to understand implementation without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could minimally enhance by mentioning: (1) This follows the Flask application factory pattern, and (2) The `task_ignore_result=True` Celery setting. However, these are very minor additions and the summary is excellent as-is."
+    },
+    "examples/celery/src/task_app/tasks.py::process": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "Claims function is a 'Celery shared_task' but no @shared_task decorator is visible in the provided code"
+        ],
+        "notes": "The summary is mostly accurate. While the type hint 'self: Task' strongly suggests Celery usage, calling it a 'shared_task' specifically adds information not present in the code snippet. All other details (iteration behavior, update_state calls, sleep duration, return value) are correctly described."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Excellent coverage. The summary addresses the loop mechanism, state updates with specific metadata structure, the 1-second delay, return value format, and the intended use case. Both human and technical versions complement each other well."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. The human version uses accessible language ('pausing briefly', 'progress tracker'), while the technical version provides precise implementation details without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate detail: specific method names (update_state), parameter structures (meta dict with current/total keys), exact sleep duration (1 second), return type (dictionary), and architectural context (async task monitoring). The level of detail matches what a developer would need."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove or qualify the 'Celery shared_task' claim since the decorator isn't visible in the code. Consider phrasing as 'A method on a Celery Task class' or 'appears to be a Celery task method based on the type hint' to stay strictly within what's observable in the code."
+    },
+    "examples/celery/src/task_app/views.py::result": {
+      "factual_accuracy": {
+        "rating": 2,
+        "errors_found": [
+          "Claims 'This is a Flask blueprint GET endpoint' - the code shows no Flask decorators, route definitions, or blueprint registration. It's a plain Python function.",
+          "No evidence in the code that this is an endpoint at all"
+        ],
+        "notes": "The core functionality description is accurate (AsyncResult, ready(), successful(), get()), but the Flask endpoint claim is a significant hallucination that misrepresents the code's nature."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't mention that result.get() could potentially block or raise exceptions if the task failed",
+          "Doesn't clarify what 'result.result' attribute contains when not ready"
+        ],
+        "notes": "Covers the main flow well: ready check, conditional successful() call, and value retrieval logic. Minor details about error handling omitted."
+      },
+      "clarity": {
+        "rating": 3,
+        "notes": "The human-friendly portion is clear and accessible. However, the incorrect Flask endpoint claim in the technical section creates confusion about how this function should be used and integrated."
+      },
+      "technical_depth": {
+        "rating": 3,
+        "notes": "Good detail on AsyncResult API methods (ready(), successful(), get()) and the conditional logic. The Celery reference is appropriate. However, the Flask hallucination and lack of discussion about potential blocking/exception behavior of get() reduces the quality."
+      },
+      "overall_score": 3,
+      "recommendation": "Major issues",
+      "suggested_improvements": "Remove the incorrect 'Flask blueprint GET endpoint' claim entirely. Clarify that this is a utility function that could be used in various contexts (web endpoints, CLI tools, etc.). Add a note that result.get() may block until the task completes and could raise exceptions if the task failed. Specify that this pattern is commonly used with Celery or similar distributed task queues."
+    },
+    "examples/tutorial/flaskr/__init__.py::create_app": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "States 'maps the root URL \"/\" to the blog index endpoint' but the code uses `endpoint=\"index\"` without specifying it's blog.index (though the comment explains they'll be equivalent)"
+        ],
+        "notes": "The summary is mostly accurate. The minor issue is that it says the root is mapped to 'blog index endpoint' when the code actually uses endpoint='index'. While the comment indicates this will equal blog.index, the technical description should be more precise about what the code literally does."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Creation of instance folder with os.makedirs()",
+          "OSError exception handling for folder creation",
+          "The silent=True parameter in config.from_pyfile() that suppresses errors if config doesn't exist"
+        ],
+        "notes": "Covers all major functionality (config, database, blueprints, routes, return value). Missing some minor but relevant details about folder creation and error handling."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human-friendly and technical summaries are well-written and easy to understand. The human summary provides good context, while the technical summary includes specific method calls and parameters. Appropriate for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Technical summary includes specific method names, parameters, and structure. Good level of detail for most elements. Could be slightly more detailed about the conditional config loading logic and the instance folder setup."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Clarify that root URL maps to 'index' endpoint (not explicitly 'blog.index' in the code itself). 2. Mention the instance folder creation with os.makedirs() and OSError handling. 3. Note that config.from_pyfile() uses silent=True to ignore missing config files. Technical revision: 'creates instance folder if needed, loads config from file (silent=True) or test settings, [...] maps root URL to \"index\" endpoint (which will resolve to blog.index due to blueprint registration)'"
+    },
+    "examples/tutorial/flaskr/auth.py::login": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's behavior. No hallucinations detected. The technical summary correctly identifies the flow: POST handling, credential validation via check_password_hash(), session management, redirects, and template rendering."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could explicitly mention this is a Flask route handler/view function",
+          "Could note that GET requests always render the login template (implied but not explicit in human summary)"
+        ],
+        "notes": "Covers the main functionality well: authentication flow, session management, error handling, and template rendering. Both success and failure paths are described. The technical summary is more complete than the human one."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their target audiences. The human summary uses accessible language for general understanding, while the technical summary provides specific implementation details for developers. Good balance and structure."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Technical summary provides appropriate detail including specific function calls (check_password_hash, session.clear(), redirect, flash), data structures (session dict), and control flow. Could benefit from mentioning the Flask framework context and that this is a view function, but overall depth is strong."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement: The technical summary could briefly mention this is a Flask view function/route handler to provide fuller context. The human summary could be slightly more explicit that the function handles both displaying the initial login form (GET) and processing submitted credentials (POST)."
+    },
+    "examples/tutorial/flaskr/blog.py::delete": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims function is 'Protected by @login_required decorator' but this decorator is not present in the provided code"
+        ],
+        "notes": "The summary accurately describes all the actual code logic (get_post validation, database operations, redirect), but introduces information about a decorator that doesn't exist in the shown code. This is a hallucination, though it may be a reasonable assumption for a blog application."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Excellent coverage of all functionality: validation via get_post(), database connection, SQL execution, transaction commit, and redirect response. Covers both the what and the why. Side effects and control flow are well documented."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Exceptionally clear with two well-structured sections targeting different audiences. The human-friendly version explains purpose and security, while the technical version provides implementation details. Language is precise and accessible."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail covering the execution flow, SQL operation specifics, transaction management, and HTTP redirect. Could potentially mention that get_post() likely raises an exception on failure (implied by lack of return value handling), but overall depth is appropriate."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove the reference to '@login_required decorator' since it's not visible in the provided code snippet. If making assumptions about decorators or surrounding code, clearly indicate these are assumptions (e.g., 'likely protected by authentication'). Alternatively, only describe what's explicitly shown in the code."
+    },
+    "examples/tutorial/flaskr/db.py::get_db": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly identifies Flask's g object, lazy loading pattern, SQLite connection details, PARSE_DECLTYPES flag, and row_factory configuration."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: connection caching mechanism, initial creation logic, configuration details (PARSE_DECLTYPES, row_factory), return value, and the request-scoped nature of the connection. Both human and technical versions appropriately address their audiences."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity for both versions. The human version uses accessible language explaining the 'why' (efficiency, reuse), while the technical version provides precise implementation details. Well-structured and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary demonstrates strong depth: identifies the lazy-loading pattern, explains Flask's g object scope, specifies connection parameters and their purposes, and describes the row_factory behavior. Appropriate level of detail without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an exemplary summary that accurately describes the code with appropriate detail for both general and technical audiences. Both versions complement each other well."
+    },
+    "src/flask/app.py::handle_http_exception": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements accurately reflect the code's behavior. The summary correctly identifies proxy exceptions, RoutingException handling, error handler lookup, and the execution flow."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not mention the MRO (Method Resolution Order) lookup feature highlighted in the docstring as a v1.0 change",
+          "Could explicitly state the return type possibilities (HTTPException | ResponseReturnValue)"
+        ],
+        "notes": "Covers the main logic flow, early exit conditions, and handler invocation well. Missing some nuanced details from the docstring about lookup behavior and return type flexibility."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with a conceptual overview followed by technical implementation details. Language is precise and appropriate for developers familiar with web frameworks. The separation between high-level purpose and technical mechanics is well executed."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail with specific method names, data structures, and execution flow. Could enhance depth by mentioning the MRO-based handler matching (a key feature per docstring) and explaining what `ensure_sync()` does (likely synchronizing async handlers)."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Add mention of MRO-based exception matching: 'searches for handlers by exception code and class hierarchy (MRO)'. 2. Clarify that `ensure_sync()` handles async/sync handler compatibility. 3. Explicitly note the dual return type possibility (exception object vs. response value)."
+    },
+    "src/flask/app.py::get_send_file_max_age": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the function's behavior, including the config retrieval, None handling, timedelta conversion, and fallback return value. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The filename parameter is accepted but never used in the function body",
+          "The docstring notes this is a duplicate of a method in the Flask class"
+        ],
+        "notes": "Covers all major functionality paths (None check, timedelta conversion, raw value return) and clearly explains the purpose. The missing elements are relatively minor - the unused parameter could be noted but may be intentional for API consistency, and the duplicate method note is more contextual than functional."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human and technical summaries are well-written and accessible to their respective audiences. The human summary effectively explains the real-world implication (browser caching behavior), while the technical summary provides clear implementation details. Good use of precise terminology without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate detail for understanding the implementation: config key name, all three conditional branches, the specific method used for conversion (total_seconds()), and the expected data types. This level of detail is sufficient for a developer to understand the function without reading the source."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancement: Could briefly mention that the filename parameter is accepted but unused (likely for API consistency or future use). This is a very minor point and doesn't significantly impact the summary's quality."
+    },
+    "src/flask/app.py::make_shell_context": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the initial dictionary keys ('app' and 'g'), the iteration through shell_context_processors, the update mechanism, and the return value. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: initial state (app and g), the processing loop, the merge operation via update(), and the return value. The function has no side effects to document. Both the human-friendly and technical portions provide comprehensive coverage at their respective levels."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-friendly explanation effectively communicates the purpose and use case without jargon. The technical explanation provides precise implementation details using appropriate terminology. Both sections are well-organized and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail for a code summary. Mentions specific implementation details like rv.update(), the iteration pattern, dictionary initialization, and the accumulation mechanism. Balances precision with readability without being overly verbose or omitting important details."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that effectively serves both general readers and technical audiences. It's factually accurate, complete, clear, and appropriately detailed."
+    },
+    "src/flask/app.py::full_dispatch_request": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The summary states the signal is emitted 'asynchronously', but the parameter '_async_wrapper=self.ensure_sync' suggests it's ensuring synchronous execution, not asynchronous"
+        ],
+        "notes": "The summary is largely accurate but contains a potentially misleading characterization of the signal sending mechanism. The 'ensure_sync' wrapper name suggests synchronous behavior enforcement, not asynchronous execution."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary comprehensively covers all major components: flag setting, signal emission, preprocessing, conditional dispatch, exception handling, and finalization. Both the human-readable and technical portions address the full request lifecycle."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and clear. The human-readable version provides good context for general understanding, while the technical version gives precise implementation details with method names and control flow. The language is appropriate for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth: specific method names, parameter details, conditional logic ('if preprocessing returns None'), exception handling flow, and the overall architecture pattern. It accurately describes the pre/post-processing hooks and exception safety mechanisms."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Change 'emits request_started signal asynchronously' to 'emits request_started signal with sync wrapper (ensure_sync)' or 'emits request_started signal (ensuring synchronous execution)' to more accurately reflect the code's behavior. Otherwise, the summary is excellent and comprehensive."
+    },
+    "src/flask/blueprints.py::get_send_file_max_age": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the function's behavior. The human summary correctly explains the caching purpose and conditional requests. The technical summary accurately describes the logic flow, type checking, and conversions."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The filename parameter is accepted but never used in the function body"
+        ],
+        "notes": "Covers the main functionality, return value handling, and configuration retrieval well. The only notable omission is that the filename parameter exists in the signature but is not utilized, which might be worth mentioning as it could indicate the parameter is reserved for override implementations."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. The human summary uses accessible language explaining the browser caching behavior. The technical summary provides clear step-by-step logic. The 'blindly using a cached copy' phrase effectively conveys the concept of conditional vs. timed caching."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary appropriately covers implementation details: configuration key name, None handling, timedelta conversion with total_seconds() and int casting, and the fallback return. The level of detail matches what a developer would need to understand the implementation."
+      },
+      "overall_score": 4.75,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Consider adding a brief note that the filename parameter is not used in this base implementation, which may be relevant for developers looking to override this method in subclasses."
+    },
+    "src/flask/cli.py::find_app_by_string": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all key aspects of the code. The technical details about AST parsing, literal evaluation, attribute lookup, and function invocation are all correct. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't mention the 'mode=\"eval\"' parameter in ast.parse()",
+          "Doesn't explicitly mention that only simple name references are allowed for function calls (not complex attribute chains)",
+          "Doesn't mention the _called_with_wrong_args helper function usage"
+        ],
+        "notes": "Covers the main functionality, two primary use cases, error handling, and return value well. The missing elements are minor implementation details that don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with both a human-readable overview and detailed technical explanation. The flow is logical, terminology is appropriate, and the two-tier approach makes it accessible to different audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth with specific mentions of AST node types, literal_eval constraints, and the inspection/invocation pattern. Could be enhanced by mentioning that only simple names (not attribute chains) are allowed for function references, and the constraint that arguments must be literal values."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement: Could mention that function references must be simple names (not dotted attribute paths like 'obj.create_app') and that the 'mode=\"eval\"' ensures single-expression parsing. Could also note that keyword arguments with None names (like **kwargs syntax) are filtered out in the kwargs dictionary comprehension. These are minor details that would add completeness but aren't critical for understanding."
+    },
+    "src/flask/cli.py::shell_command": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The human summary correctly identifies the purpose and key features. The technical summary accurately describes the implementation steps including banner construction, context initialization, PYTHONSTARTUP handling, Flask context population, readline configuration, and the final code.interact() call."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The banner contents (Python version, platform, app name, instance path) could be mentioned",
+          "The use of compile() before eval() for the PYTHONSTARTUP script"
+        ],
+        "notes": "Covers all major functionality well. The human summary appropriately focuses on user benefits. The technical summary covers the execution flow thoroughly. Minor details about banner composition and the compile step are omitted but not critical."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. The human summary is accessible and focuses on practical benefits. The technical summary uses precise terminology and follows the logical flow of the code. The separation into human and technical versions is effective."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth, mentioning specific function calls (eval(), current_app.make_shell_context(), code.interact()), class usage (rlcompleter.Completer), and the flow of context preparation. It balances detail with readability without becoming overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancements: (1) Mention what's included in the banner text in the technical summary, (2) Note that the code uses compile() before eval() for proper error reporting, (3) Briefly mention that __interactivehook__ is typically set by the site module. However, these are minor additions and the current summary is already high quality."
+    },
+    "src/flask/cli.py::_validate_key": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all validation logic paths, correctly identifying the three cert types (adhoc, SSLContext, file path) and the corresponding validation rules. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all main aspects: the validation rules for both branches (key provided vs not provided), the side effect of modifying ctx.params['cert'], the return value, and error handling. The import error handling for ssl module is a minor detail that could be mentioned but doesn't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured. The human-friendly version uses accessible language to explain the rules. The technical version provides implementation details without being verbose. The dual-level approach works well for different audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary appropriately details the mechanism: context parameter retrieval, type checking logic, tuple pairing in ctx.params, exception types, and return behavior. The level of detail matches what a developer would need to understand the function's operation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent as written. If hyper-detailed documentation were needed, could mention: (1) the graceful handling of ImportError for the ssl module, and (2) that the function signature follows Click's callback pattern (ctx, param, value). However, these are minor details that don't detract from the current quality."
+    },
+    "src/flask/cli.py::locate_app": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the import mechanism, error handling logic (including the tb_next check to distinguish error sources), the conditional logic based on app_name parameter, and the exception/return behavior."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key elements: import process, error handling with three distinct branches, the tb_next depth check rationale, sys.modules retrieval, delegation to helper functions, return values (Flask|None), and exception raising conditions. The raise_if_not_found parameter behavior is properly explained."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach: the human-friendly summary provides accessible context about purpose and behavior, while the technical summary delivers implementation specifics. Both are well-structured and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical summary. Mentions specific implementation details (__import__(), sys.modules, tb_next check, delegation pattern) without becoming verbose. The explanation of the traceback depth check is particularly valuable for understanding the error handling logic."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary that balances accessibility with technical precision. No improvements needed."
+    },
+    "src/flask/config.py::from_file": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's behavior, including file path resolution, file opening modes, exception handling logic, and return values. No hallucinations or incorrect statements detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality: path resolution, file opening with text/binary modes, the load callable, exception handling (both silent and non-silent cases), error message enhancement, and return behavior. Both the high-level and technical sections complement each other well."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The two-level summary approach works excellently. The human-friendly section gives a clear overview with concrete examples. The technical section provides precise implementation details. Minor typo: 'based the' should be 'based on the', but this doesn't meaningfully impact clarity."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section provides appropriate detail: mentions specific mode strings ('r'/'rb'), errno values (ENOENT, EISDIR), the delegation pattern to from_mapping(), and the conditional exception handling flow. Level of detail is well-suited for developers who need to understand the implementation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Fix minor typo: 'based the text parameter' \u2192 'based on the text parameter'. Optionally, could clarify that the load callable returns a 'mapping' rather than specifically a 'dictionary' to be more precise with terminology, though this is a very minor point."
+    },
+    "src/flask/ctx.py::request": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Technical summary incorrectly states this is 'A property decorator' when the code shows a regular method without the @property decorator"
+        ],
+        "notes": "The functional description is accurate (null-check, RuntimeError, returning Request object), but the classification as a property decorator is incorrect. This appears to be a regular instance method."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention this is an instance method that accesses private attribute _request",
+          "Docstring mentions access through ':data:`.request`' which isn't explained"
+        ],
+        "notes": "Covers the main functionality well: the check, the error condition, the return value, and the purpose. Minor contextual details from the docstring could be included."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human and technical summaries are well-written and easy to understand. The human summary provides good context for general understanding, while the technical summary explains the implementation clearly (despite the property decorator error)."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail explaining the null-check pattern, guard clause purpose, and context enforcement. Appropriately detailed for the code's complexity. The property decorator misidentification prevents a perfect score."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove or correct the 'property decorator' reference in the technical summary. It should read: 'An instance method that performs a null-check...' or simply 'A method that performs a null-check...'. Otherwise, the summary effectively captures the code's purpose and implementation."
+    },
+    "src/flask/ctx.py::after_this_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the decorator's purpose, validation logic, and mechanics. The distinction between per-request vs. global behavior is properly highlighted."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: purpose, scope (single request), validation (context check), error handling (RuntimeError), registration mechanism (_after_request_functions list), and return value. The human-readable section appropriately references the code example's use case."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-readable section effectively explains the 'why' and 'when' without implementation details. The technical section provides precise implementation details with appropriate terminology. Both are clear and well-organized."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: specific function calls (_cv_app.get), attribute accesses (ctx._after_request_functions), exception types (RuntimeError), and the decorator pattern mechanics. Balances detail with readability."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that accurately describes both the purpose and implementation of the code. The dual-level approach (human + technical) effectively serves different audience needs."
+    },
+    "src/flask/debughelpers.py::explain_template_loading_attempts": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the function's purpose, the iteration logic, the match counting mechanism, the blueprint context checking, and the logging behavior. No hallucinations or factual errors detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Function returns None (side-effect only)",
+          "The specific structure of the diagnostic output format (numbered list with indentation)"
+        ],
+        "notes": "Covers all major functionality including the diagnostic report generation, loader iteration, match counting, anomaly detection, and blueprint-specific hints. Minor elements like return value and exact formatting details could be mentioned, but these are not critical omissions."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a human-friendly overview followed by technical implementation details. The language is precise and accessible to both general developers (first paragraph) and those needing implementation specifics (technical section). Good balance between readability and detail."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section provides appropriate depth, mentioning key implementation details like the `_dump_loader_info()` helper, the `triple` tuple structure for match results, context variable retrieval pattern (`_cv_app.get(None)`), and the conditional logic for anomaly detection. Level of detail is well-suited for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Very minor: Could add that the function returns None and is purely side-effect based (logging only), and could mention the specific format of the output (numbered, indented list). However, these are negligible omissions that don't detract from the summary's quality."
+    },
+    "src/flask/helpers.py::send_file": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the delegation pattern, parameter processing, environ injection, and Response return type. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Security consideration: function assumes trusted paths (not mentioned but important)",
+          "Support for both file paths and file-like objects",
+          "Conditional responses and range request support"
+        ],
+        "notes": "Covers the main functionality and implementation pattern well. Missing some important features like the dual input type support (PathLike vs IO) and security warnings from the docstring, but these may be acceptable omissions for a concise summary."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach. Human-friendly version is accessible and uses plain language. Technical version is clear, well-structured, and uses appropriate terminology for the target audience."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth for a summary. Correctly identifies the delegation pattern, preprocessing step, environ injection, and HTTP header configuration. Could mention X-Sendfile support or file_wrapper optimization, but current level is appropriate for most use cases."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Consider adding: (1) Brief mention that the function accepts both file paths and file-like objects, (2) Note about security: paths should be trusted, not user-provided. However, these are minor enhancements - the summary is already of high quality and suitable for its purpose."
+    },
+    "src/flask/helpers.py::url_for": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly identifies the function as a wrapper that delegates to current_app.url_for(), accurately describes all parameters, and correctly states the requirement for an active Flask application context."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Blueprint name resolution (endpoints starting with '.')",
+          "Query string behavior (unknown keys appended as ?a=b&c=d)",
+          "Error handling via app.handle_url_build_error"
+        ],
+        "notes": "Covers the core functionality well, including the wrapper pattern, main parameters, context requirement, and return value. However, omits some useful details mentioned in the docstring about blueprint resolution and query parameter handling."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity in both sections. The human summary uses accessible language with a good analogy about keeping URLs consistent. The technical summary is concise and uses appropriate terminology for developers. The two-tier approach serves different audiences effectively."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth for a summary. Correctly identifies the delegation pattern, mentions context requirements, and explains parameter flow. Could be enhanced by briefly mentioning the query string behavior or blueprint resolution feature, which are key aspects of URL generation in Flask."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Consider adding: (1) Brief mention that endpoints starting with '.' use the current blueprint name, (2) Note that unknown keys in **values become query string parameters (?a=b format), (3) Optional: mention that build errors are handled by the app's error handler. These additions would make the summary more comprehensive without significantly increasing length."
+    },
+    "src/flask/helpers.py::stream_with_context": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior. The description of the two-step approach (checking if callable vs generator), the use of `_cv_app.get()`, sentinel value yielding, and pre-execution with `next()` are all correct. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "RuntimeError raised when no active context exists",
+          "Cleanup logic in finally block (gen.close() for WSGI iterators)",
+          "Use of update_wrapper to preserve function metadata in decorator case"
+        ],
+        "notes": "Covers the main functionality well, including both usage modes (decorator/wrapper), context preservation mechanism, and the sentinel pattern. Missing some error handling and cleanup details that could be important for complete understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The non-technical summary is accessible and explains the 'why' clearly. The technical summary is precise and methodical, walking through the logic flow in a way that's easy to follow. Good use of technical terminology without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Strong technical detail covering the dual-mode handling, context capture mechanism, sentinel pattern, and pre-execution strategy. Could be enhanced by mentioning the error handling (RuntimeError), cleanup logic for WSGI iterators, and the `with ctx:` context manager usage that actually preserves the context during iteration."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add mention of: (1) The RuntimeError raised when no context is active - this is important for users to understand when the function can be used; (2) The cleanup logic in the finally block that handles WSGI iterator cleanup; (3) Clarify that 'with ctx:' is what actually keeps the context active during iteration. Consider rephrasing 'HTTP request has technically ended' to 'request context would normally be torn down' for precision."
+    },
+    "src/flask/json/__init__.py::jsonify": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly identifies the function as a thin wrapper that delegates to current_app.json.response(), accurately describes the return type and mimetype, and properly explains the JSON provider's role."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Constraint that positional and keyword arguments cannot be used simultaneously",
+          "Behavior when no arguments provided (None is serialized)",
+          "Requirement for active Flask app context"
+        ],
+        "notes": "Covers the main functionality well, including delegation pattern, return type, and debug formatting. However, omits some important constraints and edge cases documented in the docstring."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate separation between human-friendly and technical explanations. The human version uses accessible language ('browsers and clients can understand'), while the technical version provides precise implementation details. Well-structured and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical summary. Explains the delegation pattern, mentions the JSON provider architecture enabling customization, correctly identifies it as a thin wrapper, and specifies key implementation details like argument passing and return type."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention: (1) the mutual exclusivity of args/kwargs, (2) the requirement for an active app context, and (3) the None serialization behavior when no arguments are provided. However, these are minor omissions that don't significantly impact the summary's usefulness."
+    },
+    "src/flask/json/provider.py::dump": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the delegation to self.dumps(), the use of fp.write(), and the pass-through of kwargs."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not explicitly mention the function returns None",
+          "Could reference the UTF-8 encoding requirement mentioned in the docstring"
+        ],
+        "notes": "Covers the main functionality, parameters, and side effects well. The missing elements are minor - the return value (None) is implicit for a write operation, and the UTF-8 encoding detail, while useful, is not critical to understanding the core functionality."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical sections are clear and well-articulated. The human summary uses accessible language, while the technical summary provides appropriate implementation details without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical depth. Explains the delegation pattern, the method chain (dumps \u2192 write), and provides concrete examples of kwargs usage (indentation, custom encoders). Appropriate level of detail for understanding implementation without being pedantic."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional minor enhancements: (1) Could mention the function returns None to be fully explicit, (2) Could note the UTF-8 encoding recommendation from the docstring. However, these are very minor and the summary is already high quality."
+    },
+    "src/flask/json/tag.py::tag": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly describes the iteration through self.order, the check-then-tag pattern, early return behavior, and fallback to returning the original value."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: the ordered iteration, the conditional matching logic, the transformation mechanism, return values for both match and no-match cases, and the interface contract (check() and tag() methods). The function has no observable side effects, and this is appropriately not mentioned."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. The human summary provides good conceptual understanding with the 'tagged representation' framing. The technical summary is precise and uses appropriate terminology (predicate, transformation, iteration) without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical depth. Identifies the key implementation details: ordered collection traversal, the two-method interface pattern (check/tag), early termination behavior, and the dependency on external tag objects. Appropriately detailed without over-explaining trivial aspects."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None required. The summary is accurate, complete, and well-structured. If being extremely thorough, one could mention that the function signature shows type annotations (t.Any) suggesting flexibility in both input and output types, but this is already implicit in the current summary."
+    },
+    "src/flask/logging.py::wsgi_errors_stream": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims 'The function is wrapped with LocalProxy' - this is not evident from the provided code and appears to be an assumption or hallucination"
+        ],
+        "notes": "The core logic description is accurate, but the LocalProxy claim cannot be verified from the code shown and may confuse readers. The `request` object in Flask is indeed a LocalProxy, but the *function itself* is not wrapped."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not mention the ext://flask.logging.wsgi_errors_stream reference path noted in docstring",
+          "Doesn't explicitly state the return type (TextIO)"
+        ],
+        "notes": "Covers the main conditional logic and use case well. The omission of the ext:// reference path is minor but could be useful for users configuring logging."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-readable and technical sections are well-written and easy to understand. The progression from high-level purpose to implementation details is logical and clear."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Provides good technical detail about the truthy evaluation and WSGI environ dictionary access. However, the LocalProxy mention adds confusion rather than clarity since it's about the request object's implementation, not this function."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Remove or clarify the LocalProxy statement - it should either be removed entirely or clarified that it refers to how the `request` object works (not this function). Consider adding: (1) explicit mention of the TextIO return type, and (2) the ext://flask.logging.wsgi_errors_stream reference path for configuration purposes."
+    },
+    "src/flask/sansio/app.py::trap_http_exception": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all logic paths in the code. The three conditions are correctly identified and explained, and the behavior when TRAP_HTTP_EXCEPTIONS, TRAP_BAD_REQUEST_ERRORS, and debug mode interact is properly captured."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention the return type (bool) explicitly",
+          "Could note the version history mentioned in docstring (added in 0.8, changed in 1.0)"
+        ],
+        "notes": "Covers all main logic paths, configuration options, and exception types. The function's purpose and mechanism are well explained. Minor version history details from docstring could be included but aren't critical."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach: the human-readable version provides clear context about the purpose (debugging vs normal handling), while the technical version methodically walks through each conditional branch. Both are accessible to their intended audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth by enumerating all three conditions with their specific logic (AND operators, None checks, isinstance checks). It correctly identifies the specific exception types (BadRequestKeyError vs BadRequest) and configuration keys, which are crucial implementation details."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancements: (1) Could explicitly mention 'returns bool' for completeness, (2) Could add a brief note about version history if documenting API changes is important in this context. However, the summary is already highly effective as written."
+    },
+    "src/flask/sansio/app.py::add_template_test": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements in both the human-friendly and technical summaries are factually correct. The summary accurately describes the function's purpose, parameters, behavior, and side effects."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not mention the alternative `template_test` decorator mentioned in the docstring",
+          "Does not note that the function returns None (though this is implicit)",
+          "Does not mention this was added in version 0.10"
+        ],
+        "notes": "Covers the main functionality well including parameters, side effects, and the name defaulting behavior. Missing elements are relatively minor contextual details from the docstring."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate language for both audiences. The human-friendly section explains the 'why' and use case clearly, while the technical section provides precise implementation details. Well-structured and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: mentions the specific type (`TemplateTestCallable`), explains the dictionary mutation pattern, details the name defaulting logic using `name or f.__name__`, and describes how the registration enables template access. Appropriate level of detail without over-explaining."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention: (1) the alternative `template_test` decorator for registration, (2) that this feature was added in version 0.10. However, these are very minor omissions and the summary is excellent as written."
+    },
+    "src/flask/sansio/app.py::_find_error_handler": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's behavior. The priority order (blueprint \u2192 app, code \u2192 None, MRO traversal) is correctly explained. The helper method call and data structure access patterns are accurately described."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential elements: input parameters (exception and blueprints list), the helper method call, the nested iteration logic (code \u2192 name \u2192 MRO), the lookup mechanism via error_handler_spec dictionary, and return values (handler or None). The summary appropriately omits minor details like the empty handler_map check while preserving all functionally significant aspects."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are well-structured and understandable. The human summary provides good conceptual overview for general developers, while the technical summary offers implementation-level detail for those needing deeper understanding. The progression from high-level intent to specific mechanism is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth: mentions specific method names, explains the nested iteration structure, describes the dictionary access pattern (error_handler_spec[name][c]), and correctly identifies the use of __mro__ for inheritance-aware matching. The level of detail matches what a developer would need to understand the implementation without being unnecessarily verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary that requires no changes. If being extremely pedantic, one could explicitly mention that the function checks 'if not handler_map: continue' to skip empty maps, but this is a minor optimization detail that doesn't affect functional understanding."
+    },
+    "src/flask/sansio/app.py::add_template_global": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly describes the function's purpose, parameter usage, and implementation details. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: main functionality, parameter behavior (including the name fallback logic), side effects (state modification), and the relationship between the function and templates. The implicit None return is appropriately handled by focusing on the side effect nature of the operation."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a well-structured two-tier explanation. The human-readable section explains the 'why' and practical use case, while the technical section explains the 'how' with appropriate terminology. Easy to understand for both general developers and those seeking implementation details."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for this function. Explains the dictionary storage mechanism, the conditional name resolution logic, the concept of Jinja's global namespace, and correctly identifies the state modification side effect. The level of detail matches the code's complexity."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that accurately and completely describes the code's functionality at both conceptual and technical levels."
+    },
+    "src/flask/sansio/app.py::template_filter": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the decorator pattern, the dual invocation modes (with/without parentheses), the callable check mechanism, and the registration process via add_template_filter()."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Return type information (T_template_filter or callable)",
+          "The :param documentation in the docstring"
+        ],
+        "notes": "Covers the main functionality, usage patterns, and side effects well. The human summary effectively explains the purpose and flexibility. The technical summary explains the implementation mechanism. Minor: could mention the type hints and the reference to add_template_filter() for alternative registration."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-oriented and technical summaries are well-written and appropriately targeted. The human summary provides helpful context (what a filter does) while the technical summary uses precise terminology (decorator pattern, invocation modes) suitable for developers."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth: explains the decorator pattern implementation, the callable check logic, the dual invocation modes with concrete syntax examples, and the registration mechanism. Appropriate level of detail for understanding the implementation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Very minor: Could briefly mention that the function returns either the decorated function itself or a decorator callable (T_template_filter | Callable[[T_template_filter], T_template_filter]) to be more precise about return types. Could also note that add_template_filter() is mentioned in the docstring as an alternative registration method."
+    },
+    "src/flask/sansio/blueprints.py::extend": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements accurately describe the code's behavior. The key transformation logic (None \u2192 name, otherwise \u2192 name.key), the extend operation, in-place modification, and the undefined 'name' variable are all correctly identified."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensively covers: main functionality (merging dictionaries with list values), key transformation logic, return value (None), side effects (in-place modification of parent_dict), and even identifies the contextual issue with the undefined 'name' variable."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure: accessible human-level explanation followed by detailed technical breakdown. The human summary provides intuitive understanding while the technical summary offers implementation specifics. Terminology is precise and appropriate."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for the code's complexity. Mentions specific method (.extend()), explains conditional logic clearly, identifies mutation behavior, and provides valuable context about the undefined variable suggesting nested function scope. The level of detail matches what a developer would need."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an exemplary summary that balances accessibility with technical precision. It correctly identifies all key behaviors and even provides helpful context about the undefined variable."
+    },
+    "src/flask/sansio/blueprints.py::register": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all key operations: name validation, BlueprintSetupState creation, static file routing, function merging, deferred function execution, CLI command integration, and recursive nested blueprint registration with proper URL prefix and subdomain handling."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality including: name construction logic, duplicate name checking with error raising, first registration tracking, static file handling, blueprint function merging conditions, deferred callback execution, CLI command registration scenarios, and nested blueprint recursion with option merging. The function has no return value (None) and this is appropriately not emphasized since the side effects (registration) are the main purpose."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and appropriate for their audiences. The human-readable version provides a clear high-level overview using accessible language. The technical version offers specific implementation details (method names, data structures) without being overwhelming."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth by naming specific methods (add_url_rule(), _merge_blueprint_funcs()), data structures (app.blueprints, BlueprintSetupState), and explaining the conditional logic for merging options and first-time registration. It captures the recursive nature and option propagation for nested blueprints accurately."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is comprehensive and accurate. If any enhancement were desired, it could briefly mention that the function raises ValueError on duplicate names, but this is already implied in the validation description."
+    },
+    "src/flask/sansio/blueprints.py::app_template_test": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The term 'validation tests' is slightly misleading - Jinja tests are boolean tests used in template conditionals (e.g., `is_even`, `is_defined`), not specifically validation tests"
+        ],
+        "notes": "The summary is largely accurate in describing the decorator pattern and functionality, but the characterization as 'validation tests' could be more precise. Jinja tests are general-purpose boolean tests for template logic."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Return type details could be more explicit (returns the original function when used without parentheses, or a decorator function when used with a name parameter)",
+          "Could mention the type hints (T_template_test) that indicate the function signature is preserved"
+        ],
+        "notes": "Covers the main functionality well, including the dual-mode decorator pattern, registration mechanism, and scope. Minor details about return types could be more explicit."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with separate human-readable and technical sections. The explanation of the dual-mode decorator pattern is clear and accessible. Good use of specific code references and examples."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail on the decorator pattern implementation and the callable check logic. Could be enhanced with a brief explanation of what Jinja tests are used for (e.g., 'boolean predicates used in template conditionals like {% if value is custom_test %}')."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Replace 'validation tests' with 'boolean test functions' or 'template test predicates' for more accuracy. 2. Add a brief example of Jinja test usage (e.g., '{% if user is premium %}') to contextualize what these tests do. 3. Be more explicit about return types: 'returns the original function unchanged when used without parentheses, or returns a decorator function when used with a name parameter'."
+    },
+    "src/flask/sansio/blueprints.py::teardown_app_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly explains the registration mechanism, the use of `None` for app-level scope, the deferred registration via `record_once()`, and the decorator pattern."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all essential elements: main functionality (cleanup handler registration), scope (app-level vs blueprint-level), lifecycle integration, return value, decorator usage, and the deferred registration mechanism. The example use case (database connections) adds helpful context."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human and technical summaries are well-structured and clear. The human summary provides accessible context while the technical summary offers implementation details. The progression from high-level purpose to technical mechanics is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary appropriately explains: the `record_once()` deferral pattern, the lambda's purpose, the dictionary structure (`teardown_request_funcs`), the significance of the `None` key for app-level scope, the `setdefault()` usage, and the decorator pattern. This is the right level of detail for understanding the implementation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that balances accessibility with technical accuracy. If being extremely thorough, could mention the `T_teardown` type hint, but this is a very minor point and not necessary for understanding the functionality."
+    },
+    "src/flask/sansio/scaffold.py::after_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior, the decorator pattern, the data structure used (dictionary with None key, list values), and the return value. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 3,
+        "missing_elements": [
+          "Exception handling behavior: if a callback raises an exception, remaining callbacks won't execute",
+          "Distinction between app-level vs blueprint-level registration",
+          "Mention that this shouldn't be used for actions that must execute (like closing resources)",
+          "The typical usage as a decorator with @ syntax"
+        ],
+        "notes": "Covers core functionality well but omits important caveats from the docstring about exception handling and appropriate use cases. The app/blueprint distinction is mentioned in the docstring but not in the summary."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with human-readable and technical sections. Language is clear and accessible. The progression from high-level concept to implementation details is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good explanation of the decorator pattern, dictionary structure with setdefault, and the registration mechanism. Could be enhanced by mentioning typical decorator usage syntax and being more explicit that the execution logic exists elsewhere in the framework."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add critical information from the docstring: (1) Note that if a callback raises an exception, remaining callbacks won't run, making this unsuitable for critical cleanup tasks; (2) Mention the app vs blueprint behavior distinction; (3) Optionally show typical decorator usage: '@app.after_request'. These additions would make the summary more complete without sacrificing clarity."
+    },
+    "src/flask/sansio/scaffold.py::errorhandler": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's functionality. It correctly identifies that this is a decorator factory, explains the dual input options (HTTP codes or exception types), and accurately describes the technical implementation including the closure pattern and registration mechanism."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not mention this works on both app and blueprint objects with different scopes",
+          "Does not mention the generic type parameter T_error_handler",
+          "Could note that this is a convenience wrapper around register_error_handler"
+        ],
+        "notes": "Covers the core functionality well including main use cases, return values, and side effects. The missing elements are contextual details from the docstring that provide additional usage information but aren't strictly necessary to understand the code itself."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate separation between human-friendly and technical explanations. The human section uses accessible language with clear examples, while the technical section provides precise implementation details. Both sections are concise and well-structured."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth covering the decorator pattern, closure mechanics, the registration side effect, and function passthrough behavior. Could be enhanced by mentioning the generic type preservation (T_error_handler) which ensures type safety, but the current level is appropriate for most audiences."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Consider adding a brief mention that this works on both application and blueprint objects with different error handling scopes, as this is an important usage distinction highlighted in the original docstring. Optionally note that T_error_handler is a generic type parameter that preserves the handler function's type signature."
+    },
+    "src/flask/sansio/scaffold.py::add_url_rule": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Summary mentions '@setupmethod decorator' but this decorator is not present in the provided code - this appears to be a hallucination"
+        ],
+        "notes": "The functional description is accurate, but the fabricated decorator reference is a significant error that undermines trust in the summary."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "No mention that HEAD is always added automatically to methods",
+          "Missing detail about required_methods and provide_automatic_methods attributes being checked on view_func",
+          "Doesn't explicitly state return value is None",
+          "Default methods ['GET'] not mentioned"
+        ],
+        "notes": "Covers the core functionality well and appropriately notes it's a stub implementation. Some documentation details are omitted but these are relatively minor."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical explanations are clear, well-structured, and appropriate for their respective audiences. The progression from general concept to technical details is logical."
+      },
+      "technical_depth": {
+        "rating": 3,
+        "notes": "Appropriate level of technical detail about the abstract interface pattern and NotImplementedError, but the fabricated decorator and missing details about automatic method handling (HEAD/OPTIONS) and attribute checking reduce the quality."
+      },
+      "overall_score": 3,
+      "recommendation": "Major issues",
+      "suggested_improvements": "1. Remove the incorrect reference to '@setupmethod decorator' which does not exist in the code. 2. Add mention that HEAD is always added automatically and OPTIONS is added by default. 3. Note that the function checks for 'required_methods' and 'provide_automatic_methods' attributes on view_func. 4. Mention the default methods are ['GET']. 5. Be more careful to only describe what's actually present in the code to avoid hallucinations."
+    },
+    "src/flask/sansio/scaffold.py::teardown_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the registration mechanism, the timing of execution, error handling behavior, and the technical implementation details including the dictionary structure and decorator pattern."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Works on both app and blueprint objects with different scopes",
+          "Teardown functions should avoid raising exceptions",
+          "The significance of the None key in the dictionary"
+        ],
+        "notes": "Covers the core functionality, return value, and side effects well. Provides good context about typical use cases. However, misses some important details from the docstring about app vs blueprint usage and exception handling requirements."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with effective two-tier structure. The high-level explanation is accessible to developers unfamiliar with Flask, while the technical section provides implementation details for those who need them. Good use of concrete examples (database connections, resources)."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail explaining the dictionary structure, setdefault pattern, decorator usage, and Flask's execution mechanism. Could be enhanced by explaining why the None key is used or mentioning that blueprint-specific keys would be different values."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Add a note about app vs blueprint behavior: 'When used on an app, runs after every request; when on a blueprint, runs only for that blueprint's requests.' 2. Mention that teardown functions should handle their own exceptions. 3. Optionally explain that the None key represents app-level (non-blueprint) teardown functions."
+    },
+    "src/flask/sansio/scaffold.py::_find_package_path": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the fallback to os.getcwd(), the three distinct cases (namespace packages, regular packages, and modules), and the specific directory relationships (grandparent vs parent of origin). No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The root module name extraction step (partitioning on '.')",
+          "The nested logic for namespace packages that tries to find the submodule spec first"
+        ],
+        "notes": "Covers all major paths through the code and the return behavior. The namespace package handling is slightly simplified - it doesn't fully explain that the code first tries to find the specific import_name's spec within the namespace and uses commonpath to pick the right location. However, for a summary this level is reasonable."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with a clear separation between high-level explanation and technical details. The non-technical portion is accessible, while the technical portion provides concrete implementation details. Good use of examples and specific function names."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for the target audience. Mentions specific functions (find_spec, os.path.commonpath, is_relative_to), explains the conditional logic, and clarifies what each path returns. The grandparent/parent distinction is particularly helpful for understanding the directory traversal."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention that the function first extracts the root module name via partitioning on '.', and could slightly expand on the namespace package submodule search logic, but these are minor points. The summary is excellent as-is."
+    },
+    "src/flask/sessions.py::get_cookie_domain": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "Refers to 'authentication cookies' when the code specifically deals with 'session cookies' - while session cookies are often used for authentication, this is slightly imprecise terminology"
+        ],
+        "notes": "The summary is almost entirely accurate. The description of cookie domain behavior, return type, and version changes are all correct. The only minor issue is using 'authentication cookies' as shorthand when 'session cookies' is more precise."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: main functionality, return type, configuration source, version change note, lack of side effects, and the behavioral implications of the setting. The function is simple enough that no critical details are missing."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate dual-level explanation. The human-friendly section explains the 'why' and practical implications, while the technical section provides implementation details. Both are concise and well-structured."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for a simple getter function. Correctly identifies: type signature, config key accessed, lack of transformations/side effects, version behavior change, and that it's a pure configuration accessor. No unnecessary verbosity."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional minor refinement: Change 'authentication cookies' to 'session cookies' for technical precision, though the current wording is understandable and commonly used in practice since session cookies typically manage authentication state."
+    },
+    "src/flask/sessions.py::get_cookie_secure": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the function's purpose (checking secure cookie settings), the configuration key used (SESSION_COOKIE_SECURE), and the security implications (HTTPS protection, preventing interception)."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage including: main functionality (config retrieval), parameter (Flask app instance), return value (boolean), operation type (dictionary lookup), and importantly notes the absence of transformations and side effects. The human summary adds valuable context about the security implications."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. The human summary provides accessible context about secure connections and cookie interception. The technical summary is precise and structured, clearly explaining the implementation details without unnecessary complexity."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical precision. Explicitly mentions: dictionary lookup operation, parameter typing, return type, absence of data transformations, and lack of side effects. This level of detail is appropriate for such a straightforward function without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary with no significant improvements needed. An extremely minor enhancement could be explicitly noting that this is an instance method (has `self` parameter), but this is negligible given the context is already clear."
+    },
+    "src/flask/sessions.py::make_null_session": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the function's purpose (creating a null session on configuration failure), behavior (allows reads, blocks writes with helpful messages), and implementation (simple instantiation via self.null_session_class()). The observation about the unused 'app' parameter is correct and valuable."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage including: purpose/use case, return value and type, behavioral characteristics (read vs write operations), implementation details, and the significant detail that the 'app' parameter goes unused. Both human-friendly and technical perspectives are addressed."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with clear separation between conceptual explanation and technical details. The human-friendly section uses accessible language ('dummy' session, 'keep running smoothly') while the technical section provides precise terminology (proxy object, factory method, dictionary-like lookups). Easy to understand for both audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth with specific details about the implementation pattern (factory method), object behavior (proxy with read/write distinction), and notable implementation quirks (unused parameter). References the class attribute dependency without over-explaining. Well-balanced for a technical audience."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None required. This is a high-quality summary that accurately and comprehensively describes the code while maintaining excellent clarity for multiple audience levels."
+    },
+    "src/flask/templating.py::render_template_string": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all steps: retrieving app context, compiling source string to Jinja2 template, delegating to _render(), and returning rendered output. No hallucinations or incorrect statements detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "No mention of the **context parameter structure (keyword arguments)",
+          "Could note this appears to be part of Flask framework"
+        ],
+        "notes": "Covers main functionality, return value, and key operations. The human summary effectively explains the purpose while the technical summary details the implementation. Minor deduction for not explicitly mentioning that context variables are passed as keyword arguments."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their audiences. Human version uses accessible language ('template written as text', 'filling in variable values'). Technical version provides precise implementation details with specific function calls and data flow. The two-tier approach is effective."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: specific function names, call chain (`app_ctx._get_current_object()` \u2192 `ctx.app.jinja_env.from_string()` \u2192 `_render()`), identifies Jinja2 as the templating engine, and explains parameter passing. Balances detail without over-explaining obvious aspects."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional minor enhancement: Could briefly mention in the technical summary that `**context` unpacks keyword arguments, making it clearer how variables are passed to the template. For example: 'passing the context, compiled template, and unpacked keyword arguments (**context) containing template variables.'"
+    },
+    "src/flask/templating.py::_render": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's behavior. The human summary correctly identifies the template rendering process with signal checkpoints. The technical summary accurately names all methods, signals, and parameters used."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all main functionality: app extraction, context updating, both signals (before_render_template and template_rendered), the actual rendering call, and the return value. Side effects via signals are well-documented."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The human summary uses clear analogies ('checkpoint moments') and concrete examples. The technical summary is precise and uses proper terminology. Both are appropriate for their intended audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides excellent detail: specific method names (app.update_template_context, template.render), signal names, parameter details (_async_wrapper=app.ensure_sync), and architectural context (Flask's signal system, lifecycle hooks)."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is a high-quality summary. If being extremely thorough, could mention that update_template_context receives both ctx and context parameters, but this is a very minor detail that doesn't impact understanding."
+    },
+    "src/flask/testing.py::session_transaction": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements in the summary accurately reflect the code's behavior. The description of the session transaction flow, cookie handling, and error conditions are all correct."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The function accepts *args and **kwargs that are passed to test_request_context",
+          "The is_null_session check that causes early return without saving"
+        ],
+        "notes": "Covers the main functionality, error handling, and key implementation details well. Minor omissions: doesn't explicitly mention that arguments are forwarded to test_request_context (though the original docstring mentions this), and the null session check that prevents saving is not mentioned."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. The human-friendly section explains the 'why' and 'what' clearly with good analogies. The technical section provides precise implementation details in logical order. Both audiences would understand their respective sections well."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Provides appropriate technical depth including specific method names, the sequence of operations, WSGI environment details, cookie handling mechanisms, and exception types. The level of detail is suitable for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancements: (1) Briefly mention that *args/**kwargs are forwarded to test_request_context for custom request setup. (2) Note that null sessions (when is_null_session returns True) are not saved back, preventing unnecessary save operations for read-only session backends."
+    },
+    "src/flask/views.py::as_view": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code including the conditional instantiation logic, decorator application, metadata attachment, and the purpose of the view_class reference."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality: both instantiation patterns (init_every_request), the closure mechanism, dispatch_request invocation via ensure_sync, decorator application order, all metadata attributes attached (name, doc, module, methods, provide_automatic_options, view_class), and the return value."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The two-tier summary structure works well. The general summary provides accessible high-level understanding for non-experts, while the technical summary delivers precise implementation details for developers. Both are well-organized and use appropriate terminology for their audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth with specific implementation details: closure-based approach, current_app.ensure_sync() usage, sequential decorator application, specific metadata attributes, and the introspection/testing purpose of view_class. Appropriately detailed without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If any minor enhancement were desired, could briefly mention that class_args and class_kwargs are forwarded to __init__, but this is already quite clear from context."
+    },
+    "src/flask/wrappers.py::blueprint": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's functionality. All statements are correct: the function extracts blueprint names from endpoints, uses rpartition('.') to split on the last dot, and returns None appropriately. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention that rpartition returns a 3-tuple and index [0] extracts the first element",
+          "Could note the null-safety check (endpoint is not None) before string operation"
+        ],
+        "notes": "Covers main functionality, return values, and key logic. The explanation of when None is returned aligns with both code and docstring. Minor implementation details could be added for completeness."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with both human-readable and technical explanations. The blueprint concept is explained clearly for general understanding, while the technical section provides concrete implementation details. The example pattern 'blueprint.route_name' aids comprehension."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including the specific method (rpartition), the delimiter used, and the extraction logic. Could be enhanced by explaining that rpartition returns a tuple (before, sep, after) and why index [0] is used, making it more instructive for learning purposes."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional enhancement: Add a brief note that 'rpartition returns a 3-tuple (left, separator, right) where [0] retrieves the left portion before the last dot.' This would make the technical explanation more complete for developers unfamiliar with rpartition."
+    }
+  },
+  "architecture_evaluation": {
+    "completeness": {
+      "rating": 5,
+      "files_in_repo": 35,
+      "notes": "All 35 files are accounted for in the logical groups. Core Flask components (app.py, blueprints, views, ctx, sessions, helpers, etc.) are all included along with supporting files, examples, and documentation."
+    },
+    "logical_grouping": {
+      "rating": 5,
+      "notes": "The groupings are semantically sound and well-organized: Application Entry, Core Framework, Routing & Views, Request/Response Handling, Configuration, Templates, Debugging, Events, Testing are all logical categories. The separation of three example applications also makes sense."
+    },
+    "diagram_quality": {
+      "rating": 2,
+      "notes": "The diagram is too cluttered with 13 nodes and 30+ connections. Major issues: (1) Circular dependencies create visual confusion (Core <-> Application Entry, Core <-> Routing, Routing <-> Debugging), (2) Examples and Documentation shouldn't be in an architecture diagram - they're not architectural components, (3) Too many bidirectional arrows make it hard to understand flow, (4) Color coding is underutilized (too many gray nodes)."
+    },
+    "overall_score": 3,
+    "suggestions": [
+      "Remove examples and documentation from the architecture diagram - focus only on the core Flask framework components (would reduce from 13 to 8 nodes)",
+      "Eliminate or clarify circular dependencies - the bidirectional arrows between Core, Application Entry, Routing, and Debugging suggest architectural issues or misrepresentation",
+      "Establish a clearer hierarchy: Application Entry at top \u2192 Core Framework \u2192 specialized components (Routing, Request/Response, Templates, etc.) below",
+      "Reduce the number of edges by showing only primary dependencies, not every possible interaction",
+      "Better utilize color coding: use one color for infrastructure (blue), one for runtime components (green), one for support utilities (gray)",
+      "Consider creating two separate diagrams: (1) Core Architecture (6-7 nodes) and (2) Examples & Extensions"
+    ]
+  },
+  "overall_metrics": {
+    "repo_summary_score": 5,
+    "module_summary_avg": 4.34,
+    "function_summary_avg": 4.67,
+    "architecture_score": 3,
+    "overall_quality": 4.32
+  },
+  "function_sampling": {
+    "target_size": 50,
+    "sampled_count": 50,
+    "total_functions": 320,
+    "sampled_items": [
+      "docs/conf.py::github_link",
+      "examples/celery/src/task_app/__init__.py::create_app",
+      "examples/celery/src/task_app/tasks.py::process",
+      "examples/celery/src/task_app/views.py::result",
+      "examples/tutorial/flaskr/__init__.py::create_app",
+      "examples/tutorial/flaskr/auth.py::login",
+      "examples/tutorial/flaskr/blog.py::delete",
+      "examples/tutorial/flaskr/db.py::get_db",
+      "src/flask/app.py::handle_http_exception",
+      "src/flask/app.py::get_send_file_max_age",
+      "src/flask/app.py::make_shell_context",
+      "src/flask/app.py::full_dispatch_request",
+      "src/flask/blueprints.py::get_send_file_max_age",
+      "src/flask/cli.py::find_app_by_string",
+      "src/flask/cli.py::shell_command",
+      "src/flask/cli.py::_validate_key",
+      "src/flask/cli.py::locate_app",
+      "src/flask/config.py::from_file",
+      "src/flask/ctx.py::request",
+      "src/flask/ctx.py::after_this_request",
+      "src/flask/debughelpers.py::explain_template_loading_attempts",
+      "src/flask/helpers.py::send_file",
+      "src/flask/helpers.py::url_for",
+      "src/flask/helpers.py::stream_with_context",
+      "src/flask/json/__init__.py::jsonify",
+      "src/flask/json/provider.py::dump",
+      "src/flask/json/tag.py::tag",
+      "src/flask/logging.py::wsgi_errors_stream",
+      "src/flask/sansio/app.py::trap_http_exception",
+      "src/flask/sansio/app.py::add_template_test",
+      "src/flask/sansio/app.py::_find_error_handler",
+      "src/flask/sansio/app.py::add_template_global",
+      "src/flask/sansio/app.py::template_filter",
+      "src/flask/sansio/blueprints.py::extend",
+      "src/flask/sansio/blueprints.py::register",
+      "src/flask/sansio/blueprints.py::app_template_test",
+      "src/flask/sansio/blueprints.py::teardown_app_request",
+      "src/flask/sansio/scaffold.py::after_request",
+      "src/flask/sansio/scaffold.py::errorhandler",
+      "src/flask/sansio/scaffold.py::add_url_rule",
+      "src/flask/sansio/scaffold.py::teardown_request",
+      "src/flask/sansio/scaffold.py::_find_package_path",
+      "src/flask/sessions.py::get_cookie_domain",
+      "src/flask/sessions.py::get_cookie_secure",
+      "src/flask/sessions.py::make_null_session",
+      "src/flask/templating.py::render_template_string",
+      "src/flask/templating.py::_render",
+      "src/flask/testing.py::session_transaction",
+      "src/flask/views.py::as_view",
+      "src/flask/wrappers.py::blueprint"
+    ],
+    "skip_dunders": true,
+    "min_function_lines": 5,
+    "prefer_longer": true,
+    "random_seed": 42
+  }
+}

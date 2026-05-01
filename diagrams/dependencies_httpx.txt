@@ -1,0 +1,126 @@
+ MODULE DEPENDENCY GRAPH
+============================================================
+ __init__.py
+  ├─> __version__.py
+  ├─> _api.py
+  ├─> _auth.py
+  ├─> _client.py
+  ├─> _config.py
+  ├─> _content.py
+  ├─> _exceptions.py
+  ├─> _main.py
+  ├─> _models.py
+  ├─> _status_codes.py
+  ├─> _types.py
+  └─> _urls.py
+
+ _api.py
+  ├─> _client.py
+  ├─> _config.py
+  ├─> _models.py
+  ├─> _types.py
+  └─> _urls.py
+
+ _auth.py
+  ├─> _exceptions.py
+  ├─> _models.py
+  └─> _utils.py
+
+ _client.py
+  ├─> __version__.py
+  ├─> _auth.py
+  ├─> _config.py
+  ├─> _decoders.py
+  ├─> _exceptions.py
+  ├─> _models.py
+  ├─> _status_codes.py
+  ├─> _types.py
+  ├─> _urls.py
+  └─> _utils.py
+
+ _config.py
+  ├─> _models.py
+  ├─> _types.py
+  └─> _urls.py
+
+ _content.py
+  ├─> _exceptions.py
+  ├─> _multipart.py
+  ├─> _types.py
+  └─> _utils.py
+
+ _decoders.py
+  └─> _exceptions.py
+
+ _exceptions.py
+  └─> _models.py
+
+ _main.py
+  ├─> _client.py
+  ├─> _exceptions.py
+  ├─> _models.py
+  └─> _status_codes.py
+
+ _models.py
+  ├─> _content.py
+  ├─> _decoders.py
+  ├─> _exceptions.py
+  ├─> _multipart.py
+  ├─> _status_codes.py
+  ├─> _types.py
+  ├─> _urls.py
+  └─> _utils.py
+
+ _multipart.py
+  ├─> _types.py
+  └─> _utils.py
+
+ __init__.py
+  ├─> asgi.py
+  ├─> base.py
+  ├─> default.py
+  ├─> mock.py
+  └─> wsgi.py
+
+ asgi.py
+  ├─> _models.py
+  ├─> base.py
+  └─> _types.py
+
+ base.py
+  └─> _models.py
+
+ default.py
+  ├─> _config.py
+  ├─> _exceptions.py
+  ├─> _models.py
+  ├─> base.py
+  ├─> _types.py
+  └─> _urls.py
+
+ mock.py
+  ├─> _models.py
+  └─> base.py
+
+ wsgi.py
+  ├─> _models.py
+  ├─> base.py
+  └─> _types.py
+
+ _types.py
+  ├─> _auth.py
+  ├─> _config.py
+  ├─> _models.py
+  └─> _urls.py
+
+ _urlparse.py
+  └─> _exceptions.py
+
+ _urls.py
+  ├─> _types.py
+  ├─> _urlparse.py
+  └─> _utils.py
+
+ _utils.py
+  ├─> _types.py
+  └─> _urls.py

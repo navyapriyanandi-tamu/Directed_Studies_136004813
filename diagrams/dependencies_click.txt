@@ -1,0 +1,95 @@
+ MODULE DEPENDENCY GRAPH
+============================================================
+ __init__.py
+  ├─> core.py
+  ├─> decorators.py
+  ├─> exceptions.py
+  ├─> formatting.py
+  ├─> globals.py
+  ├─> parser.py
+  ├─> termui.py
+  ├─> types.py
+  └─> utils.py
+
+ _compat.py
+  ├─> _winconsole.py
+  └─> types.py
+
+ _termui_impl.py
+  ├─> _compat.py
+  ├─> exceptions.py
+  ├─> types.py
+  └─> utils.py
+
+ _winconsole.py
+  └─> _compat.py
+
+ core.py
+  ├─> _utils.py
+  ├─> decorators.py
+  ├─> exceptions.py
+  ├─> formatting.py
+  ├─> globals.py
+  ├─> parser.py
+  ├─> shell_completion.py
+  ├─> termui.py
+  ├─> types.py
+  └─> utils.py
+
+ decorators.py
+  ├─> core.py
+  ├─> globals.py
+  └─> utils.py
+
+ exceptions.py
+  ├─> _compat.py
+  ├─> core.py
+  ├─> globals.py
+  └─> utils.py
+
+ formatting.py
+  ├─> _compat.py
+  ├─> _textwrap.py
+  └─> parser.py
+
+ globals.py
+  └─> core.py
+
+ parser.py
+  ├─> _utils.py
+  ├─> core.py
+  ├─> exceptions.py
+  └─> shell_completion.py
+
+ shell_completion.py
+  ├─> core.py
+  └─> utils.py
+
+ termui.py
+  ├─> _compat.py
+  ├─> _termui_impl.py
+  ├─> exceptions.py
+  ├─> globals.py
+  ├─> types.py
+  └─> utils.py
+
+ testing.py
+  ├─> _compat.py
+  ├─> core.py
+  ├─> formatting.py
+  ├─> termui.py
+  ├─> types.py
+  └─> utils.py
+
+ types.py
+  ├─> _compat.py
+  ├─> core.py
+  ├─> exceptions.py
+  ├─> shell_completion.py
+  └─> utils.py
+
+ utils.py
+  ├─> _compat.py
+  ├─> exceptions.py
+  ├─> globals.py
+  └─> types.py

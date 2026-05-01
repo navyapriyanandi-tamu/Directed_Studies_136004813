@@ -1,0 +1,53 @@
+graph TD
+    subgraph click_repo
+        g_Core_3a8c9aa0["Core Framework - __init__.py, core.py, decorators.py, parser.py"]
+        style g_Core_3a8c9aa0 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Terminal_0ec22522["Terminal UI and Output - _termui_impl.py, _textwrap.py, formatting.py, termui.py"]
+        style g_Terminal_0ec22522 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Type_5f58a874["Type System and Validation - exceptions.py, types.py"]
+        style g_Type_5f58a874 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Platform_47021db9["Platform Compatibility - _compat.py, _winconsole.py, utils.py"]
+        style g_Platform_47021db9 fill:#5DADE2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Context_c9a6915c["Context and State Management - _utils.py, globals.py"]
+        style g_Context_c9a6915c fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Shell_a783223f["Shell Integration - shell_completion.py"]
+        style g_Shell_a783223f fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Testing_546543ca["Testing Utilities - testing.py"]
+        style g_Testing_546543ca fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_5b6cf869["Documentation - conf.py"]
+        style g_Documentation_5b6cf869 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_acbdb143["Example - Simple Utilities - colors.py, inout.py, termui.py, validation.py"]
+        style g_Example:_acbdb143 fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_89da10cb["Example - Interactive Features - aliases.py, completion.py"]
+        style g_Example:_89da10cb fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_a6f2558e["Example - Complex Applications - __init__.py, __init__.py, cli.py, cmd_init.py, cmd_status.py, +2 more"]
+        style g_Example:_a6f2558e fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_4b3ad0f1["Example - Data Processing - imagepipe.py"]
+        style g_Example:_4b3ad0f1 fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Core_3a8c9aa0 --> g_Type_5f58a874
+    g_Core_3a8c9aa0 --> g_Platform_47021db9
+    g_Core_3a8c9aa0 --> g_Terminal_0ec22522
+    g_Core_3a8c9aa0 --> g_Shell_a783223f
+    g_Core_3a8c9aa0 --> g_Context_c9a6915c
+    g_Platform_47021db9 --> g_Type_5f58a874
+    g_Platform_47021db9 --> g_Context_c9a6915c
+    g_Terminal_0ec22522 --> g_Type_5f58a874
+    g_Terminal_0ec22522 --> g_Core_3a8c9aa0
+    g_Terminal_0ec22522 --> g_Context_c9a6915c
+    g_Terminal_0ec22522 --> g_Platform_47021db9
+    g_Type_5f58a874 --> g_Shell_a783223f
+    g_Type_5f58a874 --> g_Core_3a8c9aa0
+    g_Type_5f58a874 --> g_Context_c9a6915c
+    g_Type_5f58a874 --> g_Platform_47021db9
+    g_Context_c9a6915c --> g_Core_3a8c9aa0
+    g_Shell_a783223f --> g_Core_3a8c9aa0
+    g_Shell_a783223f --> g_Platform_47021db9
+    g_Testing_546543ca --> g_Type_5f58a874
+    g_Testing_546543ca --> g_Terminal_0ec22522
+    g_Testing_546543ca --> g_Platform_47021db9
+    g_Testing_546543ca --> g_Core_3a8c9aa0
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

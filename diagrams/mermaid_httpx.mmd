@@ -1,0 +1,60 @@
+graph TD
+    subgraph httpx
+        g_Application_315bb4c3["Application Entry - __init__.py, __version__.py, _main.py"]
+        style g_Application_315bb4c3 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_API_84ab8684["API Layer - _api.py, _client.py"]
+        style g_API_84ab8684 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Authentication_342fcf96["Authentication and Security - _auth.py"]
+        style g_Authentication_342fcf96 fill:#E74C3C,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Configuration_254f6425["Configuration - _config.py"]
+        style g_Configuration_254f6425 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Models_25ac429f["Models - _models.py, _status_codes.py"]
+        style g_Models_25ac429f fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Data_7475a7cc["Data Processing - _content.py, _decoders.py, _multipart.py, _urlparse.py, _urls.py"]
+        style g_Data_7475a7cc fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Transport_e35a423e["Transport Layer - __init__.py, asgi.py, base.py, default.py, mock.py, +1 more"]
+        style g_Transport_e35a423e fill:#E67E22,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Error_ef432366["Error Handling - _exceptions.py"]
+        style g_Error_ef432366 fill:#C0392B,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_ceba282b["Utilities - _types.py, _utils.py"]
+        style g_Utilities_ceba282b fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Application_315bb4c3 --> g_API_84ab8684
+    g_Application_315bb4c3 --> g_Data_7475a7cc
+    g_Application_315bb4c3 --> g_Configuration_254f6425
+    g_Application_315bb4c3 --> g_Models_25ac429f
+    g_Application_315bb4c3 --> g_Error_ef432366
+    g_Application_315bb4c3 --> g_Utilities_ceba282b
+    g_Application_315bb4c3 --> g_Authentication_342fcf96
+    g_API_84ab8684 --> g_Data_7475a7cc
+    g_API_84ab8684 --> g_Configuration_254f6425
+    g_API_84ab8684 --> g_Models_25ac429f
+    g_API_84ab8684 --> g_Error_ef432366
+    g_API_84ab8684 --> g_Application_315bb4c3
+    g_API_84ab8684 --> g_Utilities_ceba282b
+    g_API_84ab8684 --> g_Authentication_342fcf96
+    g_Authentication_342fcf96 --> g_Models_25ac429f
+    g_Authentication_342fcf96 --> g_Utilities_ceba282b
+    g_Authentication_342fcf96 --> g_Error_ef432366
+    g_Configuration_254f6425 --> g_Data_7475a7cc
+    g_Configuration_254f6425 --> g_Utilities_ceba282b
+    g_Configuration_254f6425 --> g_Models_25ac429f
+    g_Data_7475a7cc --> g_Utilities_ceba282b
+    g_Data_7475a7cc --> g_Error_ef432366
+    g_Error_ef432366 --> g_Models_25ac429f
+    g_Models_25ac429f --> g_Data_7475a7cc
+    g_Models_25ac429f --> g_Utilities_ceba282b
+    g_Models_25ac429f --> g_Error_ef432366
+    g_Transport_e35a423e --> g_Data_7475a7cc
+    g_Transport_e35a423e --> g_Configuration_254f6425
+    g_Transport_e35a423e --> g_Models_25ac429f
+    g_Transport_e35a423e --> g_Error_ef432366
+    g_Transport_e35a423e --> g_Utilities_ceba282b
+    g_Utilities_ceba282b --> g_Models_25ac429f
+    g_Utilities_ceba282b --> g_Data_7475a7cc
+    g_Utilities_ceba282b --> g_Configuration_254f6425
+    g_Utilities_ceba282b --> g_Authentication_342fcf96
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

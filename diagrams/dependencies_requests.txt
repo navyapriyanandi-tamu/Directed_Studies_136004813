@@ -1,0 +1,84 @@
+ MODULE DEPENDENCY GRAPH
+============================================================
+ __init__.py
+  ├─> __version__.py
+  ├─> api.py
+  ├─> exceptions.py
+  ├─> models.py
+  ├─> packages.py
+  ├─> sessions.py
+  ├─> status_codes.py
+  └─> utils.py
+
+ _internal_utils.py
+  └─> compat.py
+
+ adapters.py
+  ├─> auth.py
+  ├─> compat.py
+  ├─> cookies.py
+  ├─> exceptions.py
+  ├─> models.py
+  ├─> structures.py
+  └─> utils.py
+
+ api.py
+  └─> sessions.py
+
+ auth.py
+  ├─> _internal_utils.py
+  ├─> compat.py
+  ├─> cookies.py
+  └─> utils.py
+
+ cookies.py
+  ├─> _internal_utils.py
+  └─> compat.py
+
+ exceptions.py
+  └─> compat.py
+
+ help.py
+  └─> __version__.py
+
+ models.py
+  ├─> _internal_utils.py
+  ├─> auth.py
+  ├─> compat.py
+  ├─> cookies.py
+  ├─> exceptions.py
+  ├─> hooks.py
+  ├─> status_codes.py
+  ├─> structures.py
+  └─> utils.py
+
+ packages.py
+  └─> compat.py
+
+ sessions.py
+  ├─> _internal_utils.py
+  ├─> adapters.py
+  ├─> auth.py
+  ├─> compat.py
+  ├─> cookies.py
+  ├─> exceptions.py
+  ├─> hooks.py
+  ├─> models.py
+  ├─> status_codes.py
+  ├─> structures.py
+  └─> utils.py
+
+ status_codes.py
+  └─> structures.py
+
+ structures.py
+  └─> compat.py
+
+ utils.py
+  ├─> __version__.py
+  ├─> _internal_utils.py
+  ├─> certs.py
+  ├─> compat.py
+  ├─> cookies.py
+  ├─> exceptions.py
+  └─> structures.py

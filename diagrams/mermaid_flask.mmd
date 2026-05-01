@@ -1,0 +1,70 @@
+graph TD
+    subgraph flask
+        g_Application_315bb4c3["Application Entry - __init__.py, __main__.py, cli.py"]
+        style g_Application_315bb4c3 fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Core_3a8c9aa0["Core Framework - app.py, app.py, ctx.py, globals.py, scaffold.py"]
+        style g_Core_3a8c9aa0 fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Routing_31d94bb7["Routing and Views - blueprints.py, blueprints.py, views.py, wrappers.py"]
+        style g_Routing_31d94bb7 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Request/Response_86fd6f4e["Request/Response Handling - __init__.py, helpers.py, provider.py, sessions.py, tag.py"]
+        style g_Request/Response_86fd6f4e fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Configuration_b2059556["Configuration and Environment - config.py, typing.py"]
+        style g_Configuration_b2059556 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Templates_2bf72b72["Templates and UI - templating.py"]
+        style g_Templates_2bf72b72 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Debugging_6743188e["Debugging and Logging - debughelpers.py, logging.py"]
+        style g_Debugging_6743188e fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Events_94dba9ae["Events and Signals - signals.py"]
+        style g_Events_94dba9ae fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Testing_fa6a5a32["Testing - testing.py"]
+        style g_Testing_fa6a5a32 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_5b6cf869["Documentation - conf.py"]
+        style g_Documentation_5b6cf869 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_79c4b5be["Example - Task Queue - __init__.py, make_celery.py, tasks.py, views.py"]
+        style g_Example:_79c4b5be fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_7f1e2e24["Example - JavaScript Integration - __init__.py, views.py"]
+        style g_Example:_7f1e2e24 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Example:_31048166["Example - Blog Tutorial - __init__.py, auth.py, blog.py, db.py"]
+        style g_Example:_31048166 fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Example:_79c4b5be --> g_Routing_31d94bb7
+    g_Example:_7f1e2e24 --> g_Core_3a8c9aa0
+    g_Application_315bb4c3 --> g_Core_3a8c9aa0
+    g_Application_315bb4c3 --> g_Routing_31d94bb7
+    g_Application_315bb4c3 --> g_Templates_2bf72b72
+    g_Application_315bb4c3 --> g_Request/Response_86fd6f4e
+    g_Application_315bb4c3 --> g_Events_94dba9ae
+    g_Application_315bb4c3 --> g_Configuration_b2059556
+    g_Core_3a8c9aa0 --> g_Debugging_6743188e
+    g_Core_3a8c9aa0 --> g_Application_315bb4c3
+    g_Core_3a8c9aa0 --> g_Routing_31d94bb7
+    g_Core_3a8c9aa0 --> g_Templates_2bf72b72
+    g_Core_3a8c9aa0 --> g_Request/Response_86fd6f4e
+    g_Core_3a8c9aa0 --> g_Events_94dba9ae
+    g_Core_3a8c9aa0 --> g_Testing_fa6a5a32
+    g_Core_3a8c9aa0 --> g_Configuration_b2059556
+    g_Routing_31d94bb7 --> g_Debugging_6743188e
+    g_Routing_31d94bb7 --> g_Core_3a8c9aa0
+    g_Routing_31d94bb7 --> g_Application_315bb4c3
+    g_Routing_31d94bb7 --> g_Request/Response_86fd6f4e
+    g_Routing_31d94bb7 --> g_Configuration_b2059556
+    g_Debugging_6743188e --> g_Routing_31d94bb7
+    g_Debugging_6743188e --> g_Core_3a8c9aa0
+    g_Debugging_6743188e --> g_Configuration_b2059556
+    g_Request/Response_86fd6f4e --> g_Events_94dba9ae
+    g_Request/Response_86fd6f4e --> g_Routing_31d94bb7
+    g_Request/Response_86fd6f4e --> g_Core_3a8c9aa0
+    g_Request/Response_86fd6f4e --> g_Configuration_b2059556
+    g_Templates_2bf72b72 --> g_Debugging_6743188e
+    g_Templates_2bf72b72 --> g_Core_3a8c9aa0
+    g_Templates_2bf72b72 --> g_Request/Response_86fd6f4e
+    g_Templates_2bf72b72 --> g_Events_94dba9ae
+    g_Templates_2bf72b72 --> g_Configuration_b2059556
+    g_Testing_fa6a5a32 --> g_Request/Response_86fd6f4e
+    g_Testing_fa6a5a32 --> g_Core_3a8c9aa0
+    g_Testing_fa6a5a32 --> g_Application_315bb4c3
+    g_Testing_fa6a5a32 --> g_Configuration_b2059556
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

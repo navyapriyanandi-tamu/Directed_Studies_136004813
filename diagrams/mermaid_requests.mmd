@@ -1,0 +1,54 @@
+graph TD
+    subgraph requests
+        g_Configuration_fb1032c8["Configuration and Setup - __version__.py, conf.py, setup.py"]
+        style g_Configuration_fb1032c8 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Documentation_3d72c7b9["Documentation and Theming - flask_theme_support.py"]
+        style g_Documentation_3d72c7b9 fill:#7F8C8D,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Application_fbbf32cf["Application Entry and Initialization - __init__.py"]
+        style g_Application_fbbf32cf fill:#4A90E2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Authentication_342fcf96["Authentication and Security - auth.py, certs.py"]
+        style g_Authentication_342fcf96 fill:#E74C3C,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Core_3c8a2c9f["Core HTTP Models - models.py, sessions.py"]
+        style g_Core_3c8a2c9f fill:#50C878,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_HTTP_b3522bdf["HTTP Communication - adapters.py, api.py, hooks.py"]
+        style g_HTTP_b3522bdf fill:#95A5A6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Data_a797bd53["Data Handling and Structures - cookies.py, structures.py, utils.py"]
+        style g_Data_a797bd53 fill:#9B59B6,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Compatibility_9a3e12a6["Compatibility and Dependencies - _internal_utils.py, compat.py, packages.py"]
+        style g_Compatibility_9a3e12a6 fill:#5DADE2,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Error_ef432366["Error Handling - exceptions.py"]
+        style g_Error_ef432366 fill:#C0392B,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+        g_Utilities_4828f7c8["Utilities and Reference - help.py, status_codes.py"]
+        style g_Utilities_4828f7c8 fill:#F39C12,stroke:#FFFFFF,stroke-width:3px,color:#FFFFFF
+
+    g_Application_fbbf32cf --> g_Compatibility_9a3e12a6
+    g_Application_fbbf32cf --> g_Configuration_fb1032c8
+    g_Application_fbbf32cf --> g_Data_a797bd53
+    g_Application_fbbf32cf --> g_Utilities_4828f7c8
+    g_Application_fbbf32cf --> g_Core_3c8a2c9f
+    g_Application_fbbf32cf --> g_HTTP_b3522bdf
+    g_Application_fbbf32cf --> g_Error_ef432366
+    g_HTTP_b3522bdf --> g_Compatibility_9a3e12a6
+    g_HTTP_b3522bdf --> g_Data_a797bd53
+    g_HTTP_b3522bdf --> g_Authentication_342fcf96
+    g_HTTP_b3522bdf --> g_Core_3c8a2c9f
+    g_HTTP_b3522bdf --> g_Error_ef432366
+    g_Authentication_342fcf96 --> g_Compatibility_9a3e12a6
+    g_Authentication_342fcf96 --> g_Data_a797bd53
+    g_Data_a797bd53 --> g_Authentication_342fcf96
+    g_Data_a797bd53 --> g_Configuration_fb1032c8
+    g_Data_a797bd53 --> g_Compatibility_9a3e12a6
+    g_Data_a797bd53 --> g_Error_ef432366
+    g_Error_ef432366 --> g_Compatibility_9a3e12a6
+    g_Utilities_4828f7c8 --> g_Configuration_fb1032c8
+    g_Utilities_4828f7c8 --> g_Data_a797bd53
+    g_Core_3c8a2c9f --> g_Compatibility_9a3e12a6
+    g_Core_3c8a2c9f --> g_Data_a797bd53
+    g_Core_3c8a2c9f --> g_Authentication_342fcf96
+    g_Core_3c8a2c9f --> g_Utilities_4828f7c8
+    g_Core_3c8a2c9f --> g_HTTP_b3522bdf
+    g_Core_3c8a2c9f --> g_Error_ef432366
+
+    linkStyle default stroke:#FFFFFF,stroke-width:2px
+
+    end

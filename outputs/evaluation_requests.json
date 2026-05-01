@@ -1,0 +1,1729 @@
+{
+  "repo_name": "requests",
+  "judge_model": "protected.Claude Sonnet 4.5",
+  "generator_model": "Claude Haiku 4.5",
+  "repo_summary_evaluation": {
+    "accuracy": {
+      "rating": 5,
+      "errors_found": [],
+      "notes": "The summary accurately describes the requests library's purpose, architecture, and key components. All mentioned features (sessions, authentication, cookies, redirects, SSL, encoding detection, adapters, hook system) are confirmed by the module summaries. The technical description correctly identifies the layered architecture built on urllib3 and accurately describes the component relationships."
+    },
+    "completeness": {
+      "rating": 3,
+      "missing_elements": [
+        "No mention of the high-level API convenience functions (requests.get(), requests.post(), etc.) which are likely in api.py",
+        "Certificate handling and SSL/TLS certificate management (certs.py) not mentioned in repo summary",
+        "The adapters.py module (likely HTTPAdapter class) is missing its summary, which appears to be a critical component",
+        "Three modules (_internal_utils.py, adapters.py, api.py) have blank summaries, creating gaps in understanding",
+        "No mention of the status_codes module's convenience features",
+        "Setup/packaging aspects (setup.py) not reflected in repo summary"
+      ],
+      "notes": "While the summary covers the core architecture well, the missing module summaries (especially api.py and adapters.py) represent significant gaps. The repo summary doesn't compensate for these missing pieces, so a developer wouldn't understand the convenience API layer or adapter implementation details."
+    },
+    "clarity": {
+      "rating": 5,
+      "notes": "Excellent clarity with well-separated Human and Technical perspectives. The Human version is approachable and explains the 'why' effectively. The Technical version provides clear architectural overview with logical component relationships. Good use of terminology without being overly complex. The progression from user-facing features to technical architecture is well-structured."
+    },
+    "usefulness": {
+      "rating": 3,
+      "notes": "Moderately useful for onboarding. A developer would understand the overall purpose and architecture, but the missing module summaries create blind spots in critical areas (especially the public API layer and adapter implementation). The summary would help with conceptual understanding but wouldn't provide enough detail for navigating certain key modules. Would be much more useful with complete module coverage."
+    },
+    "overall_score": 4,
+    "strengths": [
+      "Accurate and well-researched description of library purpose and functionality",
+      "Clear architectural overview identifying key components and their relationships",
+      "Excellent separation between user-facing (Human) and technical perspectives",
+      "Successfully conveys the library's philosophy of abstracting complexity",
+      "Correctly identifies the layered architecture and integration patterns",
+      "Good coverage of supporting subsystems (exceptions, utilities, cookies, headers)"
+    ],
+    "weaknesses": [
+      "Three critical modules (api.py, adapters.py, _internal_utils.py) have no summaries, creating knowledge gaps",
+      "Missing mention of the high-level convenience API (requests.get/post/etc.) which is likely the most-used interface",
+      "Certificate handling subsystem not mentioned despite having a dedicated module",
+      "No mention of version management or package metadata modules",
+      "The repo summary doesn't acknowledge or compensate for the missing module summaries",
+      "Could benefit from a brief mention of the documentation infrastructure (though reasonably omitted)"
+    ]
+  },
+  "module_summaries_evaluation": {
+    "modules_evaluated": [
+      "docs/_themes/flask_theme_support.py",
+      "docs/conf.py",
+      "setup.py",
+      "src/requests/__init__.py",
+      "src/requests/__version__.py",
+      "src/requests/_internal_utils.py",
+      "src/requests/adapters.py",
+      "src/requests/api.py",
+      "src/requests/auth.py",
+      "src/requests/certs.py",
+      "src/requests/compat.py",
+      "src/requests/cookies.py",
+      "src/requests/exceptions.py",
+      "src/requests/help.py",
+      "src/requests/hooks.py",
+      "src/requests/models.py",
+      "src/requests/packages.py",
+      "src/requests/sessions.py",
+      "src/requests/status_codes.py",
+      "src/requests/structures.py",
+      "src/requests/utils.py"
+    ],
+    "individual_evaluations": {
+      "docs/_themes/flask_theme_support.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary accurately describes a Pygments style customization for Flask documentation. The connection to Flask theming, Pygments Style inheritance, and token-based styling are all consistent with the imports and class name. Minor deduction because it makes reasonable but unverified assumptions about implementation details (e.g., the specific 'styles dictionary' and integration with Sphinx) that cannot be confirmed from the structure alone."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "Fully complete. Mentions the only class (FlaskyStyle), correctly notes no functions exist, explains the purpose comprehensively, and contextualizes the relevant imports. Both the high-level and technical descriptions cover all key aspects."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity. The summary provides both an accessible high-level explanation and a detailed technical description. The purpose (custom syntax highlighting for Flask docs) is immediately clear, and the technical details about Pygments integration are well-articulated without unnecessary jargon."
+        },
+        "overall_score": 4
+      },
+      "docs/conf.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary correctly identifies this as a Sphinx documentation configuration file and accurately describes its typical responsibilities. The mention of sys/os for path manipulation and requests for remote content fetching aligns with the imports listed."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "For a configuration file with no functions or classes, the summary appropriately describes the conceptual contents (project metadata, extensions, theme config, build settings). Since there are no function/class summaries to synthesize, the summary provides reasonable coverage of what a conf.py typically contains. Minor deduction as we cannot verify every specific configuration detail is mentioned."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Very clear and well-structured. The two-part format (general description + technical details) effectively communicates both the purpose and implementation details. Easy to understand for anyone familiar with documentation systems."
+        },
+        "overall_score": 5
+      },
+      "setup.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "Correctly identifies setup.py as a Python packaging file and accurately describes its general purpose, imports, and role in distribution. However, makes assumptions about content that 'likely' exists without concrete evidence from the actual code. The generic description is accurate but not necessarily specific to this particular setup.py instance."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "While it explains what setup.py files generally do, it provides no specific information about THIS setup.py file's actual contents, configuration, or constants. The structure shows 0 functions and 0 classes, but the summary doesn't describe what module-level code actually exists. The request for 'actual code content' at the end reveals the summary is incomplete and speculative rather than based on the actual module."
+        },
+        "clarity": {
+          "rating": 3,
+          "notes": "The general explanation is clear and uses appropriate terminology. However, the ending request for code content (in bold, after a separator) is confusing and inappropriate for a module summary. This makes it seem like the AI couldn't actually analyze the file, which undermines confidence in the summary and disrupts the professional tone."
+        },
+        "overall_score": 3
+      },
+      "src/requests/__init__.py": {
+        "accuracy": {
+          "rating": 2,
+          "notes": "The summary focuses exclusively on dependency validation but misses the primary purpose of this __init__.py module. The extensive imports (api functions like get/post/put/delete, exceptions, models, sessions, status_codes, __version__) indicate this module serves as the main entry point that exposes the public API of the requests library. Validation is only a secondary initialization task, not the core purpose."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "While the two validation functions are accurately described, the summary omits the module's main role as the public API interface. Missing are mentions of: re-exported API functions (request, get, post, put, patch, delete, head, options), exception classes, models (Request, Response, PreparedRequest), Sessions, and status_codes. These are likely the primary exports users interact with."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The summary is well-written and easy to understand. The technical and human sections are clear and properly structured. However, it provides a clear but incomplete picture, making users think this module only does validation when it's actually the main package entry point."
+        },
+        "overall_score": 2
+      },
+      "src/requests/__version__.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary makes highly plausible inferences based on the module name `__version__.py` and Python package conventions. The structure (0 functions, 0 classes, no imports) is consistent with a simple constants module. However, without actual code content, this remains educated speculation rather than verified accuracy. The description aligns with how the `requests` library actually implements version metadata, but the caveat disclaimer is appropriate."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Given no functions or classes exist, the summary appropriately focuses on the likely constants and their purpose. It mentions standard metadata variables (`__version__`, `__author__`, `__license__`, etc.) and explains their usage context (setup.py, client compatibility checks). The note acknowledging the need for actual code content is honest about the limitation. Minor deduction for not being able to confirm which specific constants are actually present."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-organized and easy to understand. It clearly explains both the purpose (version metadata storage) and technical implementation details. The distinction between what the module 'likely contains' versus definitive statements is appropriate. The note at the end properly disclaims the speculative nature without undermining the useful information provided."
+        },
+        "overall_score": 4
+      },
+      "src/requests/_internal_utils.py": {
+        "accuracy": {
+          "rating": 1,
+          "notes": "No module summary was provided - both Human and Technical fields are empty."
+        },
+        "completeness": {
+          "rating": 1,
+          "notes": "Cannot assess completeness as no summary exists. A complete module summary should describe the module's purpose (internal string utilities for the requests library), mention the two utility functions, and explain how they support cross-version Python string handling."
+        },
+        "clarity": {
+          "rating": 1,
+          "notes": "No content to evaluate for clarity. Empty summaries provide no value to users trying to understand the module."
+        },
+        "overall_score": 1
+      },
+      "src/requests/adapters.py": {
+        "accuracy": {
+          "rating": 1,
+          "notes": "No module summary was provided to evaluate. Both 'Human' and 'Technical' fields in the GENERATED MODULE SUMMARY section are empty."
+        },
+        "completeness": {
+          "rating": 1,
+          "notes": "Cannot assess completeness as no summary text exists to review."
+        },
+        "clarity": {
+          "rating": 1,
+          "notes": "Cannot assess clarity of a non-existent summary."
+        },
+        "overall_score": 1
+      },
+      "src/requests/api.py": {
+        "accuracy": {
+          "rating": 1,
+          "notes": "No module summary was provided. Both Human and Technical summary fields are empty."
+        },
+        "completeness": {
+          "rating": 1,
+          "notes": "The generated summary is completely empty - no functions, purpose, or module description is present."
+        },
+        "clarity": {
+          "rating": 1,
+          "notes": "Cannot evaluate clarity of a non-existent summary. Empty text provides no information to users."
+        },
+        "overall_score": 1
+      },
+      "src/requests/auth.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. All three authentication schemes (Basic, Proxy, Digest) are correctly identified, the use of thread-local storage for HTTPDigestAuth is accurate, and the integration mechanism via __call__ and response hooks is correctly described."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All four classes are mentioned with their specific roles. Key mechanisms are covered: credential storage, thread safety, retry logic, hash utilities, 401 handling, body replay, and redirect handling. The summary appropriately captures both high-level functionality and implementation details like RFC 2617 compliance and integration points with requests pipeline."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity with well-separated human and technical sections. The human version uses accessible language to explain authentication schemes, while the technical version provides precise implementation details. The progression from abstract concepts to specific mechanisms is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/requests/certs.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The summary correctly identifies the module's purpose (certificate handling for requests library) and the certifi import. However, it makes speculative claims ('likely exposes', 'likely where() function') without definitive knowledge. Given the module has no functions/classes, these are reasonable inferences, but the confidence level could be adjusted."
+        },
+        "completeness": {
+          "rating": 3,
+          "notes": "With no functions or classes to document, the summary attempts to fill the gap by explaining the module's likely purpose and implementation. However, it cannot confirm what module-level variables/constants actually exist. The summary acknowledges the structure limitations but makes assumptions about implementation details that aren't confirmed by the provided metadata."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "Well-written and easy to understand. The two-tier structure (general explanation followed by technical details) works well. The explanation of how this fits into the broader requests library architecture is clear and helpful."
+        },
+        "overall_score": 4
+      },
+      "src/requests/compat.py": {
+        "accuracy": {
+          "rating": 3,
+          "notes": "The summary makes reasonable inferences about the module's purpose as a compatibility layer given the filename and imports, but extrapolates significantly beyond the single function we can verify. It claims the module 'provides a unified compatibility interface' and 'abstracts away version-specific imports,' but we only have direct evidence of one function handling character detection libraries. The numerous imports (urllib3, collections, http, etc.) suggest re-exports for compatibility, but this isn't confirmed in the structure provided."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "The summary explicitly mentions the module's only function (_resolve_char_detection) and accurately describes its behavior. No classes exist to document. The key functionality is covered."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "Well-written and easy to understand. The human-readable and technical sections effectively explain both purpose and implementation. However, it's somewhat verbose and makes the module sound more complex than it appears to be (one function + imports). Could be more concise."
+        },
+        "overall_score": 4
+      },
+      "src/requests/cookies.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. The four main classes are correctly identified, the adapter pattern is properly explained, and the dict-like interface is accurately characterized. The technical details about inheritance from CookieJar, MutableMapping implementation, and pickling protocols are all correct."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Very comprehensive coverage of the main classes and patterns. However, the summary could more explicitly mention some important standalone utility functions like extract_cookies_to_jar (bridges requests to cookiejar), get_cookie_header (prepares cookies for requests), morsel_to_cookie (converts HTTP cookie formats), and cookiejar_from_dict (creates jars from dicts). These are key integration points between requests and the standard library that deserve mention alongside the class descriptions."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical summaries. The human version uses effective analogies (dictionary-like, 'behind the scenes') and concrete examples (jar['cookie_name']). The technical version is well-structured, properly uses terminology, and clearly delineates the functional groups and design patterns. The progression from user-facing behavior to implementation details is logical and easy to follow."
+        },
+        "overall_score": 5
+      },
+      "src/requests/exceptions.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as the exception hierarchy for the requests library. It correctly identifies RequestException as the base class, properly categorizes the exception types, and accurately explains the JSONDecodeError's multiple inheritance pattern and custom methods for initialization and pickling."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All 25 exception classes are accounted for through logical categorization rather than exhaustive listing (which would be verbose). The three functions are properly contextualized within the JSONDecodeError class. Warning classes are mentioned. The summary appropriately groups related exceptions (connection errors, HTTP errors, URL validation errors, etc.) making it comprehensive without being overwhelming."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both Human and Technical versions are well-written. The Human version clearly explains the 'why' (precision in error handling), while the Technical version provides organized details about the exception hierarchy and implementation specifics. The explanation of JSONDecodeError's multiple inheritance and method overrides is particularly clear and useful."
+        },
+        "overall_score": 5
+      },
+      "src/requests/help.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose as a diagnostic utility for the requests library. All technical details are correct: the function workflows, data collection methods (platform module, getattr with None defaults), JSON formatting, and the role of each function are precisely described."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "All three functions are properly mentioned and their relationships explained. The summary covers the key aspects: system metadata collection, dependency version detection, Python implementation identification, and JSON output formatting. The note about zero classes and the CLI entry point nature are appropriate details."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both the human and technical summaries are well-written and easy to understand. The human summary clearly explains the practical purpose (troubleshooting/bug reporting), while the technical summary provides implementation details in a logical flow without being overly verbose. The separation between human and technical perspectives works well."
+        },
+        "overall_score": 5
+      },
+      "src/requests/hooks.py": {
+        "accuracy": {
+          "rating": 4,
+          "notes": "The description of the hook/callback system and dispatch mechanism is accurate based on the dispatch_hook() function summary. The contextual references to the requests library and HTTP request/response processing are reasonable inferences given the module path, though not explicitly confirmed by the provided function summaries."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "Significant omission: the module has 2 functions (default_hooks and dispatch_hook), but the summary only describes dispatch_hook(). With only 2 functions in the module, missing 50% of the functionality is a major completeness gap. The default_hooks() function is not mentioned or explained at all."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "The summary is well-written and easy to understand. Good use of technical terminology (pipeline pattern, event-driven architecture, value-chaining) with clear explanations in both human-friendly and technical sections. The progression from concept to implementation details is logical."
+        },
+        "overall_score": 3
+      },
+      "src/requests/models.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes this as the core HTTP request/response module for the requests library. All five classes are correctly identified with accurate descriptions of their purposes. The lifecycle description (construction, encoding, consumption, interpretation) matches the function summaries. Dependencies and design patterns are correctly stated."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers all major classes and core functionality areas. It mentions key capabilities like URL construction, encoding, authentication, response streaming, status validation, and link extraction. However, it could be slightly more explicit about specific features like cookie management, hook registration/deregistration, redirect detection, and the IDNA encoding for internationalized domain names. That said, for a module-level summary, the current level of detail is appropriate and not overly verbose."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical versions are well-written and clear. The human version effectively explains the module's purpose in accessible terms (handling HTTP lifecycle, abstracting complexities). The technical version provides concrete details about classes, dependencies, and design patterns without being overwhelming. The summary flows logically from high-level purpose to implementation details."
+        },
+        "overall_score": 5
+      },
+      "src/requests/packages.py": {
+        "accuracy": {
+          "rating": 2,
+          "notes": "The summary makes specific claims about functionality (managing vendored packages, manipulating sys.modules, defining package aliases) but the module has 0 functions and 0 classes. With only 'sys' and 'compat' imports, these claims are speculative. The module may contain module-level code doing these things, but there's no structural evidence provided to support these detailed assertions."
+        },
+        "completeness": {
+          "rating": 2,
+          "notes": "Since there are no functions or classes to describe, the summary resorts to speculation using qualifiers like 'likely defines' and 'acts as'. Without actual code elements to reference, the summary cannot be considered complete - it's essentially educated guessing based on the module name and minimal imports."
+        },
+        "clarity": {
+          "rating": 4,
+          "notes": "The writing is clear and well-structured, explaining concepts like vendored dependencies and namespace management in understandable terms. However, it loses a point because the confident tone doesn't match the lack of concrete structural elements to describe."
+        },
+        "overall_score": 2
+      },
+      "src/requests/sessions.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's core functionality. It correctly identifies the session management role, redirect handling with security considerations, settings merging strategy, and the request-response lifecycle orchestration. The technical details about SessionRedirectMixin and Session classes, their key methods, and the delegation patterns are all correct based on the function summaries provided."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Covers the two main classes and most critical functions (resolve_redirects, rebuild_auth/proxies/method, send, merge_setting/hooks, get_adapter, HTTP verb methods, serialization). However, it omits some notable functions: prepare_request() (which is crucial for merging settings), merge_environment_settings() (important for env variable handling), and utility functions like get_redirect_target() and should_strip_auth() (though their functionality is mentioned indirectly). The session() factory function is also not mentioned. Still, the summary captures the essential functionality well."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-written and easy to understand. The human version provides an accessible overview of what the module does, while the technical version offers concrete implementation details with clear structure. The progression from concepts to specific methods is logical, and the separation between SessionRedirectMixin and Session responsibilities is clear."
+        },
+        "overall_score": 5
+      },
+      "src/requests/status_codes.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. It correctly identifies that the module provides HTTP status code mappings, uses dynamic attribute injection via setattr(), creates dual-case variants, and auto-generates documentation. The technical details about _codes dictionary, doc() function, and attribute-style access patterns are all accurate based on the function summaries."
+        },
+        "completeness": {
+          "rating": 5,
+          "notes": "Both key functions are covered: _init() is described through 'module initialization' and 'dynamic attribute injection', while doc() is explicitly mentioned as providing 'documentation lookup API'. The summary captures the main data structure (_codes dictionary), the structures import, and both primary aspects of the module (initialization and documentation generation)."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The human summary effectively conveys the developer-facing benefits with concrete examples (200\u2192'OK', 404\u2192'Not Found'). The technical summary is well-structured and uses appropriate terminology. The examples of attribute-style access (codes.ok, codes.NOT_FOUND) help illustrate the actual usage pattern clearly."
+        },
+        "overall_score": 5
+      },
+      "src/requests/structures.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately describes the module's purpose and implementation. The case-insensitive dictionary behavior is correctly explained, including the key technical detail that lowercase-normalized keys map to (original_key, value) tuples. The HTTP header use case is spot-on for the requests library context."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "Both main classes are covered with their core functionality well-explained. The most important methods (__setitem__, __getitem__, __eq__) are mentioned. However, several implemented methods aren't explicitly discussed: __delitem__, __iter__, __len__, copy, __repr__, and get. While these are standard dictionary operations, mentioning that the class implements the full Mapping protocol/dictionary interface would improve completeness."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Excellent clarity in both human and technical sections. The concrete example of 'Content-Type' vs 'content-type' immediately illustrates the problem being solved. The technical explanation of the internal _store mechanism is clear and helps readers understand the implementation strategy. Good separation between user-facing behavior and implementation details."
+        },
+        "overall_score": 5
+      },
+      "src/requests/utils.py": {
+        "accuracy": {
+          "rating": 5,
+          "notes": "The summary accurately captures the module's purpose as a utility library for HTTP communication. The three core responsibilities identified (data transformation, network validation, HTTP infrastructure) correctly represent the function categories present in the module."
+        },
+        "completeness": {
+          "rating": 4,
+          "notes": "The summary covers the major functional areas well (data transformation, encoding, network/proxy handling, headers). However, some specific utility categories could be more explicitly mentioned: cookie handling (dict_from_cookiejar, add_dict_to_cookiejar), netrc authentication (get_netrc_auth), file operations (atomic_open, extract_zipped_paths), and URL manipulation (urldefragauth, requote_uri). These are somewhat implied in the broader categories but not called out."
+        },
+        "clarity": {
+          "rating": 5,
+          "notes": "Both human and technical summaries are well-structured and easy to understand. The human summary effectively explains the 'why' (abstracting data handling concerns), while the technical summary provides clear organization into three numbered categories with concrete examples of libraries used. The language is accessible and avoids unnecessary jargon."
+        },
+        "overall_score": 5
+      }
+    },
+    "average_score": 3.76
+  },
+  "function_summaries": {
+    "src/requests/__init__.py::check_compatibility": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: version parsing logic, version constraints, assertion-based validation, and warning behavior. Version ranges are correctly stated (urllib3 >= 1.21.1, chardet 3.0.2-5.x.x, charset_normalizer 2.0.0-3.x.x)."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Special handling of 'dev' version check",
+          "Normalization of 2-part version strings to 3-part"
+        ],
+        "notes": "Covers the main functionality, validation logic, side effects (warnings), and return value. Missing some edge case handling details like the 'dev' version assertion and the logic to append '0' when version has only 2 parts, but these are relatively minor preprocessing steps."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-readable and technical summaries are clear and well-structured. The human summary provides good context about the requests library, while the technical summary offers implementation details without being overwhelming. The version constraint notation (e.g., '3.0.2\u20135.x.x') is intuitive."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth: explains string parsing methodology, tuple comparison semantics, specific version bounds with proper notation, error handling mechanism (AssertionError vs warnings), and the specific warning type used. Appropriately detailed for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention: (1) the special handling that rejects 'dev' versions of urllib3, and (2) the normalization of 2-part version strings to 3-part by appending '0'. However, these are minor preprocessing details that don't significantly impact understanding of the function's core purpose."
+    },
+    "src/requests/_internal_utils.py::to_native_string": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly explains the isinstance() check, the decode operation, the default encoding parameter, and the two code paths. No hallucinations or factual errors detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all essential elements: main functionality, both code branches (builtin_str vs other types), the encoding parameter with its default value, return behavior, and side effects. It also appropriately contextualizes the function's purpose (Python version compatibility)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The summary is well-structured with separate human-readable and technical sections. Language is clear and accessible. The progression from high-level purpose to technical implementation details is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section provides appropriate depth: mentions isinstance() type checking, explains the decode() method call, specifies the encoding parameter and default value, identifies the return type, and notes the absence of side effects. The level of detail is well-suited for developers."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent and requires no improvements. If being extremely pedantic, one could explicitly mention that this function is commonly used for Python 2/3 compatibility (where str/unicode/bytes differ between versions), but the current mention of 'handling strings consistently across different Python versions' adequately captures this context."
+    },
+    "src/requests/adapters.py::send": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. All mentioned methods, exception types, and flow are correct. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "add_headers() call that adds necessary headers to the request",
+          "request_url() call that constructs the final URL",
+          "Chunked transfer encoding logic based on Content-Length header",
+          "LocationValueError handling that gets converted to InvalidURL"
+        ],
+        "notes": "Covers the main flow well, but omits a few intermediate steps. The missing elements are relatively minor but would provide fuller picture of the function's operations."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach with human-friendly overview followed by technical details. The human summary effectively communicates purpose without jargon, while technical summary provides specific implementation details for developers."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical depth with specific method names, exception types, and control flow. Could be slightly improved by mentioning URL construction, header manipulation, and chunked encoding logic. The exception handling mapping is particularly well documented."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Consider adding: (1) mention of add_headers() and request_url() helper methods, (2) chunked transfer encoding determination logic, (3) LocationValueError\u2192InvalidURL conversion at the start. Example addition to technical summary: 'Constructs final URL via request_url(), adds necessary headers with add_headers(), and determines chunked encoding based on request body and Content-Length header presence.'"
+    },
+    "src/requests/adapters.py::proxy_manager_for": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly identifies the caching mechanism, the distinction between SOCKS and HTTP/HTTPS proxies, the detection method, credential extraction, and the configuration parameters used."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: caching behavior, proxy type handling, manager creation, configuration parameters, return value, and side effects. The summary appropriately acknowledges the proxy_kwargs parameter that allows additional configuration."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach. The human-readable section provides clear conceptual understanding, while the technical section gives implementation details. Both are well-structured and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed technical summary. Specifies the exact detection mechanism (proxy.lower().startswith('socks')), names the specific functions called (get_auth_from_url, proxy_from_url, proxy_headers), and lists all configuration parameters. The level of detail matches the code's complexity."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that balances accessibility with technical precision. The dual-level approach (human-friendly + technical) effectively serves different audiences."
+    },
+    "src/requests/adapters.py::get_connection": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code including the deprecation warning, proxy selection logic, URL validation, and connection retrieval paths. All mentioned functions and methods match the code exactly."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all major functionality: deprecation status, proxy vs. direct connection handling, error conditions (InvalidProxyURL), validation logic, and return value. Both the high-level and technical descriptions provide appropriate levels of detail for their audiences."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summary levels are well-structured and clearly written. The high-level summary provides a concise overview suitable for general users, while the technical summary offers step-by-step details appropriate for developers who need to understand the implementation."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth by naming specific functions (select_proxy, prepend_scheme_if_needed, parse_url, proxy_manager_for), describing the conditional logic flow, specifying the return type (urllib3.ConnectionPool), and explaining both proxy and non-proxy code paths."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is comprehensive and accurate. If any enhancement were desired, it could briefly mention that the `proxies` parameter is optional and uses a 'Requests-style dictionary' format, but this is a very minor point since it's already in the docstring."
+    },
+    "src/requests/adapters.py::get_connection_with_tls_context": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all code paths, method calls, parameters, return values, and exceptions. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality including proxy selection, connection pool attribute building, proxy vs direct connection logic, return value, and exception handling. The only minor omission is the prepend_scheme_if_needed call, but this is a detail that doesn't affect understanding of the main flow."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a high-level human-friendly summary followed by detailed technical description. Appropriate terminology for target audience. The high-level summary effectively communicates purpose while the technical summary provides implementation details."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate detail including specific method names, parameter unpacking syntax (**host_params), exception types, and the conditional logic flow. Level of detail matches what a developer would need to understand the implementation without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent as written. If being pedantic, could mention that the proxy URL is normalized with prepend_scheme_if_needed before parsing, but this is a minor implementation detail that doesn't warrant inclusion."
+    },
+    "src/requests/api.py::patch": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly identifies the function as a PATCH request wrapper, accurately describes the delegation to request(), and properly identifies the return type and parameter handling."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: purpose (PATCH request), parameters (url, data, kwargs), return value (Response object), implementation pattern (delegation), and use cases. The mention of 'json' parameter in Human summary adequately covers what's in the docstring."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. Human section is accessible and explains the 'why' and 'what'. Technical section provides implementation details without being overly verbose. Appropriate language for each audience."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate depth for this simple wrapper function. Explains the delegation pattern, parameter forwarding via **kwargs, and provides concrete examples of what might be passed (headers, authentication, timeouts). Correctly notes that HTTP communication details are abstracted."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary with no significant improvements needed. If being extremely thorough, could explicitly mention that 'json' is handled as a kwarg (as noted in the docstring), but this is already implicitly covered by the mention of 'various types of data' and '**kwargs'."
+    },
+    "src/requests/api.py::request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly describes the function's behavior, the use of a context manager with Session, the delegation pattern, automatic cleanup, and the return value."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention that it accepts various HTTP methods (GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD)",
+          "Could note that **kwargs allows for additional parameters like verify, stream, cert, proxies, files, cookies, allow_redirects"
+        ],
+        "notes": "The summary covers the main functionality, return value, and resource management well. The technical version mentions several key optional parameters with 'etc.' which implies more exist. Minor deduction for not being more explicit about the full parameter flexibility, though the 'etc.' partially addresses this."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate two-tiered approach. The human-friendly version is accessible and explains the 'why' (convenience, no manual session management). The technical version provides implementation details without being verbose. Both are well-written and easy to understand for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Mentions the context manager pattern, explains the resource leak prevention rationale, identifies the delegation pattern, and lists several key parameters. The level of detail is suitable without overwhelming the reader with every parameter from the extensive docstring."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional minor enhancement: In the technical summary, could be more explicit about the breadth of parameters by saying 'and other optional parameters (verify, stream, cert, proxies, files, cookies, allow_redirects)' instead of 'etc.' to give readers a fuller picture. However, this is a very minor point and the current summary is excellent as-is."
+    },
+    "src/requests/api.py::head": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. Correctly describes HEAD request behavior, the allow_redirects default override, delegation to request(), and return type."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: purpose of HEAD requests, parameters (url and **kwargs), default behavior change for allow_redirects, delegation mechanism, and return value. The human-friendly section provides context and use cases while the technical section explains implementation details."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate separation between human-friendly explanation and technical details. The human section uses accessible language and practical examples (verifying links, checking file metadata), while the technical section is precise and uses proper terminology."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Mentions specific implementation details like kwargs.setdefault(), the delegation pattern, parameter passing flow, and the significance of overriding the default allow_redirects behavior. Good balance between being thorough and concise."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a well-crafted summary that serves both general users and developers effectively. If being extremely pedantic, could explicitly mention this is part of the requests library in the human section, but it's already implied through context."
+    },
+    "src/requests/auth.py::_basic_auth_str": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code including the backwards compatibility handling, encoding process (latin1), base64 encoding, and the Basic Auth format. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major functionality: input validation, deprecation warnings, string-to-bytes conversion, encoding steps (latin1, base64), formatting, and return value. Both summaries appropriately address different audience levels."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and clear. The human-friendly version explains the purpose and context effectively. The technical version provides a logical step-by-step breakdown that matches the code flow without being overly verbose."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: specifies encoding types (latin1, base64), mentions the colon separator, strip operation, and native string conversion. Includes enough detail for developers to understand implementation without reproducing the entire code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an excellent summary that balances accessibility and technical precision. Both versions serve their intended audiences well."
+    },
+    "src/requests/compat.py::_resolve_char_detection": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior. It correctly identifies the library order (chardet, then charset_normalizer), the dynamic import mechanism, error handling approach, and return values."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: purpose, libraries attempted, import mechanism, error handling, return values (module object or None), and the graceful degradation pattern. Both the high-level explanation and technical details are comprehensive."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a plain-English explanation followed by technical details. The human-readable portion is accessible to non-experts, while the technical section uses precise terminology appropriate for developers. Well-organized and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary demonstrates strong depth: specifies importlib.import_module(), identifies the ImportError exception type, mentions the silent failure pattern, explains the lazy-loading concept, and notes the runtime dependency deferral strategy. Appropriate level of detail without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an exemplary summary that balances accessibility with technical precision. If any enhancement were desired, one could optionally note that the loop's condition 'if chardet is None' causes it to stop after the first successful import, but this is already implicit in the current description."
+    },
+    "src/requests/cookies.py::get": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "Summary says 'returns the cookie value' but the code likely returns a cookie object, not just its value"
+        ],
+        "notes": "The summary is mostly accurate but slightly ambiguous about what is returned. The function returns whatever `_find_no_duplicates` returns, which is typically a cookie object rather than just a value."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't clarify what type of object is returned (cookie object vs. primitive value)",
+          "Could mention this is a dict-like interface method for a cookie jar"
+        ],
+        "notes": "Covers the main functionality well including parameters, exception handling, default behavior, and performance characteristics. Minor details about return type could be clearer."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier explanation. The human-friendly version uses clear analogies (dictionary lookup, multiple websites) that make it accessible. The technical version provides implementation details without being overly verbose. Well-structured and easy to understand for both audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including the internal method name, exception handling pattern, and complexity analysis. Could be slightly improved by clarifying the return type and mentioning that this implements a dict-like interface pattern."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Clarify that the function returns a cookie object (not just a value) from the cookie jar. Consider adding: 'Returns the cookie object if found, or the default value (None by default) if not found.' Also could briefly mention this implements a dict-like interface for a cookie jar class."
+    },
+    "src/requests/cookies.py::extract_cookies_to_jar": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the function's purpose, the validation check, the use of Mock adapters, and the extraction process. No hallucinations or technical inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: the early return validation, the adapter pattern implementation, the specific objects used (MockRequest/MockResponse), and the side effect of storing cookies in the jar. The implicit None return is appropriately not mentioned since it's a side-effect function."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a high-level explanation followed by technical details. The progression from 'why' to 'how' is logical. Language is precise without being overly verbose. Technical terms are used appropriately for the target audience."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical summary. Mentions specific attributes (_original_response), identifies the design pattern (adapter), explains the interface mismatch problem being solved, and traces the data flow through msg object to extract_cookies(). Good balance between detail and readability."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is exemplary and requires no improvements. It successfully bridges high-level understanding with technical implementation details, making it valuable for both quick reference and deeper comprehension."
+    },
+    "src/requests/cookies.py::create_cookie": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "States '14 default cookie attributes' but the dictionary contains 13 attributes",
+          "States 'three computed boolean/string fields' but then lists four fields (port_specified, domain_specified, domain_initial_dot, path_specified)"
+        ],
+        "notes": "The overall logic and flow are correctly described, but there are two counting errors that undermine technical precision. These are factual inaccuracies rather than conceptual misunderstandings."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention the 'supercookie' aspect from the docstring more prominently",
+          "Could note that domain_initial_dot checks if domain starts with a dot (not just that it's computed)"
+        ],
+        "notes": "Covers the main functionality well including validation, defaults, computed fields, and return type. The human-friendly explanation captures the purpose effectively. Minor details about specific computations could be more precise."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach with a human-friendly explanation followed by technical details. The language is clear and accessible to both general users and technical readers. Good flow and structure."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Provides good technical detail about the implementation including the validation mechanism, dictionary operations, and computed fields. The mention of specific field names and the cookielib.Cookie constructor shows appropriate depth. Could be slightly more precise about what each computed field represents."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Correct the count to '13 default cookie attributes'. 2) Change 'three computed boolean/string fields' to 'four computed fields' or list only three if one was intended to be excluded. 3) Consider adding brief explanation of what domain_initial_dot checks (whether domain starts with '.'). 4) These are minor factual corrections that would make an otherwise strong summary excellent."
+    },
+    "src/requests/cookies.py::list_domains": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the purpose (extracting unique domains), the iteration mechanism, the duplicate checking logic, and the return value. No hallucinations or inaccuracies detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all key aspects: main functionality (unique domain extraction), implementation details (iteration and duplicate checking), and return value (list of unique domain strings). The code has no parameters (beyond self) or side effects, and this is appropriately reflected by their absence in the summary."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with two well-structured sections. The human-friendly section provides context and use cases, while the technical section offers implementation specifics. Both are concise and easy to understand for their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail for the code's complexity. Mentions specific implementation details like `iter(self)`, `cookie.domain` attribute access, and the duplicate-prevention mechanism. The level of detail matches the straightforward nature of the code without over-explaining."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that accurately and completely describes the code with appropriate clarity and technical depth for both general and technical audiences."
+    },
+    "src/requests/cookies.py::keys": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior. It correctly identifies that the function retrieves cookie names, converts an iterator to a list via `iterkeys()`, and provides dict-like interface compatibility. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: main functionality (retrieving cookie names), implementation mechanism (iterator to list conversion), return value (list of strings), and side effects (none/read-only). The reference to dict-like interface aligns with the docstring."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human and technical sections are well-written and appropriate for their audiences. The human section provides context and use cases, while the technical section explains implementation details clearly. Good separation of concerns between the two levels."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical detail for a simple wrapper function. Explains the `self.iterkeys()` call, the `list()` materialization, return type specificity (list of strings), and notes the state immutability. The depth matches the complexity of the code."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a well-crafted summary that accurately and completely describes a straightforward function with appropriate clarity for both general and technical audiences."
+    },
+    "src/requests/cookies.py::morsel_to_cookie": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior, including the two-path expiration handling logic, type validation, and attribute mapping. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The unusual behavior where comment_url is set to bool(morsel['comment']) rather than from a comment_url field",
+          "The specific time format string used ('%a, %d-%b-%Y %H:%M:%S GMT')",
+          "The discard parameter is always set to False",
+          "The port parameter is always set to None"
+        ],
+        "notes": "Covers the main functionality, return value, and error handling well. Minor details about some hardcoded values and an odd attribute mapping are omitted, but these are relatively minor for most use cases."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with both human-readable and technical versions. The human summary provides good context about the purpose, while the technical summary gives implementation details without being overly verbose. Well-targeted to respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth with specific function names (time.time(), time.strptime(), calendar.timegm()), explanation of the conversion logic, and mention of validation behavior. Strikes a good balance between being informative and concise."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally mention that the time format expected for 'expires' is '%a, %d-%b-%Y %H:%M:%S GMT', and note the unusual mapping where comment_url derives from the comment field. However, these are minor enhancements and the current summary is excellent for practical purposes."
+    },
+    "src/requests/cookies.py::items": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "The human summary says the function 'provides a way to convert a cookie jar into a standard Python dictionary' which is slightly imprecise - the function returns a list of tuples, not a dict. It *enables* dict conversion but doesn't perform it."
+        ],
+        "notes": "The technical section is factually accurate. The minor imprecision in the human summary about what the function directly returns versus what it enables is the only issue."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The docstring references related methods (keys() and values()) which aren't mentioned",
+          "Could mention this implements dict-like behavior"
+        ],
+        "notes": "Covers the main functionality, return value, implementation details, and side effects well. Missing only minor contextual elements."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with appropriate human-friendly and technical sections. The language is clear and accessible to both general users and developers. The progression from high-level purpose to implementation details is logical."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for the function's complexity. Explains the iterator-to-list conversion, the tuple structure, the enabling of dict conversion, and mentions memory implications. Good balance without over-explaining a simple function."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "In the human summary, clarify that the function returns a list of name-value pairs (tuples) rather than directly converting to a dictionary. For example: 'This function returns a list of name-value pairs from the cookie jar, which allows users to easily convert it into a standard Python dictionary.' Also consider briefly mentioning that this is part of a dict-like interface alongside keys() and values() methods."
+    },
+    "src/requests/cookies.py::_find": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: the search mechanism, optional filtering, return value, exception handling, and the arbitrary selection behavior when duplicates exist."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: main functionality (searching/filtering), parameters (name, optional domain/path), return value (cookie.value), exception (KeyError with formatted message), and the duplicate handling behavior. Both summaries complement each other well."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "The human-readable summary is accessible and explains the purpose clearly. The technical summary provides implementation details without being overly verbose. The two-tier approach effectively serves different audience needs."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary appropriately details the implementation: iteration mechanism, conditional filtering logic, short-circuit evaluation, and the f-string formatting in the KeyError. The depth matches what's needed to understand the code's behavior without over-explaining trivial aspects."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. The summary is accurate, complete, and well-structured. It correctly identifies the arbitrary selection behavior (mentioned in docstring), explains both the success and failure cases, and provides appropriate technical detail about the implementation approach."
+    },
+    "src/requests/cookies.py::get_cookie_header": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the purpose, parameters, internal operations (MockRequest wrapper, jar.add_cookie_header call, header extraction), and return values including the None case."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: purpose, parameters (jar and request), the complete flow of operations, return values (Cookie header string or None), and the rationale for using MockRequest. The function is relatively straightforward, and the summary captures everything relevant."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellently structured with a high-level conceptual explanation followed by technical implementation details. The two-tier approach makes it accessible to different audiences. The language is clear and concise without ambiguity."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Provides appropriate technical detail for this level of code complexity. Explains the MockRequest wrapper purpose ('standardize its interface'), details the method call chain, and explains the dictionary access pattern. The depth matches the code's complexity without over- or under-explaining."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary that requires no improvements. It successfully balances accessibility with technical precision, accurately describes all code behavior, and provides appropriate context for understanding the function's role in HTTP request cookie handling."
+    },
+    "src/requests/help.py::info": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major aspects of the code. It correctly identifies the purpose (bug report diagnostics), the types of information collected, the methods used, and the return structure. No hallucinations or factual errors detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "OSError exception handling is not explicitly mentioned in technical section",
+          "Call to _implementation() helper function not mentioned",
+          "The specific logic for 'using_charset_normalizer' being based on 'chardet is None' is not explained"
+        ],
+        "notes": "Covers the main functionality well and mentions most key components. The return value structure is described. However, some implementation details like the OSError try-except block and the _implementation() helper call could be more explicit."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-readable and technical summaries are well-structured and easy to understand. The human summary provides good context about purpose, while the technical summary offers concrete implementation details. Language is precise and appropriate for the respective audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including specific function calls (platform.system(), getattr()), data formatting (hexadecimal conversion), and error handling approach. Could be slightly enhanced by mentioning the OSError exception type explicitly and the conditional logic for determining using_charset_normalizer."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancements could include: (1) Explicitly mention the OSError exception handling in the technical summary, (2) Note the call to _implementation() helper function, (3) Clarify that 'using_charset_normalizer' is determined by checking if chardet is None (which seems like it might be a logic issue in the original code, but should be documented as written)."
+    },
+    "src/requests/hooks.py::dispatch_hook": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's behavior, including the hook lookup, normalization of single callables, sequential execution, conditional data transformation, and return value."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all main functionality: hook retrieval by key, single callable normalization, iteration, transformation logic (non-None return values), and final return. The conceptual summary provides good context while the technical summary covers implementation details. Could mention the `hooks = hooks or {}` safety check, but this is a minor omission."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and easy to understand. The conceptual summary effectively explains the purpose and use case, while the technical summary provides step-by-step implementation details. The language is precise and accessible."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides excellent depth: explains the dictionary lookup, the normalization pattern for single callables vs lists, the iteration mechanism, the conditional update logic based on non-None returns, and the sequential transformation pattern. Appropriate level of detail without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent. If being extremely thorough, could mention: (1) the `hooks = hooks or {}` defensive programming pattern that handles None/falsy hooks parameter, and (2) that if no hooks are found for the key, the original hook_data is returned unchanged. However, these are very minor points and the current summary is already comprehensive and well-crafted."
+    },
+    "src/requests/models.py::prepare_url": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements in the summary accurately reflect the code's behavior. No hallucinations detected. The technical details about parse_url(), IDNA encoding, urlunparse(), requote_uri(), and exception types are all correct."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Whitespace stripping (url.lstrip())",
+          "Wildcard/dot validation for ASCII hostnames",
+          "Default path to '/' when empty",
+          "Side effect nature: no return value, modifies self.url"
+        ],
+        "notes": "Covers the main flow well but omits a few secondary validations and doesn't explicitly state that this is a side-effect function that modifies instance state rather than returning a value. The 'stores the final formatted URL' partially addresses this but could be clearer."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with both human-friendly and technical summaries. The human summary provides good conceptual understanding while the technical summary gives implementation details. Language is clear and accessible to the respective audiences."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Technical summary provides good depth with specific function names, component lists, and exception types. Could be slightly more comprehensive by mentioning the whitespace handling, default path behavior, and hostname wildcard validation. The level of detail is appropriate for understanding the implementation."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1. Add mention of whitespace stripping in technical summary\n2. Include the wildcard/dot validation for ASCII hostnames\n3. Note that empty paths default to '/'\n4. Explicitly state in human summary that function modifies self.url (side effect) rather than returning a value\n5. Consider adding that LocationParseError is caught and converted to InvalidURL"
+    },
+    "src/requests/models.py::_encode_files": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's functionality. All technical details mentioned (tuple unpacking, .read() method, RequestField creation, multipart encoding) are correct and present in the code."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Input validation (raises ValueError if files are empty or data is a string)",
+          "The guess_filename() fallback when filename cannot be determined from tuple",
+          "That both data fields AND files are combined into new_fields (summary emphasizes files more)"
+        ],
+        "notes": "Covers the main processing flow and return values well. Missing some edge cases and validation logic, but captures the core functionality comprehensively."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both human and technical summaries are well-written. The human summary provides good context about the use case (HTTP file uploads), while the technical summary is detailed but still easy to follow with clear step-by-step logic."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate detail for its audience: specific method calls (make_multipart, encode_multipart_formdata), data structure handling (tuple unpacking, list comprehension logic), and encoding behavior (strings to UTF-8, bytes handling). Good balance between detail and readability."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add a brief mention of: (1) input validation at the start (ValueError conditions), (2) the guess_filename() fallback mechanism, and (3) clarify that both regular form data fields AND files are processed and combined into the final multipart body (currently the technical summary could give the impression only files go through the final encoding)."
+    },
+    "src/requests/models.py::close": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the code's behavior, including the conditional closure based on content consumption status and the two-step release process using getattr."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Doesn't mention the important note from docstring that this method shouldn't normally be called explicitly",
+          "Doesn't mention that the raw object must not be accessed after calling this method"
+        ],
+        "notes": "Covers the main functionality well including the conditional logic and pool release mechanism. However, misses some important usage warnings from the docstring that would be valuable context for users."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with two-level explanation approach. The human-friendly version provides good conceptual understanding, while the technical version gives implementation details. Both are well-structured and understandable to their respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth. Mentions specific implementation details like the _content_consumed flag, getattr usage, the None check pattern, and explains why this two-step approach accommodates different connection types. Good balance between detail and readability."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add a note about the important usage warnings from the docstring: (1) this method shouldn't normally need to be called explicitly, and (2) the underlying raw object must not be accessed after this method is called. For example, add to the human-friendly summary: 'Note: This is typically called automatically and shouldn't usually be invoked manually. After calling, the connection object should not be accessed.'"
+    },
+    "src/requests/models.py::prepare_body": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all three processing paths (JSON, stream, regular data), correct method names (_encode_params, _encode_files, prepare_content_length), accurate header names (Content-Type, Content-Length, Transfer-Encoding), and correctly identifies the body.tell() mechanism for position tracking."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "InvalidJSONError exception raised for invalid JSON",
+          "NotImplementedError when streams and files are used together",
+          "The super_len() utility function usage"
+        ],
+        "notes": "Covers the main functionality, all three processing paths, and key side effects (headers, self.body assignment). Missing some edge cases and error conditions, but these are relatively minor details. No return value mentioned, which is correct since this method modifies instance state."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with a concise high-level summary followed by a detailed technical breakdown. The numbered path notation (1), (2), (3) makes it easy to follow. Uses appropriate technical terminology without being overly verbose. Clear distinction between the human-readable and technical sections."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: specific encoding details (UTF-8), header names and values, method calls, control flow logic (conditional header setting), and implementation details (body.tell() for file position). Balances detail with readability well."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement: Could briefly mention the two exceptions raised (InvalidJSONError for malformed JSON, NotImplementedError for incompatible stream+files combination), but this is optional as the current summary is already comprehensive and these are edge cases."
+    },
+    "src/requests/models.py::_encode_params": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all code behaviors: pass-through for strings/bytes/file-like objects, iterative processing with UTF-8 encoding, None filtering, and URL encoding with doseq=True. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Does not explicitly mention the fallback case (else clause) that returns data unchanged for non-matching types",
+          "Could mention that the function returns different types depending on input (sometimes encoded string, sometimes original data)"
+        ],
+        "notes": "Covers all major functionality including the four main branches, parameter handling, and encoding behavior. The minor omission of the final else clause is not critical since it's a simple pass-through."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-level and technical summaries are well-structured and understandable. The human summary provides good context (web requests, query strings) while the technical summary follows the logical flow of the code clearly."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary appropriately details the conditional logic, helper function calls (to_key_val_list, urlencode), encoding specifics, and the purpose of doseq=True. Good balance between comprehensiveness and conciseness."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could add one minor clarification: 'Returns URL-encoded string for iterable inputs, or passes through the original data unchanged for strings, bytes, file-like objects, or other non-iterable types.' This would make the varied return types more explicit."
+    },
+    "src/requests/models.py::prepare": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements accurately reflect the code's behavior. The summary correctly identifies the method sequence, ordering constraints, and the critical relationship between prepare_auth and prepare_hooks as documented in the comments. The implicit None return is correctly noted."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage of all key aspects: lists all preparation methods called, explains the ordering rationale, mentions the implicit None return, identifies side-effect-based state modification pattern, and captures the authentication/hooks dependency. Both high-level purpose and implementation details are covered."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent dual-level presentation. The human summary provides clear conceptual understanding suitable for general developers. The technical summary offers precise implementation details with specific method names and execution order. The two-tier approach effectively serves different audience needs."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical audience. Enumerates all six preparation methods with their parameters in parentheses, explicitly states the critical ordering constraint, provides concrete example (OAuth), and correctly identifies the side-effect pattern. The level of detail matches what a developer would need to understand the function's behavior without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If any minor enhancement were desired, the human summary could briefly mention that the function doesn't return a value but modifies the request object in place, though this is adequately covered in the technical section."
+    },
+    "src/requests/models.py::links": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code: header retrieval, parsing logic, dictionary construction with rel/url as keys, and return behavior. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential elements: main functionality (parsing link headers), input source (self.headers), parsing mechanism (parse_header_links), key selection logic (rel or url fallback), return values (populated or empty dict), and the use case context (APIs, pagination)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a conceptual overview followed by technical details. The general explanation provides context (pagination/resource relationships) while the technical section offers implementation specifics. Accessible to both general developers and those seeking deeper understanding."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth with method names, data flow description, algorithmic complexity (O(1) lookup), and key selection logic. Explains the fallback mechanism (rel or url) clearly without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If being extremely thorough, could note that the entire link dictionary object is stored as the value (not just a reference string), but this is reasonably implied and not a significant omission."
+    },
+    "src/requests/models.py::iter_lines": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's behavior, including the pending variable mechanism, chunk splitting logic, and boundary detection. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Parameters (chunk_size, decode_unicode, delimiter) not explicitly documented",
+          "Important warning that method is not reentrant safe",
+          "Doesn't mention it's a generator function that yields strings"
+        ],
+        "notes": "Covers the core functionality very well, but omits some important metadata like the reentrant safety warning from the docstring and doesn't explicitly list the parameters."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach with a human-readable summary followed by technical details. The human summary is accessible while the technical section provides implementation specifics. The explanation of the boundary detection logic is particularly clear."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary demonstrates deep understanding of the implementation. It correctly explains the pending variable pattern, the chunk boundary detection logic, and the edge case handling. The level of detail is appropriate for developers who need to understand or maintain this code."
+      },
+      "overall_score": 5,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "1) Add a parameter list with brief descriptions (chunk_size, decode_unicode, delimiter). 2) Include the reentrant safety warning from the docstring as it's important for proper usage. 3) Explicitly state that this is a generator function that yields string lines. For example: 'Generator function that yields complete lines (as strings) from the response data...'"
+    },
+    "src/requests/models.py::json": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements in the summary accurately describe the code's behavior. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "UnicodeDecodeError handling in the first stage (catches wrong UTF codec detection)",
+          "Specific conditions for attempting encoding detection (not self.encoding and self.content and len(self.content) > 3)",
+          "Reference to RFC 4627 section 3 mentioned in comments"
+        ],
+        "notes": "Covers the main flow well, but omits the UnicodeDecodeError catch block which handles cases where encoding detection succeeds but decoding fails (RFC violations). This is a meaningful edge case worth mentioning."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure. Human-readable section provides intuitive understanding without jargon. Technical section is well-organized with clear progression through the parsing stages. Good balance of accessibility and precision."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Strong technical detail including function names, exception types, and parameter flow. The two-stage parsing description is accurate. Would be enhanced by mentioning the UnicodeDecodeError handling that catches RFC-violating responses and the specific conditions that trigger encoding detection."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Add mention of the UnicodeDecodeError handling: 'If encoding detection succeeds but decoding fails (indicating an RFC violation where a non-UTF-8 8-bit codec was used), the function silently falls back to the second stage.' Also consider noting the preconditions: 'First stage only activates when no encoding is pre-set and content length exceeds 3 bytes.'"
+    },
+    "src/requests/sessions.py::post": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary is completely accurate. It correctly identifies this as a convenience wrapper that delegates to self.request() with 'POST' method, accurately describes all parameters (url, data, json, **kwargs), and correctly states it returns a requests.Response object."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential elements: main functionality (sending POST requests), parameters with their types and optionality, return value, and the delegation mechanism. The summary appropriately covers what's visible in the code without over-speculating about implementation details."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human and technical summaries are well-written and appropriate for their audiences. The human version explains the convenience aspect without overwhelming detail, while the technical version provides precise information about parameter handling and delegation. The language is clear and accessible."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth: identifies the delegation pattern, specifies parameter types accurately (dictionary/bytes/file-like object), mentions the HTTP method specification, and explains the forwarding mechanism. The level of detail matches what's needed to understand the function's role without unnecessary verbosity."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is a high-quality summary that accurately and completely describes the code at appropriate levels for different audiences. If being extremely pedantic, could mention that data and json parameters are mutually exclusive in practice, but this is not visible from this function alone and would be implementation detail of the underlying request() method."
+    },
+    "src/requests/sessions.py::prepare_request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major operations: cookie conversion to CookieJar, cookie merging, netrc auth retrieval with trust_env condition, and the creation/preparation of PreparedRequest object. All technical details mentioned (CaseInsensitiveDict, get_netrc_auth, merge functions) are correctly stated."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: cookie handling (conversion and merging), authentication logic (including the trust_env condition), parameter merging (headers, params, auth, hooks), and return value. Both summaries work well together - human summary provides context while technical summary provides implementation details."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and clear. The human summary uses accessible language explaining the 'why' (standardizing request for transmission, applying defaults). The technical summary efficiently lists key operations without verbosity. Good separation of concerns between the two levels."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth with specific function names (get_netrc_auth, merge_setting, merge_hooks), data structures (CookieJar, CaseInsensitiveDict), and the conditional logic for auth retrieval. Mentions the two-step cookie merging process accurately. Provides enough detail for developers to understand implementation without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "None needed. This is an excellent summary that balances accessibility with technical precision. Both the human and technical summaries complement each other well and accurately represent the code's functionality."
+    },
+    "src/requests/sessions.py::get_adapter": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's functionality. The case-insensitive matching, dictionary iteration, exception type, and overall logic are all correctly represented."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential aspects: input parameter (url), iteration logic, matching behavior, return value (adapter), and exception handling (InvalidSchema). The technical summary appropriately mentions the first-match behavior and the dispatch pattern."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-written and appropriate for their target audiences. The human-friendly version uses accessible language ('communication handler', 'protocol prefix') while the technical version provides precise implementation details. The structure is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary provides appropriate depth: mentions the specific data structure (dictionary), the exact matching approach (lowercase conversion + startswith), exception handling details (InvalidSchema with f-string), and identifies the design pattern (adapter dispatch). Balances detail without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary with no significant issues. If being extremely pedantic, could mention that it returns the *first* matching adapter explicitly in the human summary as well (it's only in the technical version), but this is a very minor point and the current version is already excellent."
+    },
+    "src/requests/sessions.py::resolve_redirects": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes redirect handling, URL normalization (RFC 1808), cookie management, header updates, proxy/auth rebuilding, and the generator pattern. The mention of 301/302 is illustrative rather than exhaustive (code also handles 307/308 specifically), which is acceptable."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "TooManyRedirects exception raised when limit exceeded",
+          "Response content consumption and socket release before redirect",
+          "Fragment preservation logic from previous URLs"
+        ],
+        "notes": "Covers all major functionality well. The technical summary mentions most key operations. Minor omissions include: explicit exception type (TooManyRedirects), the socket/content consumption step, and fragment handling. However, these are relatively minor details and the core functionality is well-represented."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with appropriate two-tier approach. The casual explanation uses an effective 'breadcrumbs' metaphor that makes the concept accessible. The technical summary is well-structured, logically organized, and provides concrete function names and RFC references that help developers understand implementation details."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for the technical section. Mentions specific functions (get_redirect_target, extract_cookies_to_jar, merge_cookies, rebuild_proxies, rebuild_auth, urljoin, rewind_body), explains the generator pattern, references relevant RFCs, and describes key logic branches (yield_requests flag, status code-based header handling, rewindable body logic)."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancements could include: (1) Mentioning that TooManyRedirects exception is raised when limit exceeded, (2) Noting that response content is consumed/sockets released before following redirects, (3) Brief mention of fragment preservation logic. However, these are minor additions and the summary is already excellent."
+    },
+    "src/requests/sessions.py::request": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. The flow (instantiate Request, prepare, merge settings, send) is correct. Details like method uppercasing, empty dict defaults, and the specific method calls are all accurate."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers the main functionality, all major steps in the process, parameter handling, and return value. The technical summary traces through the entire execution path. Both high-level purpose and implementation details are addressed."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier approach. The human-friendly version is accessible and explains the purpose clearly. The technical version is well-structured, following the logical flow of the code while remaining readable. Appropriate for both general users and developers."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate implementation detail: specific method calls with their purposes, parameter transformations, the merging of settings, and the construction of the send_kwargs dictionary. The level of detail matches what a developer reviewing or maintaining this code would need."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If any enhancement were desired, you could optionally mention that `merge_environment_settings` can pull from environment variables (implied by the name), but this is a minor point and the current summary is excellent as written."
+    },
+    "src/requests/sessions.py::send": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major operations in the code. Both the high-level and technical summaries correctly represent the function's behavior, including default setting, validation, adapter usage, timing measurement, hook dispatching, cookie management, redirect handling, and response return."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The specific validation check that raises ValueError if a Request (instead of PreparedRequest) is passed",
+          "The _next attribute assignment for non-redirected responses to support Response.next()"
+        ],
+        "notes": "Covers the main functionality comprehensively including the request-response lifecycle, redirects, cookies, timing, and hooks. Minor details about error handling and the _next attribute could be mentioned, but these are edge cases that don't significantly impact understanding."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with two distinct levels of detail. The high-level summary provides good conceptual understanding, while the technical summary offers implementation specifics. Language is clear and appropriate for developers familiar with HTTP libraries."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical summary provides appropriate depth, mentioning specific operations like adapter retrieval, elapsed time measurement, hook dispatching, cookie extraction from response history, and conditional content forcing. The level of detail matches what a developer would need to understand the function's behavior."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Could optionally add: (1) Brief mention that ValueError is raised for incorrect input type, and (2) Note about the _next attribute being set for potential subsequent redirect following. However, these are minor enhancements and the summary is already excellent as written."
+    },
+    "src/requests/sessions.py::rebuild_method": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all three conditional branches, correctly identifies the status codes (303, 302, 301), and properly explains the method transformations and exception cases (HEAD, POST)."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all main functionality including the three redirect scenarios, the mutation side effect, and the distinction between standards-based and browser-based behavior. The implicit None return value is not mentioned, but this is acceptable since the function's purpose is clearly side-effect based."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-readable and technical sections are well-structured and clear. The human section provides good context about why this exists, while the technical section precisely maps the code logic."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical detail: specifies exact status codes and their names, mentions the exception conditions, explains the in-place mutation, and identifies the specific attributes being accessed and modified."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary. If being extremely thorough, could add: (1) that the function returns None implicitly, or (2) that it's part of a redirect handling system. However, these would be minor enhancements to an already excellent summary."
+    },
+    "src/requests/status_codes.py::_init": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "The summary states it 'creates both lowercase and uppercase versions' which is misleading. The code creates the original case version (whatever case that may be) and conditionally creates an uppercase version only if the title doesn't start with '\\' or '/'",
+          "The summary doesn't mention the conditional logic that prevents uppercase creation for titles starting with '\\' or '/'"
+        ],
+        "notes": "The core functionality is correctly identified, but the case handling is inaccurately described as 'lowercase and uppercase' when it's actually 'original case and conditionally uppercase'."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The specific condition for skipping uppercase conversion (titles starting with '\\' or '/') is mentioned in technical section but not clearly explained in context"
+        ],
+        "notes": "Covers the main functionality well including the setattr operations, doc generation, and global __doc__ update. The conditional logic for uppercase is the main gap."
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Generally clear and well-structured with both human-readable and technical sections. The misleading 'lowercase and uppercase' description could confuse readers trying to understand the exact behavior, but overall flow and organization are good."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail including specific function calls (setattr), data structures (_codes dictionary mapping), and the conditional None handling. Could be more precise about the case conversion logic and the startswith() condition's purpose."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Revise the case handling description to: 'For each title, creates an attribute with the original title name, and additionally creates an uppercase variant unless the title starts with backslash or forward slash characters.' This more accurately reflects that it's not creating lowercase/uppercase pairs, but rather original + conditional uppercase."
+    },
+    "src/requests/utils.py::is_valid_cidr": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "Both summaries accurately describe the code's functionality. The checks (one slash, mask range 1-32, IPv4 validation via socket.inet_aton) are all correctly identified."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: the three validation checks (slash count, mask range, IP validity), return values (True/False), exception handling, and provides a concrete example ('192.168.1.0/24'). The mention of 'no_proxy variable' context from docstring could have been included but is not essential."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are clear and well-structured. The human summary is accessible to general audience, while the technical summary appropriately increases detail with specific function names and exception types. Good use of concrete example to illustrate CIDR notation."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary has appropriate depth: mentions the split operation, specific validation range [1,32], names the socket.inet_aton() function, specifies IPv4 (correctly inferred from inet_aton and /32 mask), and lists exact exception types (ValueError, OSError). Well-balanced detail without being verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary. If being very nitpicky, could optionally note that the function doesn't validate the IP address against the mask (e.g., checking if it's a network address), but this goes beyond what the code actually does, so current summary is accurate."
+    },
+    "src/requests/utils.py::select_proxy": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's behavior, including the prioritization logic, the special case for URLs without hostnames, and the return values. No hallucinations or incorrect statements detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all key aspects: main functionality, parameter handling, prioritization order, edge case (missing hostname), return values, and implementation details. The two-tier summary approach (human + technical) ensures both accessibility and depth."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a logical flow. The human-readable section provides conceptual understanding, while the technical section offers implementation specifics. The progression from 'most specific to least specific' is clearly articulated, making it easy to understand the proxy selection logic."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriately detailed for a technical audience. Mentions specific implementation details (urlparse(), dictionary keys structure, the actual proxy_keys sequence) without being overly verbose. The technical section adds meaningful implementation context beyond what's in the human summary."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent and needs no substantial changes. If being extremely thorough, could optionally mention that the proxies parameter has a default empty dict fallback (`proxies = proxies or {}`), but this is a very minor detail that doesn't affect understanding."
+    },
+    "src/requests/utils.py::super_len": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major aspects of the code: the purpose (calculating remaining data length), the methods used to determine total length (__len__, .len, os.fstat), position tracking via .tell(), seek behavior for file-like objects, the UTF-8 encoding for urllib3 2.x+ strings, and the return calculation. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all essential elements: main functionality, different object types handled (strings, bytes, files, file-like objects), the return value formula, side effects (warning for text-mode files), edge cases (OSError handling, special file descriptors), and the urllib3 version-specific string handling. The two-tier structure (human-friendly + technical) ensures both conceptual and implementation details are present."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a two-part structure. The human-friendly summary explains the 'what' and 'why' in accessible language, while the technical summary provides implementation specifics. The progression from high-level concept to technical details is logical and easy to follow."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate technical depth for a code summary. Lists specific attributes and methods checked, mentions the exact return formula (max(0, total_length - current_position)), describes exception handling, notes the seek(0, 2) pattern for measuring size, and includes the FileModeWarning side effect. Balances detail without becoming overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an excellent summary that requires no changes. If being extremely pedantic, one could potentially mention that the function name 'super_len' suggests it's an enhanced length function, or note the specific FileModeWarning type, but these would be minor enhancements to an already comprehensive summary."
+    },
+    "src/requests/utils.py::parse_dict_header": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code. It correctly identifies the purpose (parsing HTTP headers per RFC 2068), the handling of keys without values (set to None), the quote removal process, and the use of helper functions like _parse_list_header() and unquote_header_value()."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "The summary covers all major functionality: input format, parsing logic, special cases (missing values, quoted strings), and return value. It appropriately mentions both the human-level purpose and technical implementation details."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent clarity with a two-tiered approach. The human-readable section provides context and use cases with a concrete example. The technical section methodically walks through the implementation logic in a clear, step-by-step manner. Both audiences (general users and developers) would find their respective sections accessible."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "The technical section provides appropriate depth: it explains the iteration mechanism, the conditional logic for handling '=' presence, the quote detection pattern (checking first and last characters), and the delegation to helper functions. It strikes a good balance between being detailed enough to understand the implementation without being overly verbose."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent as written. If any enhancement were desired, it could optionally mention that the function takes a single string parameter, but this is already reasonably clear from context."
+    },
+    "src/requests/utils.py::get_encodings_from_content": {
+      "factual_accuracy": {
+        "rating": 3,
+        "errors_found": [
+          "Claims 'the actual return type annotation incorrectly specifies None' - but there is NO return type annotation in the code at all. This is a hallucination."
+        ],
+        "notes": "The summary is mostly accurate about functionality, regex patterns, and deprecation warning, but contains a significant factual error about a non-existent return type annotation."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could mention that the docstring specifies 'bytestring' as the expected input type, though the function may work with strings too",
+          "Could note that the function returns a flat list combining all matches"
+        ],
+        "notes": "Covers main functionality, deprecation warning, regex patterns, and return behavior. Minor elements could be added but core information is present."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with separate human-readable and technical sections. The explanation is clear and accessible to both general and technical audiences. Good progressive disclosure of complexity."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Appropriately detailed for technical audience - mentions specific regex patterns, flags (re.I), methods (findall), and concatenation behavior. Could potentially show example regex matches, but depth is generally good."
+      },
+      "overall_score": 3,
+      "recommendation": "Major issues",
+      "suggested_improvements": "Remove the incorrect statement about return type annotation (there is none in the code). Otherwise, the summary is well-written and informative. Consider clarifying that the input is expected to be a bytestring per the docstring, and that an empty list is returned if no encodings are found."
+    },
+    "src/requests/utils.py::extract_zipped_paths": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all major code paths and logic. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "The extracted file uses only the last component of the member path (member.split('/')[-1]), not the full member path",
+          "The infinite loop prevention check for empty prefix is not mentioned (though this is an edge case)"
+        ],
+        "notes": "Covers main functionality, return values, and side effects well. The omission of how the extracted filename is derived is a minor gap since it could affect understanding of potential filename collisions in temp directory."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both the human-friendly and technical summaries are well-written, logically structured, and appropriate for their respective audiences. The progressive explanation from high-level to technical detail works well."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Good technical detail with specific function names (zipfile.ZipFile, namelist(), atomic_open()). Could be slightly enhanced by mentioning the path component extraction logic (using only the filename, not full path) and the caching behavior (checks if extracted_path already exists)."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Consider adding: (1) that the extracted file is named using only the last path component of the archive member, not the full member path, and (2) that the function checks if the file was previously extracted to avoid redundant extraction (caching behavior)."
+    },
+    "src/requests/utils.py::unquote_header_value": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes the function's behavior, including the quote stripping, escape sequence handling, and UNC path special case. All technical details are correct."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Covers all major aspects: main purpose, parameters (value and is_filename), return behavior, escape sequence replacements, and the UNC path edge case. Both the human-readable and technical sections complement each other well."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Well-structured with separate human-readable and technical sections. The explanation flows logically from what it does to why (browser quirks) to how (technical details). The UNC path explanation is particularly clear."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Provides appropriate technical detail including specific replace() calls, the exact escape sequences being processed, the conditional logic for UNC paths, and the bug reference context (#458). The level of detail matches what a developer would need to understand the implementation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "The summary is excellent. If being extremely thorough, could mention that the function returns the original value unchanged if it's not wrapped in quotes, but this is already implied by 'or original value if not quoted.' No substantive changes needed."
+    },
+    "src/requests/utils.py::from_key_val_list": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all code behavior: None passthrough, primitive type rejection with ValueError, and OrderedDict construction from compatible inputs. No hallucinations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could be more explicit that None input returns None (not just 'returns as-is')",
+          "Could mention the specific ValueError message text"
+        ],
+        "notes": "Covers main functionality, return values (OrderedDict, None), and exceptions (ValueError). The human summary effectively communicates the purpose, while the technical summary details the validation logic. Minor improvement: could explicitly state 'returns None for None input' rather than 'returns as-is'."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Both summaries are well-structured and clear. The human summary provides good conceptual understanding ('safety validator', 'guarantee consistent output'), while the technical summary logically walks through the validation steps. Appropriate vocabulary for respective audiences."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Technical summary appropriately detailed: specifies exact types rejected (str/bytes/bool/int), explains the validation flow, notes the reliance on iterable 2-tuples, and correctly identifies that OrderedDict instantiation will raise exceptions for malformed input. Good balance of detail without over-explanation."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Minor enhancement: In the technical summary, could explicitly state 'returns None when input is None' rather than 'returns as-is' for absolute clarity. Could optionally include the specific ValueError message text ('cannot encode objects that are not 2-tuples') for completeness."
+    },
+    "src/requests/utils.py::get_encoding_from_headers": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "All statements are accurate. The summary correctly describes the function's behavior, including the conditional logic, return values, and fallback defaults. The RFC 4627 reference for JSON UTF-8 default is appropriately mentioned."
+      },
+      "completeness": {
+        "rating": 5,
+        "missing_elements": [],
+        "notes": "Comprehensive coverage of all key aspects: input parameter, helper function usage, charset extraction logic, quote stripping, content-type-based defaults, and all return value scenarios (explicit charset, text default, JSON default, and None)."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent structure with both a human-friendly overview and detailed technical description. The two-tier approach makes it accessible to different audiences. Language is precise and easy to understand."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Appropriate level of detail for a technical summary. Mentions the parsing helper function, describes the prioritization logic explicitly, includes implementation details like quote stripping, and explains the rationale for defaults. Balances depth with readability."
+      },
+      "overall_score": 5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "This is an exemplary summary with no significant improvements needed. If being extremely pedantic, one could optionally add that the function expects a dictionary-like object that supports .get() method, but this is implied and would add unnecessary verbosity."
+    },
+    "src/requests/utils.py::resolve_proxies": {
+      "factual_accuracy": {
+        "rating": 4,
+        "errors_found": [
+          "Minor: Claims to merge from 'three sources' including NO_PROXY rules, but NO_PROXY is a filtering mechanism, not a source of proxy configurations. More accurate to say it merges two sources (explicit config and environment) while applying NO_PROXY bypass rules."
+        ],
+        "notes": "The technical description is largely accurate. Correctly identifies the logic flow, the condition checks, and the use of setdefault() to preserve explicit settings."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Could explicitly state the return type is a dict",
+          "Minor: Doesn't mention the fallback behavior when proxies parameter is None (defaults to empty dict)"
+        ],
+        "notes": "Covers the main functionality well, including parameters, return behavior, and the key decision points (trust_env, bypass checks). The technical section provides good coverage of the implementation details."
+      },
+      "clarity": {
+        "rating": 4,
+        "notes": "Well-structured with separate human-readable and technical sections. The flow is logical and terminology is appropriate. Minor awkwardness in 'bypass is not active' phrasing - could be clearer to say 'URL should not bypass proxies'."
+      },
+      "technical_depth": {
+        "rating": 5,
+        "notes": "Excellent technical detail. Names specific functions called (should_bypass_proxies, get_environ_proxies), explains setdefault() behavior, describes the scheme-specific vs 'all' fallback logic, and notes immutability of input. Appropriate level of detail for developers."
+      },
+      "overall_score": 4,
+      "recommendation": "Minor issues",
+      "suggested_improvements": "Clarify that NO_PROXY is a filtering/bypass mechanism rather than a 'source' of proxy configurations. Consider rephrasing 'bypass is not active' to 'URL should not bypass proxies' for clarity. Optionally, explicitly state the function returns a dict type in the human-readable section."
+    },
+    "src/requests/utils.py::unquote_unreserved": {
+      "factual_accuracy": {
+        "rating": 5,
+        "errors_found": [],
+        "notes": "The summary accurately describes all aspects of the code's functionality, including the splitting mechanism, hex conversion, UNRESERVED_SET checking, exception handling, and reconstruction process. No hallucinations or misrepresentations detected."
+      },
+      "completeness": {
+        "rating": 4,
+        "missing_elements": [
+          "Return type (str) could be more explicitly stated",
+          "The iteration starts from index 1 (range(1, len(parts))) to skip the first part, which could be mentioned"
+        ],
+        "notes": "Covers the main functionality, exception handling, and algorithm flow well. Minor details about iteration starting point and explicit return type documentation could enhance completeness."
+      },
+      "clarity": {
+        "rating": 5,
+        "notes": "Excellent two-tier structure with a human-readable explanation followed by technical details. The human version effectively conveys the purpose and behavior, while the technical version provides implementation specifics without being overwhelming. Well-suited for different audience levels."
+      },
+      "technical_depth": {
+        "rating": 4,
+        "notes": "Provides good technical detail including specific function calls (chr, int with base 16, join), the splitting strategy, and conditional logic. Could be enhanced slightly by mentioning why iteration starts at index 1 or providing an example of UNRESERVED_SET contents, but overall depth is appropriate."
+      },
+      "overall_score": 4.5,
+      "recommendation": "Accept as-is",
+      "suggested_improvements": "Optional minor enhancements: (1) Explicitly state return type as 'str', (2) Mention that iteration starts from index 1 to preserve the initial segment before the first '%', (3) Consider adding a brief example of what qualifies as UNRESERVED_SET characters (though the human summary does mention 'letters, numbers, hyphens, underscores, etc.')."
+    }
+  },
+  "architecture_evaluation": {
+    "completeness": {
+      "rating": 5,
+      "files_in_repo": 21,
+      "notes": "All 21 files from the repository are properly accounted for and included in the logical groups. No files are missing."
+    },
+    "logical_grouping": {
+      "rating": 5,
+      "notes": "Groups are semantically meaningful and well-organized. The separation between Core HTTP Models, HTTP Communication, Authentication, Data Handling, and support groups (Configuration, Compatibility, Error Handling) makes sense for a requests library. Files are appropriately categorized based on their purpose."
+    },
+    "diagram_quality": {
+      "rating": 3,
+      "notes": "While the diagram uses good visual practices (color coding, clear labels), it has 10 nodes with 26 interconnecting edges, making it quite dense and complex. Notable issues include: (1) circular dependencies (Data Handling \u2194 Authentication, Core HTTP Models \u2194 HTTP Communication), (2) high interconnectivity making it difficult to trace dependencies, and (3) some questionable dependency directions (e.g., Data Handling \u2192 Authentication seems unusual)."
+    },
+    "overall_score": 4,
+    "suggestions": [
+      "Consider simplifying the diagram by showing only the most critical dependencies to reduce clutter",
+      "Investigate and resolve circular dependencies - these may indicate grouping issues or should be explicitly noted",
+      "Consider creating a layered architecture view showing: Foundation layer (Compatibility, Error Handling) \u2192 Data layer (Structures, Utilities) \u2192 Core layer (Models, Sessions) \u2192 API layer (HTTP Communication, Authentication) \u2192 Entry point (__init__.py)",
+      "The Documentation & Theming group could be visually separated or excluded from the main diagram as it's not part of the runtime architecture",
+      "Consider merging some groups to reduce node count: 'Utilities & Reference' could merge with 'Data Handling & Structures', or 'Configuration & Setup' could be de-emphasized"
+    ]
+  },
+  "overall_metrics": {
+    "repo_summary_score": 4,
+    "module_summary_avg": 3.76,
+    "function_summary_avg": 4.74,
+    "architecture_score": 4,
+    "overall_quality": 4.2
+  },
+  "function_sampling": {
+    "target_size": 50,
+    "sampled_count": 50,
+    "total_functions": 192,
+    "sampled_items": [
+      "src/requests/__init__.py::check_compatibility",
+      "src/requests/_internal_utils.py::to_native_string",
+      "src/requests/adapters.py::send",
+      "src/requests/adapters.py::proxy_manager_for",
+      "src/requests/adapters.py::get_connection",
+      "src/requests/adapters.py::get_connection_with_tls_context",
+      "src/requests/api.py::patch",
+      "src/requests/api.py::request",
+      "src/requests/api.py::head",
+      "src/requests/auth.py::_basic_auth_str",
+      "src/requests/compat.py::_resolve_char_detection",
+      "src/requests/cookies.py::get",
+      "src/requests/cookies.py::extract_cookies_to_jar",
+      "src/requests/cookies.py::create_cookie",
+      "src/requests/cookies.py::list_domains",
+      "src/requests/cookies.py::keys",
+      "src/requests/cookies.py::morsel_to_cookie",
+      "src/requests/cookies.py::items",
+      "src/requests/cookies.py::_find",
+      "src/requests/cookies.py::get_cookie_header",
+      "src/requests/help.py::info",
+      "src/requests/hooks.py::dispatch_hook",
+      "src/requests/models.py::prepare_url",
+      "src/requests/models.py::_encode_files",
+      "src/requests/models.py::close",
+      "src/requests/models.py::prepare_body",
+      "src/requests/models.py::_encode_params",
+      "src/requests/models.py::prepare",
+      "src/requests/models.py::links",
+      "src/requests/models.py::iter_lines",
+      "src/requests/models.py::json",
+      "src/requests/sessions.py::post",
+      "src/requests/sessions.py::prepare_request",
+      "src/requests/sessions.py::get_adapter",
+      "src/requests/sessions.py::resolve_redirects",
+      "src/requests/sessions.py::request",
+      "src/requests/sessions.py::send",
+      "src/requests/sessions.py::rebuild_method",
+      "src/requests/status_codes.py::_init",
+      "src/requests/utils.py::is_valid_cidr",
+      "src/requests/utils.py::select_proxy",
+      "src/requests/utils.py::super_len",
+      "src/requests/utils.py::parse_dict_header",
+      "src/requests/utils.py::get_encodings_from_content",
+      "src/requests/utils.py::extract_zipped_paths",
+      "src/requests/utils.py::unquote_header_value",
+      "src/requests/utils.py::from_key_val_list",
+      "src/requests/utils.py::get_encoding_from_headers",
+      "src/requests/utils.py::resolve_proxies",
+      "src/requests/utils.py::unquote_unreserved"
+    ],
+    "skip_dunders": true,
+    "min_function_lines": 5,
+    "prefer_longer": true,
+    "random_seed": 42
+  }
+}
